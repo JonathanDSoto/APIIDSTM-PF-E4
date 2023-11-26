@@ -7,6 +7,8 @@ class BuildingCard extends LitElement {
     }
 
     static properties = {
+        title: {type: String},
+        subtitle: {type: String},
         modify_callback: { type: Function },
         delete_callback: { type: Function },
     };
@@ -151,7 +153,7 @@ class BuildingCard extends LitElement {
                 <div
                     style="position:absolute; z-index: 1; display: flex; gap: 40px; font-size: 2em;"
                 >
-                    <button @click=${this.modify_callback} class="btn-delete modify" id="delete">
+                    <button @click=${() => this.modify_callback(this)} class="btn-delete modify" id="delete">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             height=".8em"
@@ -164,7 +166,7 @@ class BuildingCard extends LitElement {
                         </svg>
                     </button>
 
-                    <button @click=${this.delete_callback} class="btn-delete delete" id="modify">
+                    <button @click=${() => this.delete_callback(this)} class="btn-delete delete" id="modify">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             height=".8em"
@@ -183,9 +185,9 @@ class BuildingCard extends LitElement {
                         src="https://www.elsudcaliforniano.com.mx/circulos/9wo8lw-edificios-inteligentes-uabcs/ALTERNATES/LANDSCAPE_1140/Edificios%20inteligentes%20UABCS"
                     />
                     <div class="info_container">
-                        <p class="title_card">CMT-03</p>
+                        <p class="title_card">${this.title}</p>
                         <p class="subtitle_card">
-                            Ciencias del Mar y de la Tierra I
+                            ${this.subtitle}
                         </p>
                     </div>
 

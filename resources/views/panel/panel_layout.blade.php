@@ -1,7 +1,7 @@
 <!-- resources/views/pane_layout.blade.php -->
 
 <!DOCTYPE html>
-<html lang="es" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact layout-menu-collapsed "
+<html lang="es" class="dark-style layout-navbar-fixed layout-menu-fixed layout-compact layout-menu-collapsed "
     dir="ltr" data-theme="theme-default" data-assets-path="../../assets/" data-template="vertical-menu-template">
 
 <head>
@@ -121,6 +121,12 @@
 
 
                 <ul class="menu-inner py-1">
+                <li class="menu-item">
+                        <a href="app-calendar.html" class="menu-link">
+                            <i class="menu-icon tf-icons ti ti-message-report"></i>
+                            <div data-i18n="Dashboard">Dashboard</div>
+                        </a>
+                    </li>
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Navegación Principal</span>
                     </li>

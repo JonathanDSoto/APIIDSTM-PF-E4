@@ -67,8 +67,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     eleValidClass: "",
                     rowSelector: ".mb-3",
                 }),
-                submitButton: new FormValidation.plugins.SubmitButton(),
-                defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+                // submitButton: new FormValidation.plugins.SubmitButton(),
+                // defaultSubmit: (e) => {
+                //     console.log("Hola");
+                //     e.preventDefault();
+                // },
                 autoFocus: new FormValidation.plugins.AutoFocus(),
             },
             init: (e) => {

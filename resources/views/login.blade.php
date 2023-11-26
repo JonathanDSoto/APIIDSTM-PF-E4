@@ -110,7 +110,8 @@
                     <h3 class="mb-1">Bienvenidos a UABCS App! 👋</h3>
                     <p class="mb-4">Inicia sesión para acceder a todas la funciones de la app</p>
 
-                    <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                    <!-- Aqui mandar a llamar un controlador -->
+                    <form id="formAuthentication" class="mb-3" >
                         <div class="mb-3">
                             <label for="email" class="form-label">Correo Institucional</label>
                             <input type="text" class="form-control" id="email" name="email"
@@ -189,6 +190,7 @@
     <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
     <script src="../../assets/vendor/js/menu.js"></script>
 
+
     <!-- endbuild -->
 
     <!-- Vendors JS -->
@@ -202,6 +204,14 @@
 
     <!-- Page JS -->
     <script src="../../assets/js/pages-auth.js"></script>
+    <script>
+        const form = document.getElementById('formAuthentication');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            window.location = "/buildings"
+        }); 
+    </script>
 
 </body>
 

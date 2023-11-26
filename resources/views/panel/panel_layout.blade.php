@@ -49,6 +49,11 @@
     <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
     <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
     <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+    <style>
+        div:where(.swal2-container) {
+            z-index: 1080 !important;
+        }
+    </style>
     @yield('aditional_header')
 
     <!-- Core CSS -->
@@ -61,7 +66,7 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
-
+    <link rel="stylesheet" href="../../assets/vendor/libs/animate-css/animate.css">
 
     <!-- Page CSS -->
 
@@ -752,9 +757,10 @@
 
                     <!-- Search Small Screens -->
                     <div class="navbar-search-wrapper search-input-wrapper  d-none">
-                        <input type="text" class="form-control search-input container-xxl border-0"
+                        <input id="search-input" type="text" class="form-control search-input container-xxl border-0"
                             placeholder="Search..." aria-label="Search...">
                         <i class="ti ti-x ti-sm search-toggler cursor-pointer"></i>
+                        
                     </div>
 
 
@@ -817,20 +823,20 @@
     <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
     <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
     <script src="../../assets/vendor/js/menu.js"></script>
-    @yield('aditional_scripts')
-
+    
     <!-- endbuild -->
-
+    
     <!-- Vendors JS -->
-
-
-
+    
+    
+    
     <!-- Main JS -->
     <script src="../../assets/js/main.js"></script>
-
-
+    
+    
     <!-- Page JS -->
-
+    @yield('aditional_scripts')
+    
 
 
 </body>

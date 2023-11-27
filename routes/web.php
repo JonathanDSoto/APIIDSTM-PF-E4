@@ -20,3 +20,15 @@ Route::get('/', function () {
 Route::get('/buildings', function () {
     return view('buildings');
 });
+
+Route::get('/roles', function () {
+    return view('roles');
+});
+
+Route::get('/permisos', function () {
+    return view('permission');
+});
+
+Route::get('/usuarios', function () {
+    return view('users');
+});

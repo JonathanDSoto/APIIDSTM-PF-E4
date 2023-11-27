@@ -148,13 +148,13 @@
                             <div data-i18n="Iniciativas">Iniciativas</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item ">
                         <a href="app-calendar.html" class="menu-link">
                             <i class="menu-icon tf-icons ti ti-school"></i>
                             <div data-i18n="Departamentos Academicos">Departamentos Academicos</div>
                         </a>
                     </li>
-                    <li class="menu-item active">
+                    <li class="menu-item {{ request()->is('buildings') ? 'active' : '' }} ">
                         <a href="/buildings" class="menu-link">
                             <i class="menu-icon tf-icons ti ti-building"></i>
                             <div data-i18n="Edificios">Edificios</div>
@@ -166,39 +166,40 @@
                             <div data-i18n="Materias">Materias</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="app-calendar.html" class="menu-link">
+                            <i class="menu-icon tf-icons ti ti-calendar"></i>
+                            <div data-i18n="Calendario">Calendario</div>
+                        </a>
+                    </li>
 
                     <!-- Apartado de administracion --> 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Administración</span>
                     </li>
-                    <li class="menu-item">
-                        <a href="app-calendar.html" class="menu-link">
+                    <li class="menu-item {{ request()->is('roles') ? 'active' : '' }}">
+                        <a href="/roles" class="menu-link">
                             <i class="menu-icon tf-icons ti ti-user-check"></i>
                             <div data-i18n="Roles">Roles</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="app-calendar.html" class="menu-link">
+                    <li class="menu-item  {{ request()->is('permisos') ? 'active' : '' }}">
+                        <a href="/permisos" class="menu-link">
                             <i class="menu-icon tf-icons ti ti-license"></i>
                             <div data-i18n="Permisos">Permisos</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="app-calendar.html" class="menu-link">
-                            <i class="menu-icon tf-icons ti ti-puzzle"></i>
-                            <div data-i18n="Tipos de modulos">Tipos de modulos</div>
+                    <li class="menu-item {{ request()->is('usuarios') ? 'active' : '' }}">
+                        <a href="/usuarios" class="menu-link">
+                            <i class="menu-icon tf-icons ti ti-user"></i>
+                            <div data-i18n="Usuarios">Usuarios</div>
                         </a>
                     </li>
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Reportes</span>
                     </li>
-                    <li class="menu-item">
-                        <a href="app-calendar.html" class="menu-link">
-                            <i class="menu-icon tf-icons ti ti-calendar"></i>
-                            <div data-i18n="Calendar">Calendar</div>
-                        </a>
-                    </li>
+                    
 
 
                     <!-- Charts & Maps -->
@@ -428,11 +429,11 @@
                                 <ul class="dropdown-menu dropdown-menu-end py-0">
                                     <li class="dropdown-menu-header border-bottom">
                                         <div class="dropdown-header d-flex align-items-center py-3">
-                                            <h5 class="text-body mb-0 me-auto">Notification</h5>
+                                            <h5 class="text-body mb-0 me-auto">Notificaciones</h5>
                                             <a href="javascript:void(0)"
                                                 class="dropdown-notifications-all text-body"
                                                 data-bs-toggle="tooltip" data-bs-placement="top"
-                                                title="Mark all as read"><i class="ti ti-mail-opened fs-4"></i></a>
+                                                title="Marcar todos como leido"><i class="ti ti-mail-opened fs-4"></i></a>
                                         </div>
                                     </li>
                                     <li class="dropdown-notifications-list scrollable-container">

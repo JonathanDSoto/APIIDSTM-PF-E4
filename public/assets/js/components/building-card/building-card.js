@@ -59,7 +59,7 @@ class BuildingCard extends LitElement {
                 display: flex;
 
                 position: relative;
-                background-color: red;
+                background-color: #2f3349;
                 border-radius: 10px;
                 overflow: hidden;
                 filter: blur(3px);

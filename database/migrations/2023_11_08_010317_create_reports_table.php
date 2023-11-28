@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
+            $table->string('description');
+            $table->dateTime('date');
+            $table->uuid('id_user');
+            $table->unsignedBigInteger('id_place');
             $table->timestamps();
+            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_place')->references('id')->on('places'); 
         });
     }
 

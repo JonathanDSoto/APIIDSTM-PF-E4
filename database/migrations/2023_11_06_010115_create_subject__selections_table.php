@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('initiatives', function (Blueprint $table) {
+        Schema::create('subject__selections', function (Blueprint $table) {
             $table->id();
+            $table->uuid('id_user');
+            $table->unsignedBigInteger('id_subject');
             $table->timestamps();
+            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_subject')->references('id')->on('subjects');
         });
     }
 
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('initiatives');
+        Schema::dropIfExists('subject__selections');
     }
 };

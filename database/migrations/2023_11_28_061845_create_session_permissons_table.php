@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('session_permissons', function (Blueprint $table) {
             $table->id();
+            $table->uuid('id_user');
+            $table->unsignedBigInteger('id_rol');
+            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_rol')->references('id')->on('roles');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('session_permissons');
     }
 };

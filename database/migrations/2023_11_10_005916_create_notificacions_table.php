@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subject__selections', function (Blueprint $table) {
+        Schema::create('notificacions', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('description');
+            $table->dateTime('date');
+            $table->uuid('id_user');
             $table->timestamps();
+            $table->foreign('id_user')->references('id')->on('users');
         });
     }
 
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subject__selections');
+        Schema::dropIfExists('notificacions');
     }
 };

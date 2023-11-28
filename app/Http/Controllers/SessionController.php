@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Calendar;
+use App\Models\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CalendarController extends Controller
+class SessionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class CalendarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Calendar $calendar)
+    public function show(Session $session)
     {
         //
     }
@@ -43,7 +43,7 @@ class CalendarController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Calendar $calendar)
+    public function edit(Session $session)
     {
         //
     }
@@ -51,7 +51,7 @@ class CalendarController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Calendar $calendar)
+    public function update(Request $request, Session $session)
     {
         //
     }
@@ -59,7 +59,7 @@ class CalendarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Calendar $calendar)
+    public function destroy(Session $session)
     {
         //
     }

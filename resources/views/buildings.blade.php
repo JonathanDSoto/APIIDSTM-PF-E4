@@ -25,7 +25,7 @@
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Sii, quiero eliminarlo!",
+                confirmButtonText: "¡Si, quiero eliminarlo!",
                 cancelButtonText: "Cancelar",
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -52,7 +52,8 @@
     </script>
     <script>
         let searchInput = document.getElementById('search-input');
-        searchInput.oninput = () => {
+        searchInput.oninput = (e) => {
+            alert(e.target.value)
             // Funcion de la barra de busqueda
         }
     </script>

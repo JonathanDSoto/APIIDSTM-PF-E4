@@ -166,13 +166,25 @@
                             <div data-i18n="Materias">Materias</div>
                         </a>
                     </li>
+                    <!-- Front Pages -->
                     <li class="menu-item">
-                        <a href="app-calendar.html" class="menu-link">
-                            <i class="menu-icon tf-icons ti ti-calendar"></i>
-                            <div data-i18n="Calendario">Calendario</div>
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class='menu-icon tf-icons ti ti-calendar'></i>
+                            <div data-i18n="Calendarios">Calendarios</div>
                         </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="../front-pages/landing-page.html" class="menu-link" target="_blank">
+                                <div data-i18n="General">General</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="../front-pages/pricing-page.html" class="menu-link" target="_blank">
+                                <div data-i18n="Departamental">Departamental</div>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-
                     <!-- Apartado de administracion --> 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Administración</span>

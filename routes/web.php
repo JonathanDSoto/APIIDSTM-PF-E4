@@ -36,3 +36,7 @@ Route::get('/usuarios', function () {
 Route::get('/calendario/general', function () {
     return view('calendar');
 });
+
+Route::get('/reportes', function () {
+    return view('report');
+});

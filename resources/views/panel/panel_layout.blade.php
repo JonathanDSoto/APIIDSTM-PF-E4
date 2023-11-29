@@ -136,8 +136,8 @@
                         <span class="menu-header-text">Navegación Principal</span>
                     </li>
                     <!-- Cosas que tendra la app --> 
-                    <li class="menu-item">
-                        <a href="app-calendar.html" class="menu-link">
+                    <li class="menu-item  {{ request()->is('reportes') ? 'active' : '' }}">
+                        <a href="/reportes" class="menu-link">
                             <i class="menu-icon tf-icons ti ti-message-report"></i>
                             <div data-i18n="Reportes">Reportes</div>
                         </a>

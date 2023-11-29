@@ -32,3 +32,4 @@ Route::get('/permisos', function () {
 Route::get('/usuarios', function () {
     return view('users');
 });
+

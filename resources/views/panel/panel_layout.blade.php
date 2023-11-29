@@ -167,19 +167,19 @@
                         </a>
                     </li>
                     <!-- Front Pages -->
-                    <li class="menu-item">
+                    <li class="menu-item {{ request()->is('calendario/general') ? 'active open' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class='menu-icon tf-icons ti ti-calendar'></i>
                             <div data-i18n="Calendarios">Calendarios</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="../front-pages/landing-page.html" class="menu-link" target="_blank">
+                            <li class="menu-item {{ request()->is('calendario/general') ? 'active' : '' }}">
+                                <a href="/calendario/general" class="menu-link">
                                 <div data-i18n="General">General</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="../front-pages/pricing-page.html" class="menu-link" target="_blank">
+                            <li class="menu-item {{ request()->is('calendario/departamental') ? 'active' : '' }}">
+                                <a href="../front-pages/pricing-page.html" class="menu-link">
                                 <div data-i18n="Departamental">Departamental</div>
                                 </a>
                             </li>

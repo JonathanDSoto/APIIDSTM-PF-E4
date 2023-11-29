@@ -32,3 +32,11 @@ Route::get('/permisos', function () {
 Route::get('/usuarios', function () {
     return view('users');
 });
+
+Route::get('/calendario/general', function () {
+    return view('calendar');
+});
+
+Route::get('/calendario/departamental', function () {
+    return view('calendar');
+});

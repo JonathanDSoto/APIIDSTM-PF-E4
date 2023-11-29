@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\DepartamentController;
 
 
 /*
@@ -27,4 +28,7 @@ Route::post('/user', [UserController::class, 'register']);
 // Roles
 Route::get('/roles', [RoleController::class, 'index']);
 Route::post('/roles', [RoleController::class, 'create']);
+
+// Departamentos
+Route::post('/department', [DepartamentController::class, 'create']);
 

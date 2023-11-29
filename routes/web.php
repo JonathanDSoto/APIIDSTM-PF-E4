@@ -36,7 +36,3 @@ Route::get('/usuarios', function () {
 Route::get('/calendario/general', function () {
     return view('calendar');
 });
-
-Route::get('/calendario/departamental', function () {
-    return view('calendar');
-});

@@ -19,9 +19,33 @@ class DepartamentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        try {
+            $validateData = $request -> validate([
+               'name' => 'required|string',
+               'url_image' => 'string'
+           ]);
+
+           $user = new Departament([
+               'name' => $validateData['name'],
+            //    'url_image' => $validateData['url_image']
+           ]);
+
+           $user -> save();
+
+           return response() -> json([
+            'message' => 'Departamento creado satisfactoriamente',
+            'result' => $user
+           ]);
+        } catch(ValidationException $e) {
+            $errors = $e -> validator -> errors() -> getMessages();
+
+            return response() -> json([
+                'message' => 'Error de validacion',
+                'errors' => $errors
+            ]);
+        }
     }
 
     /**

@@ -142,8 +142,8 @@
                             <div data-i18n="Reportes">Reportes</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="app-calendar.html" class="menu-link">
+                    <li class="menu-item {{ request()->is('iniciativas') ? 'active' : '' }}">
+                        <a href="/iniciativas" class="menu-link">
                             <i class="menu-icon tf-icons ti ti-file-certificate"></i>
                             <div data-i18n="Iniciativas">Iniciativas</div>
                         </a>

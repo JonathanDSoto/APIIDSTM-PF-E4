@@ -1,6 +1,6 @@
 @extends('panel/panel_layout')
 
-@section('title', 'Reporte')
+@section('title', 'Iniciativa')
 @section('content-size', 'xxl')
 
 @section('aditional_header')
@@ -32,17 +32,17 @@
 
 @section('content')            
 <h4 class="py-3 mb-4">
-  <span class="text-muted fw-light">UBACS</span> Reportes
+  <span class="text-muted fw-light">UBACS</span> Iniciativas
 </h4>
  
   <!-- Basic Bootstrap Table -->
 <div class="card">
-  <h5 class="card-header">Lista de Reportes</h5>
+  <h5 class="card-header">Lista de Iniciativas</h5>
   <div class="table-responsive text-nowrap">
     <table class="table">
       <thead>
         <tr>
-          <th>Reporte</th>
+          <th>Iniciativa</th>
           <th>Nombre</th>
           <th>Usuario</th>
           <th>Estado</th>

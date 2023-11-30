@@ -40,3 +40,7 @@ Route::get('/calendario/general', function () {
 Route::get('/reportes', function () {
     return view('report');
 });
+
+Route::get('/iniciativas', function () {
+    return view('initiative');
+});

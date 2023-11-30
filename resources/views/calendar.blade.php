@@ -114,9 +114,9 @@
         </div>
       </div>
     </div>
-    <!-- /Calendar Sidebar -->
+  <!-- /Calendar Sidebar -->
 
-    <!-- Calendar & Modal -->
+  <!-- Calendar & Modal -->
     <div class="col app-calendar-content">
       <div class="card shadow-none border-0">
         <div class="card-body pb-0">
@@ -124,14 +124,17 @@
           <div id="calendar"></div>
         </div>
       </div>
-      <div class="app-overlay"></div>
-      <!-- FullCalendar Offcanvas -->
-      <div class="offcanvas offcanvas-end event-sidebar" tabindex="-1" id="addEventSidebar" aria-labelledby="addEventSidebarLabel">
-        <div class="offcanvas-header my-1">
-          <h5 class="offcanvas-title" id="addEventSidebarLabel">Agregar Evento</h5>
-          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <div class="app-overlay"></div>
+
+  <!-- FullCalendar Modal -->
+  <div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addEventModalLabel">Agregar Evento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body pt-0">
+        <div class="modal-body pt-0">
           <form class="event-form pt-0" id="eventForm" onsubmit="return false">
             <div class="mb-3">
               <label class="form-label" for="eventTitle">Titulo</label>

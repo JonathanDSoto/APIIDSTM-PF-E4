@@ -45,12 +45,12 @@
       <div class="card-body">
         <div class="d-flex align-items-start justify-content-between">
           <div class="content-left">
-            <span>Session</span>
+            <span>Sesiones</span>
             <div class="d-flex align-items-center my-2">
               <h3 class="mb-0 me-2">21,459</h3>
               <p class="text-success mb-0">(+29%)</p>
             </div>
-            <p class="mb-0">Total Users</p>
+            <p class="mb-0">Total Usarios</p>
           </div>
           <div class="avatar">
             <span class="avatar-initial rounded bg-label-primary">
@@ -66,12 +66,12 @@
       <div class="card-body">
         <div class="d-flex align-items-start justify-content-between">
           <div class="content-left">
-            <span>Paid Users</span>
+            <span>Usuarios Agregados</span>
             <div class="d-flex align-items-center my-2">
               <h3 class="mb-0 me-2">4,567</h3>
               <p class="text-success mb-0">(+18%)</p>
             </div>
-            <p class="mb-0">Last week analytics </p>
+            <p class="mb-0">Análisis Semanal </p>
           </div>
           <div class="avatar">
             <span class="avatar-initial rounded bg-label-danger">
@@ -87,12 +87,12 @@
       <div class="card-body">
         <div class="d-flex align-items-start justify-content-between">
           <div class="content-left">
-            <span>Active Users</span>
+            <span>Usuarios Activos</span>
             <div class="d-flex align-items-center my-2">
               <h3 class="mb-0 me-2">19,860</h3>
               <p class="text-danger mb-0">(-14%)</p>
             </div>
-            <p class="mb-0">Last week analytics</p>
+            <p class="mb-0">Análisis Semanal</p>
           </div>
           <div class="avatar">
             <span class="avatar-initial rounded bg-label-success">
@@ -108,12 +108,12 @@
       <div class="card-body">
         <div class="d-flex align-items-start justify-content-between">
           <div class="content-left">
-            <span>Pending Users</span>
+            <span>Usuarios Pendientes</span>
             <div class="d-flex align-items-center my-2">
               <h3 class="mb-0 me-2">237</h3>
               <p class="text-success mb-0">(+42%)</p>
             </div>
-            <p class="mb-0">Last week analytics</p>
+            <p class="mb-0">Análisis Semanal</p>
           </div>
           <div class="avatar">
             <span class="avatar-initial rounded bg-label-warning">
@@ -128,7 +128,7 @@
 <!-- Users List Table -->
 <div class="card">
   <div class="card-header border-bottom">
-    <h5 class="card-title mb-3">Search Filter</h5>
+    <h5 class="card-title mb-3">Lista de Usuarios</h5>
     <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
       <div class="col-md-4 user_role"></div>
       <div class="col-md-4 user_plan"></div>
@@ -140,91 +140,55 @@
       <thead class="border-top">
         <tr>
           <th></th>
-          <th>User</th>
-          <th>Role</th>
-          <th>Plan</th>
-          <th>Billing</th>
-          <th>Status</th>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Apellidos</th>
+          <th>Correo</th>
+          <th>Contraseña</th>
+          <th>Rol</th>
           <th>Actions</th>
         </tr>
       </thead>
     </table>
   </div>
-  <!-- Offcanvas to add new user -->
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser" aria-labelledby="offcanvasAddUserLabel">
-    <div class="offcanvas-header">
-      <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Add User</h5>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body mx-0 flex-grow-0 pt-0 h-100">
+  
+ <!-- Modal to add new user -->
+<div class="modal fade" id="modalAddUser" tabindex="-1" aria-labelledby="modalAddUserLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAddUserLabel">Agregar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
       <form class="add-new-user pt-0" id="addNewUserForm" onsubmit="return false">
         <div class="mb-3">
-          <label class="form-label" for="add-user-fullname">Full Name</label>
-          <input type="text" class="form-control" id="add-user-fullname" placeholder="John Doe" name="userFullname" aria-label="John Doe" />
+          <label class="form-label" for="add-user-fullname">Nombre</label>
+          <input type="text" class="form-control" id="add-user-fullname" placeholder="Ingresa su nombre" name="userName" aria-label="John Doe" />
         </div>
         <div class="mb-3">
-          <label class="form-label" for="add-user-email">Email</label>
+          <label class="form-label" for="add-user-fullname">Apellidos</label>
+          <input type="text" class="form-control" id="add-user-lastname" placeholder="Ingresa sus apellidos" name="userLastName" aria-label="John Doe" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="add-user-email">Correo Electrónico</label>
           <input type="text" id="add-user-email" class="form-control" placeholder="john.doe@example.com" aria-label="john.doe@example.com" name="userEmail" />
         </div>
         <div class="mb-3">
-          <label class="form-label" for="add-user-contact">Contact</label>
-          <input type="text" id="add-user-contact" class="form-control phone-mask" placeholder="+1 (609) 988-44-11" aria-label="john.doe@example.com" name="userContact" />
+          <label class="form-label" for="add-user-password">Contraseña</label>
+          <input type="password" id="add-user-password" class="form-control" placeholder="Ingrese su contraseña" aria-label="Password" name="userPassword" required pattern="(?=.*[A-Z]).{6,}" title="Debe contener al menos 6 caracteres, incluyendo una mayúscula." />
+          <div class="form-text">Debe contener al menos 6 caracteres, incluyendo una mayúscula.</div>
         </div>
         <div class="mb-3">
-          <label class="form-label" for="add-user-company">Company</label>
-          <input type="text" id="add-user-company" class="form-control" placeholder="Web Developer" aria-label="jdoe1" name="companyName" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="country">Country</label>
-          <select id="country" class="select2 form-select">
-            <option value="">Select</option>
-            <option value="Australia">Australia</option>
-            <option value="Bangladesh">Bangladesh</option>
-            <option value="Belarus">Belarus</option>
-            <option value="Brazil">Brazil</option>
-            <option value="Canada">Canada</option>
-            <option value="China">China</option>
-            <option value="France">France</option>
-            <option value="Germany">Germany</option>
-            <option value="India">India</option>
-            <option value="Indonesia">Indonesia</option>
-            <option value="Israel">Israel</option>
-            <option value="Italy">Italy</option>
-            <option value="Japan">Japan</option>
-            <option value="Korea">Korea, Republic of</option>
-            <option value="Mexico">Mexico</option>
-            <option value="Philippines">Philippines</option>
-            <option value="Russia">Russian Federation</option>
-            <option value="South Africa">South Africa</option>
-            <option value="Thailand">Thailand</option>
-            <option value="Turkey">Turkey</option>
-            <option value="Ukraine">Ukraine</option>
-            <option value="United Arab Emirates">United Arab Emirates</option>
-            <option value="United Kingdom">United Kingdom</option>
-            <option value="United States">United States</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="user-role">User Role</label>
+          <label class="form-label" for="user-role">Rol Usuario</label>
           <select id="user-role" class="form-select">
-            <option value="subscriber">Subscriber</option>
-            <option value="editor">Editor</option>
-            <option value="maintainer">Maintainer</option>
-            <option value="author">Author</option>
-            <option value="admin">Admin</option>
+            <option value="admin">Administrador</option>
+            <option value="student">Estudiante</option>
+            <option value="teacher">Maestro</option>
           </select>
         </div>
-        <div class="mb-4">
-          <label class="form-label" for="user-plan">Select Plan</label>
-          <select id="user-plan" class="form-select">
-            <option value="basic">Basic</option>
-            <option value="enterprise">Enterprise</option>
-            <option value="company">Company</option>
-            <option value="team">Team</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Submit</button>
-        <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Cancel</button>
+        <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Agregar</button>
+        <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Cancelar</button>
       </form>
     </div>
   </div>

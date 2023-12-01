@@ -180,6 +180,11 @@
           <div class="form-text">Debe contener al menos 6 caracteres, incluyendo una mayúscula.</div>
         </div>
         <div class="mb-3">
+          <label class="form-label" for="add-user-password">Confirmar Contraseña</label>
+          <input type="password" id="add-user-password" class="form-control" placeholder="Ingrese su contraseña" aria-label="Password" name="userPassword" required pattern="(?=.*[A-Z]).{6,}" title="Debe contener al menos 6 caracteres, incluyendo una mayúscula." />
+          <div class="form-text">Debe contener al menos 6 caracteres, incluyendo una mayúscula.</div>
+        </div>
+        <div class="mb-3">
           <label class="form-label" for="user-role">Rol Usuario</label>
           <select id="user-role" class="form-select">
             <option value="admin">Administrador</option>

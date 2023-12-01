@@ -5,7 +5,7 @@ isRtl && (direction = "rtl"),
         {
             const v = document.getElementById("calendar"),
                 m = document.querySelector(".app-calendar-sidebar"),
-                p = document.getElementById("addEventModal"),
+                p = document.getElementById("addEventSidebar"),
                 f = document.querySelector(".app-overlay"),
                 g = {
                     Business: "primary",

@@ -44,6 +44,12 @@
     <link rel="stylesheet" href="../../assets/vendor/css/pages/app-calendar.css" />
     <link rel="stylesheet" href="../../assets/vendor/css/pages/ui-carousel.css" />
 
+    <style>
+      
+    
+    
+    </style>
+
 @endsection
 
 @section('content')
@@ -117,28 +123,25 @@
   <!-- /Calendar Sidebar -->
 
   <!-- Calendar & Modal -->
-    <div class="col app-calendar-content">
-      <div class="card shadow-none border-0">
+  <div class="col app-calendar-content">
+    <div class="card shadow-none border-0">
         <div class="card-body pb-0">
-          <!-- FullCalendar -->
-          <div id="calendar"></div>
+            <!-- FullCalendar -->
+            <div id="calendar"></div>
         </div>
-      </div>
+    </div>
     <div class="app-overlay"></div>
-
-  <!-- FullCalendar Modal -->
-  <div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addEventModalLabel">Agregar Evento</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body pt-0">
+    <!-- FullCalendar Offcanvas -->
+    <div class="offcanvas offcanvas-end event-sidebar mx-auto" tabindex="-1" id="addEventSidebar" aria-labelledby="addEventSidebarLabel">
+      <div class="offcanvas-header my-1">
+          <h5 class="offcanvas-title" id="addEventSidebarLabel">Agregar Evento</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+    <div class="offcanvas-body pt-0">
           <form class="event-form pt-0" id="eventForm" onsubmit="return false">
             <div class="mb-3">
               <label class="form-label" for="eventTitle">Titulo</label>
-              <input type="text" class="form-control" id="eventTitle" name="eventTitle" placeholder="Event Title" />
+              <input type="text" class="form-control" id="eventTitle" name="eventTitle" placeholder="Título Evento" />
             </div>
             <div class="mb-3">
               <label class="form-label" for="eventLabel">Tipo</label>
@@ -152,11 +155,11 @@
             </div>
             <div class="mb-3">
               <label class="form-label" for="eventStartDate">Fecha Inicio</label>
-              <input type="text" class="form-control" id="eventStartDate" name="eventStartDate" placeholder="Start Date" />
+              <input type="text" class="form-control" id="eventStartDate" name="eventStartDate" placeholder="Fecha Inicio" />
             </div>
             <div class="mb-3">
               <label class="form-label" for="eventEndDate">Fecha Fin</label>
-              <input type="text" class="form-control" id="eventEndDate" name="eventEndDate" placeholder="End Date" />
+              <input type="text" class="form-control" id="eventEndDate" name="eventEndDate" placeholder="Fecha Fin" />
             </div>
             <div class="mb-3">
               <label class="switch">
@@ -169,23 +172,8 @@
               </label>
             </div>
             <div class="mb-3">
-              <label class="form-label" for="eventURL">Evento URL</label>
-              <input type="url" class="form-control" id="eventURL" name="eventURL" placeholder="https://www.google.com" />
-            </div>
-            <div class="mb-3 select2-primary">
-              <label class="form-label" for="eventGuests">Agregar Invitados</label>
-              <select class="select2 select-event-guests form-select" id="eventGuests" name="eventGuests" multiple>
-                <option data-avatar="1.png" value="Jane Foster">Jane Foster</option>
-                <option data-avatar="3.png" value="Donna Frank">Donna Frank</option>
-                <option data-avatar="5.png" value="Gabrielle Robertson">Gabrielle Robertson</option>
-                <option data-avatar="7.png" value="Lori Spears">Lori Spears</option>
-                <option data-avatar="9.png" value="Sandy Vega">Sandy Vega</option>
-                <option data-avatar="11.png" value="Cheryl May">Cheryl May</option>
-              </select>
-            </div>
-            <div class="mb-3">
               <label class="form-label" for="eventLocation">Ubicación</label>
-              <input type="text" class="form-control" id="eventLocation" name="eventLocation" placeholder="Enter Location" />
+              <input type="text" class="form-control" id="eventLocation" name="eventLocation" placeholder="Ingresa Ubicación" />
             </div>
             <div class="mb-3">
               <label class="form-label" for="eventDescription">Descripción</label>

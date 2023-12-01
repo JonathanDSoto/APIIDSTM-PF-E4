@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Subject;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class SubjectController extends Controller
 {
@@ -29,7 +30,39 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validateData = $request -> validate([
+               'name' => 'required|string',
+               'id_departament' => 'required'
+           ]);
+
+           $subject = new Subject([
+               'name' => $validateData['name'],
+               'id_departament' => $validateData['id_departament'],
+            //    'url_image' => $validateData['url_image']
+           ]);
+
+           $subject -> save();
+
+           $departmentClass = new DepartamentController();
+           $department = $departmentClass -> show($subject -> id);
+
+           return response() -> json([
+            'message' => 'Materia creada satisfactoriamente',
+            'result' => [
+                'id' => $subject -> id,
+                'name' => $subject -> name,
+                'department' => $department -> original
+            ]
+           ]);
+        } catch(ValidationException $e) {
+            $errors = $e -> validator -> errors() -> getMessages();
+
+            return response() -> json([
+                'message' => 'Error de validacion',
+                'errors' => $errors
+            ]);
+        }
     }
 
     /**

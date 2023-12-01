@@ -29,7 +29,18 @@ return [
     */
 
     'disks' => [
-
+        'buildings' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/'),
+            'url' => env('APP_URL').'/storage/buildings',
+            'visibility' => 'public' 
+        ],
+        'users' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/users'),
+            'url' => env('APP_URL').'/storage/users',
+            'visibility' => 'public'
+        ],
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

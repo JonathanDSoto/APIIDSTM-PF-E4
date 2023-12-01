@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Departament;
 use App\Http\Controllers\Controller;
+use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class DepartamentController extends Controller
 {
@@ -13,7 +15,9 @@ class DepartamentController extends Controller
      */
     public function index()
     {
-        //
+        $departments = Departament::all();
+
+        return response() -> json($departments); 
     }
 
     /**
@@ -59,9 +63,17 @@ class DepartamentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Departament $departament)
+    public function show($id)
     {
-        //
+        $departamento = Departament::find($id);
+
+        if (!$departamento) {
+            // Maneja el caso en el que el departamento no se encuentra
+            return response()->json(['message' => 'Departamento no encontrado'], 404);
+        }
+
+        // Devuelve los detalles del departamento en formato JSON
+        return response()->json($departamento);
     }
 
     /**

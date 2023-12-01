@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\DepartamentController;
-
+use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\SubjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,14 @@ Route::get('/roles', [RoleController::class, 'index']);
 Route::post('/roles', [RoleController::class, 'create']);
 
 // Departamentos
+Route::get('/department/{id}', [DepartamentController::class, 'show']);
+Route::get('/department', [DepartamentController::class, 'index']);
 Route::post('/department', [DepartamentController::class, 'create']);
+
+// Materias
+Route::post('/subjects', [SubjectController::class, 'store']);
+
+// Edificios
+Route::get('/buildings', [PlaceController::class, 'index']);
+Route::post('/buildings', [PlaceController::class, 'store']);
 

@@ -49,6 +49,9 @@
     <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
     <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
     <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+    <script>
+        
+    </script>
     <style>
         div:where(.swal2-container) {
             z-index: 1080 !important;

@@ -19,38 +19,38 @@ use App\Http\Controllers\SubjectController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::prefix('user')->group(function () {
+    Route::post('/login', [UserController::class, 'login']);
+    Route::post('/', [UserController::class, 'register']);
 
-// Usuarios
-Route::post('/user/login', [UserController::class, 'login']);
+    Route::get('/', [UserController::class, 'index']);
+    Route::post('/{id}', [UserController::class, 'edit']);
+    Route::delete('/{id}', [UserController::class, 'destroy']);
+    Route::get('/{id}', [UserController::class, 'show']);
+});
 
-// Route::middleware('auth:api')->group(function () {
-    Route::post('/user', [UserController::class, 'register']);
-    Route::get('/user/{id}', [UserController::class, 'show']);
-    Route::get('/user', [UserController::class, 'index']);
-    Route::post('/user/{id}', [UserController::class, 'edit']);
-    Route::delete('/user/{id}', [UserController::class, 'destroy']);
-    
-    // Roles
-    Route::get('/roles', [RoleController::class, 'index']);
-    Route::post('/roles', [RoleController::class, 'create']);
-    
+Route::prefix('roles')->group(function () {
+    Route::get('/', [RoleController::class, 'index']);
+    Route::post('/', [RoleController::class, 'create']);
+});
+
+Route::prefix('department')->group(function () {
     // Departamentos
-    Route::get('/department/{id}', [DepartamentController::class, 'show']);
-    Route::get('/department', [DepartamentController::class, 'index']);
-    Route::post('/department', [DepartamentController::class, 'create']);
+    Route::get('/', [DepartamentController::class, 'index']);
+    Route::post('/', [DepartamentController::class, 'create']);
+    Route::get('/{id}', [DepartamentController::class, 'show']);
+});    
     
-    // Materias
+Route::prefix('subjects')->group(function () {
     Route::post('/subjects', [SubjectController::class, 'store']);
-    
-    // Edificios
-    Route::get('/buildings', [PlaceController::class, 'index']);
-    Route::post('/buildings', [PlaceController::class, 'store']);
+});
+
+Route::prefix('buildings')->group(function () {
+    Route::get('/', [PlaceController::class, 'index']);
+    Route::post('/', [PlaceController::class, 'store']);
     Route::post('/buildings/{id}', [PlaceController::class, 'update']);
     Route::delete('/buildings/{id}', [PlaceController::class, 'destroy']);
-// });
+});
 
 
 

@@ -15,7 +15,6 @@
     <!-- Canonical SEO -->
     <link rel="canonical" href="https://1.envato.market/vuexy_admin">
 
-
     <!-- ? PROD Only: Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({
@@ -139,7 +138,7 @@
                                 </label>
                             </div>
                         </div>
-                        <button class="btn btn-primary d-grid w-100">
+                        <button id="kt_docs_formvalidation_email_submit" class="btn btn-primary d-grid w-100">
                             Iniciar sesión
                         </button>
                     </form>
@@ -204,13 +203,14 @@
 
     <!-- Page JS -->
     <script src="../../assets/js/pages-auth.js"></script>
+    
     <script>
-        const form = document.getElementById('formAuthentication');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            window.location = "/buildings"
-        }); 
+        
+        async function login(e) {
+            
+        }
+        
+         
     </script>
 
 </body>

@@ -24,30 +24,39 @@ use App\Http\Controllers\SubjectController;
 // });
 
 // Usuarios
-Route::post('/user', [UserController::class, 'register']);
-Route::get('/user/{id}', [UserController::class, 'show']);
-Route::get('/user', [UserController::class, 'index']);
-Route::post('/user/{id}', [UserController::class, 'edit']);
-Route::delete('/user/{id}', [UserController::class, 'destroy']);
+Route::post('/user/login', [UserController::class, 'login']);
+
+// Route::middleware('auth:api')->group(function () {
+    Route::post('/user', [UserController::class, 'register']);
+    Route::get('/user/{id}', [UserController::class, 'show']);
+    Route::get('/user', [UserController::class, 'index']);
+    Route::post('/user/{id}', [UserController::class, 'edit']);
+    Route::delete('/user/{id}', [UserController::class, 'destroy']);
+    
+    // Roles
+    Route::get('/roles', [RoleController::class, 'index']);
+    Route::post('/roles', [RoleController::class, 'create']);
+    
+    // Departamentos
+    Route::get('/department/{id}', [DepartamentController::class, 'show']);
+    Route::get('/department', [DepartamentController::class, 'index']);
+    Route::post('/department', [DepartamentController::class, 'create']);
+    
+    // Materias
+    Route::post('/subjects', [SubjectController::class, 'store']);
+    
+    // Edificios
+    Route::get('/buildings', [PlaceController::class, 'index']);
+    Route::post('/buildings', [PlaceController::class, 'store']);
+    Route::post('/buildings/{id}', [PlaceController::class, 'update']);
+    Route::delete('/buildings/{id}', [PlaceController::class, 'destroy']);
+// });
 
 
-// Roles
-Route::get('/roles', [RoleController::class, 'index']);
-Route::post('/roles', [RoleController::class, 'create']);
 
-// Departamentos
-Route::get('/department/{id}', [DepartamentController::class, 'show']);
-Route::get('/department', [DepartamentController::class, 'index']);
-Route::post('/department', [DepartamentController::class, 'create']);
 
-// Materias
-Route::post('/subjects', [SubjectController::class, 'store']);
 
-// Edificios
-Route::get('/buildings', [PlaceController::class, 'index']);
-Route::post('/buildings', [PlaceController::class, 'store']);
-Route::post('/buildings/{id}', [PlaceController::class, 'update']);
-Route::delete('/buildings/{id}', [PlaceController::class, 'destroy']);
+
 
 
 

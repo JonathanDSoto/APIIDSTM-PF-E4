@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->id();
             $table->uuid('id_user');
-            $table->uuid('token');
+            $table->uuid('api_token');
             $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
         });

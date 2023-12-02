@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -18,6 +20,49 @@ class UserController extends Controller
         $users = User::all();
 
         return response()->json($users);
+    }
+
+    public function login(Request $request) {
+        try {
+            $validateData = $request->validate([
+                'email' => 'required|string',
+                'password' => 'required|string',
+            ]);
+
+            $user = User::where('email', $validateData['email']) -> first();
+
+            if(!$user) {
+                return response() -> json([
+                    'message' => 'Usuario con ese email no existe'
+                ]);
+            } 
+            $passwordValid = Hash::check($validateData['password'], $user->password);
+            
+            if($passwordValid) {
+                $response = [
+                    'id_user' => $user -> id,
+                    'api_token' => Str::uuid()
+                ];
+                Session::create($response);
+
+                return response() -> json([
+                    'message' => 'Sesión Iniciada exitosamente',
+                    'result' => $response
+                ]);
+            }
+
+            return response() -> json([
+                'message' => 'Contraseña incorrecta',
+            ], 401);
+
+        } catch(ValidationException $e) {
+            $errors = $e -> validator -> errors() -> getMessages();
+
+            return response() -> json([
+                'message' => 'Error de validacion',
+                'errors' => $errors
+            ]);
+        }
     }
 
     /**

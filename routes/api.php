@@ -24,10 +24,11 @@ use App\Http\Controllers\SubjectController;
 // });
 
 // Usuarios
-Route::get('/user/{id}', [UserController::class, 'show']);
-// Route::put('/user/{id}', [UserController::class, 'edit']);
-Route::get('/user', [UserController::class, 'index']);
 Route::post('/user', [UserController::class, 'register']);
+Route::get('/user/{id}', [UserController::class, 'show']);
+Route::get('/user', [UserController::class, 'index']);
+Route::post('/user/{id}', [UserController::class, 'edit']);
+Route::delete('/user/{id}', [UserController::class, 'destroy']);
 
 
 // Roles
@@ -45,6 +46,8 @@ Route::post('/subjects', [SubjectController::class, 'store']);
 // Edificios
 Route::get('/buildings', [PlaceController::class, 'index']);
 Route::post('/buildings', [PlaceController::class, 'store']);
-Route::put('/buildings/{id}', [PlaceController::class, 'edit']);
+Route::post('/buildings/{id}', [PlaceController::class, 'update']);
+Route::delete('/buildings/{id}', [PlaceController::class, 'destroy']);
+
 
 

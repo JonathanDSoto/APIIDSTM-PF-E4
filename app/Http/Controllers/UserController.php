@@ -7,13 +7,17 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function index() {
+    static $PATH_NAME = 'users';
+
+    public function index()
+    {
         $users = User::all();
 
-        return response() -> json($users);
+        return response()->json($users);
     }
 
     /**
@@ -22,41 +26,136 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        
 
-        if(!$user) {
-            return response() -> json([
+
+        if (!$user) {
+            return response()->json([
                 'message' => $user
             ], 404);
         }
 
-        return response() -> json($user);
+        return response()->json($user);
     }
-    
-    public function register(Request $request) {
+
+    public function register(Request $request)
+    {
         try {
-            $validateData = $request -> validate([
-               'name' => 'required|string',
-               'lastname' => 'required|string',
-               'email' => 'required|email|unique:users,email',
-               'password' => 'required|string|min:6',
-               'role_id' => 'required|exists:roles,id',
-           ]);
+            $validateData = $request->validate([
+                'name' => 'required|string',
+                'lastname' => 'required|string',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:6',
+                'image_name' => 'image|mimes:jpeg,png,jpg|max:2048',
+                'role_id' => 'required|exists:roles,id',
+            ]);
 
-           $user = new User([
-               'name' => $validateData['name'],
-               'lastname' => $validateData['lastname'],
-               'email' => $validateData['email'],
-               'password' => Hash::make($validateData['password']),
-               'role_id' => $validateData['role_id']
-           ]);
+            
 
-           $user -> save();
+            $imageName = null;
+            $url = null;
+            if ($request->hasFile('image_name')) {
+                $image = $request -> file('image_name');
+                $imageName = time() . '_' .  str_replace(" ", "_", $image->getClientOriginalName());
+                Storage::disk(self::$PATH_NAME)->put($imageName, file_get_contents($image));
+            }
 
-           return response() -> json([
-            'message' => 'Usuario creado satisfactoriamente',
-            'result' => $user
-           ]);
+            $user = new User([
+                'name' => $validateData['name'],
+                'lastname' => $validateData['lastname'],
+                'email' => $validateData['email'],
+                'password' => Hash::make($validateData['password']),
+                'role_id' => $validateData['role_id'],
+                'image_name' => $imageName
+            ]);
+
+            $user->save();
+            var_dump($user -> id);
+            if(!$url) $user -> image_name = Storage::disk(self::$PATH_NAME)->url($imageName);
+            $response = [
+                'message' => 'Usuario creado satisfactoriamente',
+                'result' => $user
+            ];
+
+            return response()->json($response);
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->getMessages();
+
+            return response()->json([
+                'message' => 'Error de validacion',
+                'errors' => $errors
+            ]);
+        }
+    }
+
+    public function destroy($id) {
+        $user = User::find($id);
+
+        if(!$user) {
+            return response() -> json([
+                'message' => 'No se encontro al usuario'
+            ], 404);
+        }
+
+        $user -> delete();
+
+        return response() -> json([
+            'message' => 'Usuario eliminado exitosamente'
+        ]);
+    }
+
+    public function edit(Request $request, $id) {
+        $user = User::find($id);
+
+        if(!$user) {
+            return response() -> json([
+                'message' => 'No se encontro al usuario'
+            ], 404);
+        }
+
+        try {
+            $validateData = $request->validate([
+                'name' => 'string',
+                'lastname' => 'string',
+                'email' => 'email',
+                'password' => 'string|min:6',
+                'image_name' => 'image|mimes:jpeg,png,jpg|max:2048',
+                'role_id' => 'exists:roles,id',
+            ]);
+
+            // $user = new User([
+            //     'name' => $validateData['name'],
+            //     'lastname' => $validateData['lastname'],
+            //     'email' => $validateData['email'],
+            //     'password' => Hash::make($validateData['password']),
+            //     'role_id' => $validateData['role_id']
+            // ]);
+
+            $imageName = $user -> image_name;
+            $url = null;
+            
+            if ($request->hasFile('image_name')) {
+                if(Storage::disk(self::$PATH_NAME)->exists($user->image_name)) {
+                    Storage::disk(self::$PATH_NAME)->delete($user->image_name);
+                }
+                
+                $image = $request -> file('image_name');
+                $imageName = time() . '_' .  str_replace(" ", "_", $image->getClientOriginalName());
+                Storage::disk(self::$PATH_NAME)->put($imageName, file_get_contents($image));
+            }
+            
+            var_dump($imageName);
+            $user -> image_name = $imageName;
+            $user -> update($request->except('image_name'));
+            
+            $user -> image_url = Storage::disk(self::$PATH_NAME)->url($imageName);
+            $response = [
+                'message' => 'Usuario creado satisfactoriamente',
+                'result' => $user
+            ];
+
+
+
+            return response()->json($response);
         } catch(ValidationException $e) {
             $errors = $e -> validator -> errors() -> getMessages();
 

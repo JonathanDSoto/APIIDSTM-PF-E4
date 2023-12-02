@@ -20,9 +20,10 @@ class User extends Authenticatable
     public static function boot() {
         parent::boot();
         static::creating(function($model) {
-            $model -> id = Str::uuid();
+            $model -> id = Str::uuid()->toString();;
         });
     }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -42,7 +43,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'id',
         'password',
         'remember_token',
     ];
@@ -53,6 +53,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'id' => 'string',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
         'role_id' => 'integer'

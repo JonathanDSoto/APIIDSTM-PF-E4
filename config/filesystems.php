@@ -31,7 +31,7 @@ return [
     'disks' => [
         'buildings' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/'),
+            'root' => storage_path('app/public/buildings'),
             'url' => env('APP_URL').'/storage/buildings',
             'visibility' => 'public' 
         ],

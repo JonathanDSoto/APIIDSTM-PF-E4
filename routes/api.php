@@ -23,6 +23,10 @@ use App\Http\Controllers\SubjectController;
 //     return $request->user();
 // });
 
+// Usuarios
+Route::get('/user/{id}', [UserController::class, 'show']);
+// Route::put('/user/{id}', [UserController::class, 'edit']);
+Route::get('/user', [UserController::class, 'index']);
 Route::post('/user', [UserController::class, 'register']);
 
 
@@ -41,4 +45,6 @@ Route::post('/subjects', [SubjectController::class, 'store']);
 // Edificios
 Route::get('/buildings', [PlaceController::class, 'index']);
 Route::post('/buildings', [PlaceController::class, 'store']);
+Route::put('/buildings/{id}', [PlaceController::class, 'edit']);
+
 

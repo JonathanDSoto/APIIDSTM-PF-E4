@@ -10,6 +10,29 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function index() {
+        $users = User::all();
+
+        return response() -> json($users);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $user = User::find($id);
+        
+
+        if(!$user) {
+            return response() -> json([
+                'message' => $user
+            ], 404);
+        }
+
+        return response() -> json($user);
+    }
+    
     public function register(Request $request) {
         try {
             $validateData = $request -> validate([

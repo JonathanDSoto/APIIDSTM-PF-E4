@@ -18,7 +18,7 @@ class PlaceController extends Controller
     {
         $buidings = Place::all();
 
-        return $buidings;
+        return response() -> json($buidings);
     }
 
     /**
@@ -45,14 +45,13 @@ class PlaceController extends Controller
                 'latitude' => 'required|string',
                 'altitude' => 'required|string',
                 'radius' => 'required|integer',
-                'image_name' => 'image|mimes:jpeg,png,jpg|max:2048'
+                'image_name' => 'required|image|mimes:jpeg,png,jpg|max:2048'
             ]);
+
             $image = $request->file('image_name');
             $imageName = time() . '_' .  str_replace(" ", "_" ,$image-> getClientOriginalName()) ;
-
-            $image->storeAs('app', $imageName, 'buildings');
-            // Storage::disk('buildings')->put($imageName, file_get_contents($image));
-
+            // $image->storeAs('public/buildings', $imageName);
+            Storage::disk('buildings')->put($imageName, file_get_contents($image));
             $url = Storage::disk('buildings')->url($imageName);
 
             $place = new Place([
@@ -100,9 +99,56 @@ class PlaceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Place $place)
+    public function edit(Request $request, $id)
     {
-        //
+        $place = Place::find($id);
+
+        if(!$place) {
+            return response() -> json([
+                'message' => 'Edificio no encontrado'
+            ],404);
+        }
+
+        $request->validate([
+            'name' => 'required|string',
+            'code_name' => 'required|string',
+            'latitude' => 'required|string',
+            'altitude' => 'required|string',
+            'radius' => 'required|integer',
+            'image_name' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        // $image = $request->file('image_name');
+        // $imageName = time() . '_' .  str_replace(" ", "_" ,$image-> getClientOriginalName()) ;
+        // // $image->storeAs('public/buildings', $imageName);
+        // Storage::disk('buildings')->put($imageName, file_get_contents($image));
+        $url = Storage::disk('buildings')->url($place -> image_name);
+
+        // $place = new Place([
+        //     'name' => $validateData['name'],
+        //     'code_name' => $validateData['code_name'],
+        //     'latitude' => $validateData['latitude'],
+        //     'altitude' => $validateData['altitude'],
+        //     'radius' => $validateData['radius'],
+        //     // 'image_name' => $imageName,
+        // ]);
+
+        $place->fill($request -> all()) -> save();
+
+
+        return response()->json([
+            'message' => 'Edificio creado satisfactoriamente',
+            'result' => [
+                'id'    => $place -> id,
+                'name'  => $place -> name,
+                'latitude'  => $place -> latitude,
+                'altitude'  => $place -> altitude,
+                'radius'    => $place -> radius,
+                'image_name'=> $place -> image_name,
+                'image_url' => $url
+            ],
+        ]);
+
     }
 
     /**

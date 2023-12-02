@@ -1,0 +1,792 @@
+{
+	"info": {
+		"_postman_id": "82a76d46-050c-447d-a420-a92199891756",
+		"name": "UABCS App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16172637"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/user/b7b6a394-57df-45cf-9b91-ea2e7c0b699a",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"b7b6a394-57df-45cf-9b91-ea2e7c0b699a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/user/3bfc15cc-e043-4394-a40f-17432c16dcfb",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"3bfc15cc-e043-4394-a40f-17432c16dcfb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Emilianoooo",
+									"type": "text"
+								},
+								{
+									"key": "lastname",
+									"value": "Fernandez",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "emilianofh02@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "holamundo127",
+									"type": "text"
+								},
+								{
+									"key": "role_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "image_name",
+									"type": "file",
+									"src": "/C:/Users/Luis-dev/Downloads/images.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/user/14ac40a3-52d4-428a-8ba8-aacaeff7f823",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"14ac40a3-52d4-428a-8ba8-aacaeff7f823"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Emiliano",
+									"type": "text"
+								},
+								{
+									"key": "lastname",
+									"value": "Fernandez",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "emilianofh99@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "holamundo127",
+									"type": "text"
+								},
+								{
+									"key": "image_name",
+									"type": "file",
+									"src": "/C:/Users/Luis-dev/Downloads/images.jpg"
+								},
+								{
+									"key": "role_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "emilianofh02@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ejemploChido123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/user/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Register new role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Administrador",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Este rol tiene todos los permisos",
+									"type": "text"
+								},
+								{
+									"key": "audit",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/roles",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/roles",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Department",
+			"item": [
+				{
+					"name": "Get Department",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/department/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"department",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new department",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Departamento Academico de Sistemas Computacionales",
+									"type": "text"
+								},
+								{
+									"key": "url_image",
+									"value": "",
+									"description": "opcional",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/department",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"department"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Department",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/department",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"department"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subject",
+			"item": [
+				{
+					"name": "Add new subject",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Programacion III",
+									"type": "text"
+								},
+								{
+									"key": "id_departament",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/subjects",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"subjects"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Buildings",
+			"item": [
+				{
+					"name": "Store new building",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Teibol danceeee",
+									"type": "text"
+								},
+								{
+									"key": "code_name",
+									"value": "TD-8)",
+									"type": "text"
+								},
+								{
+									"key": "latitude",
+									"value": "4.5",
+									"type": "text"
+								},
+								{
+									"key": "altitude",
+									"value": "11.05",
+									"type": "text"
+								},
+								{
+									"key": "radius",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "image_name",
+									"type": "file",
+									"src": "/C:/Users/Luis-dev/Pictures/Screenshots/Captura de pantalla 2023-11-29 211528.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/buildings",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"buildings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit building",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Fabrica Bimbo",
+									"type": "text"
+								},
+								{
+									"key": "code_name",
+									"value": "TD-8)",
+									"type": "text"
+								},
+								{
+									"key": "latitude",
+									"value": "4.9",
+									"type": "text"
+								},
+								{
+									"key": "altitude",
+									"value": "11.05",
+									"type": "text"
+								},
+								{
+									"key": "radius",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "image_name",
+									"type": "file",
+									"src": "/C:/Users/Luis-dev/Downloads/descargar.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/buildings/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"buildings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete building",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Teibol :)",
+									"type": "text"
+								},
+								{
+									"key": "code_name",
+									"value": "TD-8)",
+									"type": "text"
+								},
+								{
+									"key": "latitude",
+									"value": "4.9",
+									"type": "text"
+								},
+								{
+									"key": "altitude",
+									"value": "11.05",
+									"type": "text"
+								},
+								{
+									"key": "radius",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "image_name",
+									"type": "file",
+									"src": "/C:/Users/Luis-dev/Downloads/images.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/buildings/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"buildings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all buildings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Departamento Academico",
+									"type": "text"
+								},
+								{
+									"key": "code_name",
+									"value": "AD-46",
+									"type": "text"
+								},
+								{
+									"key": "latitude",
+									"value": "4.5",
+									"type": "text"
+								},
+								{
+									"key": "altitude",
+									"value": "11.05",
+									"type": "text"
+								},
+								{
+									"key": "radius",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "url_image",
+									"value": "null",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/buildings",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"buildings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "127.0.0.1:8000",
+			"type": "string"
+		},
+		{
+			"key": "Token",
+			"value": "c080e94f-9fcb-48a2-8d6a-8931b71c4c0e",
+			"type": "string"
+		}
+	]
+}

@@ -12,6 +12,7 @@ class RequireToken
     // Lista de rutas a excluir del middleware
     protected $excludedRoutes = [
         'api/user/login',
+        'api/session',
         // Agrega más rutas según sea necesario
     ];
 

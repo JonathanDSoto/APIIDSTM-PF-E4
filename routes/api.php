@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\DepartamentController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\SessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,9 @@ use App\Http\Controllers\SubjectController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::prefix('session')->group(function () {
+    Route::post('/', [SessionController::class, 'checkToken']);
+});
 
 Route::prefix('user')->group(function () {
     Route::post('/login', [UserController::class, 'login']);
@@ -51,12 +55,3 @@ Route::prefix('buildings')->group(function () {
     Route::post('/buildings/{id}', [PlaceController::class, 'update']);
     Route::delete('/buildings/{id}', [PlaceController::class, 'destroy']);
 });
-
-
-
-
-
-
-
-
-

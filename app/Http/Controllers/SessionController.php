@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class SessionController extends Controller
 {
@@ -14,6 +15,33 @@ class SessionController extends Controller
     public function index()
     {
         //
+    }
+
+    public function checkToken(Request $request) {
+        try {
+            $session = Session::where('api_token', $request -> input('token')) -> first();
+            
+            // var_dump($request);
+
+            if(!$session) {
+                return response() -> json([
+                    'message' => 'Token invalido'
+                ], 401);
+            }
+
+            
+
+            return response() -> json([
+                'message' => 'Token valido'
+            ], 200);
+        } catch(ValidationException $e) {
+            $errors = $e -> validator -> errors() -> getMessages();
+
+            return response() -> json([
+                'message' => 'Error de validacion',
+                'errors' => $errors
+            ]);
+        }
     }
 
     /**

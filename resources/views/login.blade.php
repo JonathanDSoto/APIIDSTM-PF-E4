@@ -64,10 +64,14 @@
     <script src="../../assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../../assets/js/config.js"></script>
-
+    <style>
+        [hidden] {
+            display: none;
+        }
+    </style>
 </head>
 
-<body>
+<body hidden>
 
 
     <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
@@ -204,7 +208,26 @@
     <!-- Page JS -->
     <script src="../../assets/js/pages-auth.js"></script>
     <script>
-        
+        async function checkSession() {
+            let token = window.localStorage.getItem('token');
+
+            let formdata = new FormData();
+            formdata.append('token', token);
+
+            let response = await fetch(`${window.location.origin}/api/session/`, {
+                method: 'POST',
+                body: formdata
+            });
+
+            if(response.status == 200) {
+                window.location.href = "/buildings";
+                return;
+            }
+
+            document.querySelector('body').removeAttribute('hidden');
+        }
+
+        checkSession();
     </script>
 
 </body>

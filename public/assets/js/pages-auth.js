@@ -1,8 +1,9 @@
 "use strict";
 const formAuthentication = document.querySelector("#formAuthentication");
+let form;
 document.addEventListener("DOMContentLoaded", function (e) {
     var t;
-    formAuthentication &&
+    form = formAuthentication &&
         FormValidation.formValidation(formAuthentication, {
             fields: {
                 username: {
@@ -90,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     rowSelector: ".mb-3",
                 }),
                 submitButton: new FormValidation.plugins.SubmitButton(),
-                defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+                // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
                 // defaultSubmit: (e) => {
                 //     console.log("Hola");
                 //     e.preventDefault();
@@ -113,21 +114,29 @@ document.addEventListener("DOMContentLoaded", function (e) {
             });
 });
 formAuthentication.addEventListener("click", async (e) => {
-    let btn = formAuthentication.querySelector("button");
     e.preventDefault();
-    btn.setAttribute("data-kt-indicator", "on");
+    let btn = formAuthentication.querySelector("button");
 
-    let formdata = new FormData();
-    formdata.append("email", document.getElementById("email").value);
-    formdata.append("password", document.getElementById("password").value);
+    if(btn == e.target) {
+        const isValid = await form.validate();
+        
+        if(isValid != "Invalid") {
+            let formdata = new FormData();
+            formdata.append("email", document.getElementById("email").value);
+            formdata.append("password", document.getElementById("password").value);
+        
+            const url = `${window.location.origin}/api/user/login`;
+            let response = await fetch(url, {
+                method: "POST",
+                body: formdata,
+            });
+            let data = await response.json();
+        
+            console.log(data);
+            window.localStorage.setItem('user', JSON.stringify(data.result));
+            window.location = "/buildings"
+        }
+    }
 
-    const url = `http://${window.location.host}/api/user/login`;
-    let response = await fetch(url, {
-        method: "POST",
-        body: formdata,
-    });
-    let data = await response.json();
 
-    window.localStorage.setItem('token', data.result.api_token);
-    window.location = "/buildings"
 });

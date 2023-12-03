@@ -29,6 +29,7 @@
                 cancelButtonText: "Cancelar",
             }).then((result) => {
                 if (result.isConfirmed) {
+                    
                     Swal.fire({
                         title: "¡Eliminado!",
                         text: "El edificio fue eliminado.",
@@ -72,6 +73,7 @@
 
 @section('content')
     <div class="map_wrapper" style="">
+        {{-- Modal inicio --}}
         <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -99,10 +101,13 @@
                     </div>
                 </div>
             </div>
+            
         </div>
+        {{-- Modal Fin --}}
         <!-- <div class="leaflet-map" id="basicMap"></div> -->
 
-        <building-card title="CMT-03" subtitle="Ciencias del Mar y de la Tierra I">
+        
+        <building-card title="CMT-20" subtitle="Ciencias del Mar y de la Tierra I">
             <uabcs-card-btn bgColor="red" icon="trash" slot="delete-btn" onclick="deleteBuild(this)"></uabcs-card-btn>
             <uabcs-card-btn bgColor="#7367f0" icon="pen" slot="modify-btn" data-bs-toggle="modal" data-bs-target="#basicModal"></uabcs-card-btn>
         </building-card>

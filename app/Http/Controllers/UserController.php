@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -19,6 +20,10 @@ class UserController extends Controller
     {
         $users = User::all();
 
+        foreach ($users as $user) {
+            $role = Role::find($user -> role_id);
+            $user -> role = $role;
+        }
         return response()->json($users);
     }
 
@@ -45,9 +50,10 @@ class UserController extends Controller
                 ];
                 Session::create($response);
 
+                $user -> api_token = $response['api_token'];
                 return response() -> json([
                     'message' => 'Sesión Iniciada exitosamente',
-                    'result' => $response
+                    'result' => $user
                 ]);
             }
 
@@ -112,9 +118,13 @@ class UserController extends Controller
                 'role_id' => $validateData['role_id'],
                 'image_name' => $imageName
             ]);
-
+            
             $user->save();
-            var_dump($user -> id);
+
+            $role = Role::find($user -> role_id);
+            // $role -> unsetAttribute('role_id');
+            $user -> role = $role;
+
             if(!$url) $user -> image_name = Storage::disk(self::$PATH_NAME)->url($imageName);
             $response = [
                 'message' => 'Usuario creado satisfactoriamente',

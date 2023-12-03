@@ -1,6 +1,6 @@
 @extends('panel/panel_layout')
 
-@section('title', 'Roles')
+@section('title', 'Usuarios')
 @section('content-size', 'xxl')
 
 @section('aditional_header')
@@ -140,15 +140,15 @@
       <thead class="border-top">
         <tr>
           <th></th>
-          <th>ID</th>
+          <th>UUID</th>
           <th>Nombre</th>
           <th>Apellidos</th>
           <th>Correo</th>
-          <th>Contraseña</th>
           <th>Rol</th>
           <th>Actions</th>
         </tr>
       </thead>
+      
     </table>
   </div>
   

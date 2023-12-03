@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-wide  customizer-hide" dir="ltr" data-theme="theme-default"
+<html lang="en" class="dark-style layout-wide  customizer-hide" dir="ltr" data-theme="theme-default"
     data-assets-path="../../assets/" data-template="vertical-menu-template">
 
 <head>
@@ -64,11 +64,7 @@
     <script src="../../assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../../assets/js/config.js"></script>
-    <style>
-        [hidden] {
-            display: none;
-        }
-    </style>
+
 </head>
 
 <body hidden>
@@ -209,19 +205,23 @@
     <script src="../../assets/js/pages-auth.js"></script>
     <script>
         async function checkSession() {
-            let token = window.localStorage.getItem('token');
+            const item = window.localStorage.getItem('user');
 
-            let formdata = new FormData();
-            formdata.append('token', token);
-
-            let response = await fetch(`${window.location.origin}/api/session/`, {
-                method: 'POST',
-                body: formdata
-            });
-
-            if(response.status == 200) {
-                window.location.href = "/buildings";
-                return;
+            if(item && item != undefined) {
+                let user = JSON.parse(item);
+    
+                let formdata = new FormData();
+                formdata.append('token', user.api_token);
+    
+                let response = await fetch(`${window.location.origin}/api/session/`, {
+                    method: 'POST',
+                    body: formdata
+                });
+    
+                if(response.status == 200) {
+                    window.location.href = "/buildings";
+                    return;
+                }
             }
 
             document.querySelector('body').removeAttribute('hidden');

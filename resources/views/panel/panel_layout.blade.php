@@ -17,6 +17,10 @@
     <!-- Canonical SEO -->
     <link rel="canonical" href="https://1.envato.market/vuexy_admin">
 
+    <script>
+        window.user_info = JSON.parse(window.localStorage.getItem('user'));
+    </script>
+
 
     <!-- ? PROD Only: Google Tag Manager (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
     {{-- <script>

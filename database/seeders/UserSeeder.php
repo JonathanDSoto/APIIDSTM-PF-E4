@@ -21,5 +21,14 @@ class UserSeeder extends Seeder
             'image_name' => '',
             'role_id' => 1
         ]);
+
+        User::create([
+            'name' => 'Fabian',
+            'lastname' => ':)',
+            'email' => 'fabian@gmail.com',
+            'password' => 'ejemploChido123',
+            'image_name' => '',
+            'role_id' => 1
+        ]);
     }
 }

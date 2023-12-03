@@ -35,7 +35,13 @@ $(function () {
                 dataSrc: '',
                 beforeSend: function (xhr) {
                     // Agregar el token de autorización al encabezado
-                    xhr.setRequestHeader('Authorization', `Bearer ${window.user_info.api_token}`); // Reemplaza 'TU_TOKEN' con tu token real
+                    xhr.setRequestHeader('Authorization', `Bearer ${window.user_info?.api_token ?? ""}`); // Reemplaza 'TU_TOKEN' con tu token real
+                },
+                complete: (e) => {
+                    if(e.status === 401) {
+                        window.localStorage.removeItem('user');
+                        window.location.href = "/";
+                    } 
                 }
             },
             columns: [

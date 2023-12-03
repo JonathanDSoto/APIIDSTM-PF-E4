@@ -203,14 +203,8 @@
 
     <!-- Page JS -->
     <script src="../../assets/js/pages-auth.js"></script>
-    
     <script>
         
-        async function login(e) {
-            
-        }
-        
-         
     </script>
 
 </body>

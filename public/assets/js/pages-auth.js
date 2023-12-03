@@ -128,7 +128,6 @@ formAuthentication.addEventListener("click", async (e) => {
     });
     let data = await response.json();
 
-    console.log(data);
-
     window.localStorage.setItem('token', data.result.api_token);
+    window.location = "/buildings"
 });

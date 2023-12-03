@@ -255,6 +255,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Check Session",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "21900c13-4118-410d-831c-6eb7a315438b",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/session/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"session",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

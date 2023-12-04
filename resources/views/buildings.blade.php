@@ -48,8 +48,6 @@
         tituloModal.innerHTML = "Editar edificio";
         console.log(parent);
     }
-
-
 </script>
 
 <script>

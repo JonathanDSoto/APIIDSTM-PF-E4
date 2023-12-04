@@ -12,10 +12,8 @@
     <script src="{{ asset('../../assets/vendor/js/lit.js') }}"></script>
     <script type="module" src="{{ asset('../../assets/js/components/building-card/card-btn.js') }}"></script>
     <script type="module" src="{{ asset('../../assets/js/components/building-card/building-card.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../assets/js/ui-modals.js"></script>
-
-
+    
     <script>
         function deleteBuild(e) {
             Swal.fire({

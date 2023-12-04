@@ -7,6 +7,7 @@ class CardButton extends LitElement {
         super();
         this.bgColor = "red";
         this.onClick = () => console.log("No action");
+        
     }
     static properties = {
         onclick: { type: Function },

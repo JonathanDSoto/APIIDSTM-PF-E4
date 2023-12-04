@@ -132,9 +132,18 @@ formAuthentication.addEventListener("click", async (e) => {
             });
             let data = await response.json();
         
-            console.log(data);
-            window.localStorage.setItem('user', JSON.stringify(data.result));
-            window.location = "/buildings"
+            console.log(response);
+            if(response.status == 200) {
+                window.localStorage.setItem('user', JSON.stringify(data.result));
+                window.location = "/buildings"
+                return;
+            }
+
+            Swal.fire({
+                title: "¡Oh, no! Algo salio mal :(",
+                text: "Compruebe su correo o contraseña e intentelo de nuevo.",
+                icon: "error"
+            });
         }
     }
 

@@ -1,6 +1,7 @@
 "use strict";
 $(function () {
     let t, a, s;
+    let tableInfo;
     s = (
         isDarkStyle
             ? ((t = config.colors_dark.borderColor),
@@ -41,7 +42,10 @@ $(function () {
                     if(e.status === 401) {
                         window.localStorage.removeItem('user');
                         window.location.href = "/";
+                        return;
                     } 
+
+                    window.tableInfo = e.responseJSON;
                 }
             },
             columns: [
@@ -171,15 +175,15 @@ $(function () {
                     searchable: !1,
                     orderable: !1,
                     render: function (e, t, a, s) {
-                        if(window.user_info.id == a.id) return "";
+                        // if(window.user_info.id == a.id)- return "";
                         return (
                             `
                             <div class="d-flex align-items-center">
-                                <a href="javascript:;" class="text-body">
+                                <a id="editButton" data-uuid="${a.id}" href="javascript:;" class="text-body">
                                     <i class="ti ti-edit ti-sm me-2">
                                     </i>
                                 </a>
-                                <a data-uuid="${a.id}" href="javascript:;" class="text-body delete-record">
+                                <a data-email="${a.email}" data-uuid="${a.id}" href="javascript:;" class="text-body delete-record">
                                     <i class="ti ti-trash ti-sm mx-2">
                                     </i>
                                 </a>
@@ -248,7 +252,6 @@ $(function () {
                 this.api()
                     .columns(5)
                     .every(function () {
-                        console.log(this);
                         var t = this,
                             a = $(
                                 '<select id="UserRole" class="form-select text-capitalize"><option value=""> Seleccione un rol </option></select>'
@@ -341,23 +344,52 @@ $(function () {
                 //                 );
                 //             });
                 //     });
+                $(".datatables-users").on("click", "#editButton", function () {
+                    let element = document.getElementById('editButton');
+                    console.log(window.tableInfo.filter((user) => user.id == element.dataset.uuid)[0]);
+                
+                    // Aquí puedes realizar la lógica de edición con el uuid del registro
+                    // Por ejemplo, puedes redirigir a una página de edición con el uuid en la URL
+                    // window.location.href = `/editar-usuario/${uuid}`;
+                });
             },
         })),
+        
         $(".datatables-users tbody").on("click", ".delete-record", async function (element) {
-            const uuid = element.target.parentElement.dataset.uuid;
+            const {uuid, email} = element.target.parentElement.dataset;
 
-            let response = await fetch(`${window.location.origin}/api/user/${uuid}`, {
-                method: 'DELETE',
-                headers: new Headers({
-                    'Authorization': `Bearer ${window.user_info.api_token}`
-                })
+            Swal.fire({
+                title: `¿Confirma que desea eliminar al usuario con el correo ${email}?`,
+                text: "¡No sera posible revertir esta acción!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "¡Si, quiero eliminarlo!",
+                cancelButtonText: "Cancelar",
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    let response = await fetch(`${window.location.origin}/api/user/${uuid}`, {
+                        method: 'DELETE',
+                        headers: new Headers({
+                            'Authorization': `Bearer ${window.user_info.api_token}`
+                        })
+                    });
+        
+                    if(response.status == 200) {
+                        e.row($(this).parents("tr")).remove().draw();
+                        Swal.fire({
+                            title: "¡Eliminado!",
+                            text: "Usuario eliminado.",
+                            icon: "success"
+                        });
+                    } else {
+                        alert("Hubo un error, intentelo de nuevo.")
+                    }
+                }
             });
 
-            if(response.status == 200) {
-                e.row($(this).parents("tr")).remove().draw();
-            } else {
-                alert("Hubo un error, intentelo de nuevo.")
-            }
+            
 
         }),
         setTimeout(() => {

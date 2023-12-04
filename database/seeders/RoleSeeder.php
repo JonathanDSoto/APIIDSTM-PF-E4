@@ -22,6 +22,11 @@ class RoleSeeder extends Seeder
             'audit' => true
         ]);
 
+        Role::create([
+            'name' => 'Alumno',
+            'description' => ':)',
+            'audit' => false
+        ]);
         
     }
 }

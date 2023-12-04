@@ -39,7 +39,7 @@ class UserController extends Controller
             if(!$user) {
                 return response() -> json([
                     'message' => 'Usuario con ese email no existe'
-                ]);
+                ], 401);
             } 
             $passwordValid = Hash::check($validateData['password'], $user->password);
             

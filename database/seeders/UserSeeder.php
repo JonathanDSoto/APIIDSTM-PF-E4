@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             'email' => 'fabian@gmail.com',
             'password' => 'ejemploChido123',
             'image_name' => '',
-            'role_id' => 1
+            'role_id' => 2
         ]);
     }
 }

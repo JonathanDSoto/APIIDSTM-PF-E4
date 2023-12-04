@@ -91,6 +91,11 @@ class UserController extends Controller
     public function register(Request $request)
     {
         try {
+            if(User::where('email', $request->input('email') ) -> first()) {
+                return response([
+                    'message' => 'Este correo ya fue registrado',
+                ], 409);
+            }
             $validateData = $request->validate([
                 'name' => 'required|string',
                 'lastname' => 'required|string',
@@ -100,7 +105,6 @@ class UserController extends Controller
                 'role_id' => 'required|exists:roles,id',
             ]);
 
-            
 
             $imageName = null;
             $url = null;
@@ -138,7 +142,7 @@ class UserController extends Controller
             return response()->json([
                 'message' => 'Error de validacion',
                 'errors' => $errors
-            ]);
+            ], 409);
         }
     }
 
@@ -198,17 +202,17 @@ class UserController extends Controller
                 Storage::disk(self::$PATH_NAME)->put($imageName, file_get_contents($image));
             }
             
-            var_dump($imageName);
             $user -> image_name = $imageName;
-            $user -> update($request->except('image_name'));
+            $user -> update($request->except('image_name', 'password'));
             
             $user -> image_url = Storage::disk(self::$PATH_NAME)->url($imageName);
+            if($request -> input('password')) {
+                $user -> password = Hash::make($request-> input('password'));
+            };
             $response = [
                 'message' => 'Usuario creado satisfactoriamente',
                 'result' => $user
             ];
-
-
 
             return response()->json($response);
         } catch(ValidationException $e) {

@@ -46,6 +46,7 @@ $(function () {
                     } 
 
                     window.tableInfo = e.responseJSON;
+                    window.reloadForm = $(".datatables-users").DataTable().ajax.reload;
                 }
             },
             columns: [
@@ -175,7 +176,7 @@ $(function () {
                     searchable: !1,
                     orderable: !1,
                     render: function (e, t, a, s) {
-                        // if(window.user_info.id == a.id)- return "";
+                        if(window.user_info.id == a.id) return "";
                         return (
                             `
                             <div class="d-flex align-items-center">
@@ -211,11 +212,11 @@ $(function () {
             buttons: [
 
                 {
-                    text: '<i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Agregar Usuario</span>',
+                    text: '<i id="addBtn" class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span class="d-none d-sm-inline-block">Agregar Usuario</span>',
                     className: "add-new btn btn-primary",
                     attr: {
-                        "data-bs-toggle": "modal",
-                        "data-bs-target": "#modalAddUser",
+                        // "data-bs-toggle": "modal",
+                        // "data-bs-target": "#modalAddUser",
                     },
                 },
             ],
@@ -344,9 +345,75 @@ $(function () {
                 //                 );
                 //             });
                 //     });
-                $(".datatables-users").on("click", "#editButton", function () {
-                    let element = document.getElementById('editButton');
-                    console.log(window.tableInfo.filter((user) => user.id == element.dataset.uuid)[0]);
+                $(".datatables-users").on("click", "#editButton", function (e) {
+                    // let element = document.getElementById('editButton');
+                    let user = window.tableInfo.filter((user) => user.id == e.currentTarget.dataset.uuid)[0];
+
+                    console.log(window.tableInfo.filter((user) => user.id == e.currentTarget.dataset.uuid)[0]);
+
+                    const label = document.getElementById("modalAddUserLabel");
+                    const oldLabel = label.textContent;
+                    label.textContent = "Editar usuario";
+
+                    const btn = document.querySelector(".data-submit");
+                    const oldbtn = btn.textContent;
+                    btn.textContent = "Aplicar"
+
+                    let modal = new bootstrap.Modal(document.getElementById('modalAddUser'));
+                    modal.show();
+
+                    let nameInput = document.getElementById("add-user-name");
+                    let lastnameInput = document.getElementById("add-user-lastname");
+                    let emailInput = document.getElementById("add-user-email");
+                    let passwordInput = document.getElementById("add-user-password");
+                    let roleInput = document.getElementById("user-role");
+                    // let roleInput = document.getElementById("user-role");
+                    
+                    nameInput.value = user.name;
+                    lastnameInput.value = user.lastname;
+                    emailInput.value = user.email;
+                    // passwordInput.value = user.;
+                    roleInput.value = user.role_id;
+
+                    
+                    let submitBtn = document.querySelector(".data-submit").onclick = async () => {
+                        let isValid = await window.formvalidation.validate();
+
+                        if(isValid != "Invalid") {
+                            let form = new FormData();
+                            form.append('name', nameInput.value);
+                            form.append('lastname', lastnameInput.value);
+                            form.append('email', emailInput.value);
+                            if(passwordInput.value.trim()) {
+                                form.append('password', passwordInput.value);
+                            }
+                            form.append('role_id', roleInput.value);
+    
+                            let response = await fetch(`${window.location.origin}/api/user/${user.id}`, {
+                                method: "POST",
+                                headers: new Headers({
+                                    'Authorization': `Bearer ${window.user_info?.api_token}`
+                                }),
+                                body: form
+                            })
+    
+                            let data = await response.json();
+    
+                            if(response.status == 200) {
+                                Swal.fire({
+                                    title: "¡Excelente! Los cambios fueron aplicados satisfactoriamente",
+                                    text: "La informacion del usuario ha sido cambiada con exito.",
+                                    icon: "success"
+                                });
+                                modal.hide();
+                                console.log($(".datatables-users"));
+                                window.location.reload();
+                                // $(".datatables-users").DataTable().ajax.reload();
+                                
+                            }
+
+                        }
+                    }
                 
                     // Aquí puedes realizar la lógica de edición con el uuid del registro
                     // Por ejemplo, puedes redirigir a una página de edición con el uuid en la URL
@@ -404,26 +471,60 @@ $(function () {
     (function () {
         var e = document.querySelectorAll(".phone-mask"),
             t = document.getElementById("addNewUserForm");
-        e &&
-            e.forEach(function (e) {
-                new Cleave(e, { phone: !0, phoneRegionCode: "US" });
-            }),
-            FormValidation.formValidation(t, {
+            window.formvalidation = FormValidation.formValidation(t, {
                 fields: {
-                    userFullname: {
+                    userName: {
                         validators: {
-                            notEmpty: { message: "Please enter fullname " },
+                            notEmpty: { message: "Ingrese un nombre" },
+                        },
+                    },
+                    userLastName: {
+                        validators: {
+                            notEmpty: { message: "Ingrese un apellido" },
                         },
                     },
                     userEmail: {
                         validators: {
-                            notEmpty: { message: "Please enter your email" },
+                            notEmpty: { message: "Ingrese un Email" },
                             emailAddress: {
                                 message:
-                                    "The value is not a valid email address",
+                                    "El valor no es una dirección de correo electrónico válida.",
                             },
                         },
                     },
+                    userPassword: {
+                        validators: {
+                            // notEmpty: {
+                            //     message: "Ingrese una contraseña"
+                            // },
+                            stringLength: {
+                                min: 6,
+                                message:
+                                    "La contraseña debe tener más de 6 caracteres",
+                            },
+                        }
+                    },
+                    userConfirmPassword: {
+                        validators: {
+                            // notEmpty: {
+                            //     message: "Por favor, confirma la contraseña",
+                            // },
+                            identical: {
+                                compare: function () {
+                                    return document.querySelector(
+                                        '[name="userPassword"]'
+                                    ).value;
+                                },
+                                message:
+                                    "La contraseña y su confirmación no coinciden",
+                            },
+                            // stringLength: {
+                            //     min: 6,
+                            //     message:
+                            //         "La contraseña debe tener más de 6 caracteres",
+                            // },
+                        },
+                    }
                 },
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
@@ -437,4 +538,9 @@ $(function () {
                     autoFocus: new FormValidation.plugins.AutoFocus(),
                 },
             });
+        e &&
+            e.forEach(function (e) {
+                new Cleave(e, { phone: !0, phoneRegionCode: "US" });
+            }),
+            window.formvalidation
     })();

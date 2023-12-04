@@ -52,6 +52,6 @@ Route::prefix('subjects')->group(function () {
 Route::prefix('buildings')->group(function () {
     Route::get('/', [PlaceController::class, 'index']);
     Route::post('/', [PlaceController::class, 'store']);
-    Route::post('/buildings/{id}', [PlaceController::class, 'update']);
-    Route::delete('/buildings/{id}', [PlaceController::class, 'destroy']);
+    Route::post('/{id}', [PlaceController::class, 'update']);
+    Route::delete('/{id}', [PlaceController::class, 'destroy']);
 });

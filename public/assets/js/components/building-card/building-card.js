@@ -11,6 +11,7 @@ class BuildingCard extends LitElement {
         subtitle: {type: String},
         modify_callback: { type: Function },
         delete_callback: { type: Function },
+        imageUrl: { type: String },
     };
 
     static styles = [
@@ -154,7 +155,7 @@ class BuildingCard extends LitElement {
 
                 <a href="#" class="container">
                     <img
-                        src="https://www.elsudcaliforniano.com.mx/circulos/9wo8lw-edificios-inteligentes-uabcs/ALTERNATES/LANDSCAPE_1140/Edificios%20inteligentes%20UABCS"
+                        src=${this.imageUrl}
                     />
                     <div class="info_container">
                         <p class="title_card">${this.title}</p>

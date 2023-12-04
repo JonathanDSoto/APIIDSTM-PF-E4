@@ -62,7 +62,7 @@ $iniciativas = [
     ['titulo' => 'Validar Horarios', 'descripcion' => 'Breve descripción del proyecto...', 'usuario' => 'Usuario 2',
     'estado'=> 'Aprobada', 'imagen' => '../../assets/img/elements/12.jpg', 'usuario_img' => '../../assets/img/avatars/6.png'],
     ['titulo' => 'Limpiar Baños', 'descripcion' => 'Breve descripción del proyecto...', 'usuario' => 'Usuario 3',
-    'estado'=> 'Aprobada', 'imagen' => '../../assets/img/elements/13.jpg', 'usuario_img' => '../../assets/img/avatars/7.png']
+    'estado'=> 'No Aprobada', 'imagen' => '../../assets/img/elements/13.jpg', 'usuario_img' => '../../assets/img/avatars/7.png']
   ];
 ?>
 
@@ -76,48 +76,58 @@ $iniciativas = [
                         <i class="ti ti-trash me"></i>
                     </button>
                 </div>
-
                 <h5 class="card-header ios-header"><strong><?php echo $iniciativa['titulo']; ?></strong></h5>
                 <div class="card-body ios-body">
                     <div class="text-center mb-2">
                         <img src="<?php echo $iniciativa['imagen']; ?>" alt="Imagen de iniciativa" class="img-fluid">
                     </div>
                     <p class="card-text ios-text"><strong>Descripción: </strong><?php echo $iniciativa['descripcion']; ?></p>
+                    
                     <div class="d-flex align-items-center mb-2">
-                        <p class="card-text ios-text me-2"><strong>Usuario: </strong></p>
-                        <img src="<?php echo $iniciativa['usuario_img']; ?>" alt="Avatar" class="rounded-circle m-2" style="width: 32px; height: 32px;">
-                        <p><?php echo $iniciativa['usuario']; ?></p>
+                        <p class="card-text ios-text m-0"><strong>Usuario: </strong></p>
+                        <div class="avatar-group ms-2 d-flex align-items-center">
+                            <div data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="<?php echo $iniciativa['usuario']; ?>">
+                            <img src="<?php echo $iniciativa['usuario_img']; ?>" alt="Avatar" class="rounded-circle">
+                            </div>
+                            <span class="ms-1"><?php echo $iniciativa['usuario']; ?></span>
+                        </div>
                     </div>
-                    <p class="card-text ios-text"><strong>Estado: </strong> <span class="badge bg-label-primary"><?php echo $iniciativa['estado']; ?></span></p>
+
+                    <!-- Aplica la clase de Bootstrap según el estado -->
+                    <p class="card-text ios-text">
+                        <strong>Estado: </strong>
+                        <span class="badge <?php echo ($iniciativa['estado'] == 'Aprobada') ? 'bg-success' : 'bg-danger'; ?>">
+                            <?php echo $iniciativa['estado']; ?>
+                        </span>
+                    </p>
                 </div>
             </div>
         </div>
     <?php endforeach; ?>
 </div>
 
-
-  <!-- Modal de confirmación para eliminar -->
-  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<!-- Modal de confirmación para eliminar -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar esta iniciativa?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <!-- Agregamos el botón de eliminar con el ícono de bote de basura -->
+                <button type="button" class="btn btn-danger">
+                    <i class="ti ti-trash me"></i> Eliminar
+                </button>
+            </div>
         </div>
-        <div class="modal-body">
-          ¿Estás seguro de que deseas eliminar esta iniciativa?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <!-- Agregamos el botón de eliminar con el ícono de bote de basura -->
-          <button type="button" class="btn btn-danger">
-            <i class="bi bi-trash"></i> Eliminar
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
+
 
   <!-- Vendors JS -->
     <script src="../../assets/vendor/libs/bs-stepper/bs-stepper.js"></script>

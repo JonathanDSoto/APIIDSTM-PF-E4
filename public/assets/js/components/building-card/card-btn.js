@@ -10,7 +10,7 @@ class CardButton extends LitElement {
         
     }
     static properties = {
-        onclick: { type: Function },
+        onClick: { type: Function },
         bgColor: { type: String },
         icon: {type:String}
     };

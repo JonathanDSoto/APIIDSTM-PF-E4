@@ -55,7 +55,7 @@
 @section('content')
 <!-- Multiple slides -->
 <div class="col-12 mb-4">
-    <h6 class="text-muted mt-3">Próximos Eventos</h6>
+    <h6 class="text-muted mt-3"><strong>Próximos Eventos</strong></h6>
     <div class="swiper" id="swiper-multiple-slides">
       <div class="swiper-wrapper">
         <div class="swiper-slide" style="background-image:url(../../assets/img/elements/10.jpg)">Evento</div>

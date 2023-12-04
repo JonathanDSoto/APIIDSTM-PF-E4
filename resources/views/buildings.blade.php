@@ -17,11 +17,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../../assets/js/ui-modals.js"></script>
 
-
-
 <script>
     let modal = new bootstrap.Modal(document.getElementById('basicModal'));
-
     async function deleteBuild(e) {
         const buildingCard = e.currentTarget.parentElement;
         const buildingId = buildingCard.dataset.id;
@@ -30,7 +27,7 @@
             // Realizar una solicitud DELETE a la API para eliminar el edificio
             const apiUrl = `${window.location.origin}/api/buildings/${buildingId}`;
             const token = window.user_info?.api_token ?? "";
-            console.log (apiUrl)
+            console.log(apiUrl)
             const response = await fetch(apiUrl, {
                 method: 'DELETE',
                 headers: {
@@ -68,21 +65,186 @@
 
     function modifyBuild(e) {
         let parent = e.target;
-        modal.show();
         let tituloModal = document.getElementById('exampleModalLabel1');
         tituloModal.innerHTML = "Editar edificio";
-        console.log(parent);
+
+        // Obtener los datos del edificio desde el building-card
+        const buildingCard = parent.closest('building-card');
+        const buildingId = buildingCard.dataset.id;
+
+        // Obtener y llenar los datos en el formulario
+        const nombreClaveInput = document.getElementById('nombre_clave');
+        const nombreInput = document.getElementById('nombre');
+        const latitudInput = document.getElementById('latitud');
+        const altitudInput = document.getElementById('altitud');
+        const radioInput = document.getElementById('radio');
+        const imageInput = document.getElementById('dropzone-basic');
+
+
+        // Llenar los campos con los datos del edificio
+        nombreClaveInput.value = buildingCard.title;
+        nombreInput.value = buildingCard.subtitle;
+        latitudInput.value = buildingCard.dataset.latitude;
+        altitudInput.value = buildingCard.dataset.altitude;
+        radioInput.value = buildingCard.dataset.radius;
+
+
+        // Mostrar el modal
+        modal.show();
+
+        // Agregar evento clic al botón "Guardar Cambios"
+        const btnSaveChanges = document.getElementById('btnSaveChanges');
+        btnSaveChanges.addEventListener('click', async () => {
+            try {
+
+                // Realizar una solicitud PUT a la API para actualizar el edificio
+                const apiUrl = `${window.location.origin}/api/buildings/${buildingId}`;
+                const token = window.user_info?.api_token ?? "";
+                const form = new FormData();
+                form.append('name', nombreInput.value);
+                form.append('code_name', nombreClaveInput.value);
+                form.append('latitude', latitudInput.value);
+                form.append('altitude', altitudInput.value);
+                form.append('radius', radioInput.value);
+                // console.log(imageInput.dropzone);
+
+                if (imageInput.dropzone.files.length > 0) {
+                    // Obtener el archivo del input
+                    const file = imageInput.dropzone.files[0];
+
+                    // Agregar el archivo al FormData
+                    // El primer parámetro es el nombre que se usará en el lado del servidor para acceder al archivo.
+                    // En este ejemplo, se usa 'imagen', pero puedes cambiarlo según tus necesidades.
+                    form.append('image_name', file, file.name);
+                }
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                    body: form,
+                });
+
+
+                if (!response.ok) {
+                    throw new Error(`Error al actualizar el edificio. Código de estado: ${response.status}`);
+                }
+
+                // Cerrar el modal
+                modal.hide();
+
+
+                // Mostrar mensaje de éxito
+                Swal.fire({
+                    title: "¡Actualizado!",
+                    text: "El edificio fue actualizado exitosamente.",
+                    icon: "success"
+                });
+
+                // Recargar las building cards
+                fetchBuildings();
+
+            } catch (error) {
+                console.error('Error al actualizar el edificio:', error.message);
+
+                // Mostrar un mensaje de error
+                Swal.fire({
+                    title: "Error",
+                    text: "No se pudo actualizar el edificio.",
+                    icon: "error"
+                });
+            }
+        });
     }
+
+
+    function addNewEdificio() {
+        // Configurar el modal para agregar un nuevo usuario
+        let tituloModal = document.getElementById('exampleModalLabel1');
+        tituloModal.innerHTML = "Agregar Nuevo Edificio";
+
+        // Restablecer los valores del formulario
+        const nombreClaveInput = document.getElementById('nombre_clave');
+        const nombreInput = document.getElementById('nombre');
+        const latitudInput = document.getElementById('latitud');
+        const altitudInput = document.getElementById('altitud');
+        const radioInput = document.getElementById('radio');
+        const imageInput = document.getElementById('dropzone-basic');
+
+        nombreClaveInput.value = '';
+        nombreInput.value = '';
+        latitudInput.value = '';
+        altitudInput.value = '';
+        radioInput.value = '';
+        imageInput.dropzone.removeAllFiles();
+
+        // Mostrar el modal
+        modal.show();
+
+        // Agregar evento clic al botón "Guardar Cambios"
+        const btnSaveChanges = document.getElementById('btnSaveChanges');
+        btnSaveChanges.addEventListener('click', async () => {
+            try {
+                // Construir el objeto FormData con los datos del nuevo usuario
+                const form = new FormData();
+                form.append('name', nombreInput.value);
+                form.append('code_name', nombreClaveInput.value);
+                form.append('latitude', latitudInput.value);
+                form.append('altitude', altitudInput.value);
+                form.append('radius', radioInput.value);
+
+                if (imageInput.dropzone.files.length > 0) {
+                    const file = imageInput.dropzone.files[0];
+                    form.append('image_name', file, file.name);
+                }
+
+                // Realizar una solicitud POST a la API para agregar un nuevo usuario
+                const apiUrl = `${window.location.origin}/api/buildings`;
+                const token = window.user_info?.api_token ?? "";
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                    body: form,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error al agregar el edificio. Código de estado: ${response.status}`);
+                }
+
+                // Cerrar el modal
+                modal.hide();
+
+                // Mostrar mensaje de éxito
+                Swal.fire({
+                    title: "¡Usuario Agregado!",
+                    text: "El nuevo edificio fue agregado exitosamente.",
+                    icon: "success"
+                });
+
+                // Recargar la lista de usuarios
+                fetchBuildings();
+
+            } catch (error) {
+                console.error('Error al agregar el usuario:', error.message);
+
+                // Mostrar un mensaje de error
+                Swal.fire({
+                    title: "Error",
+                    text: "No se pudo agregar el usuario.",
+                    icon: "error"
+                });
+            }
+        });
+    }
+
 </script>
 
 <script>
     async function fetchBuildings() {
         apiUrl = `${window.location.origin}/api/buildings`;
         const token = window.user_info?.api_token ?? "";
-
-
-        console.log(token);
-
         try {
             const response = await fetch(apiUrl, {
                 method: 'GET', // O el método que corresponda
@@ -101,7 +263,10 @@
             const templateBuildingCard = document.getElementById('template-building-card');
 
             // Limpiar las building cards existentes
-            // mapWrapper.innerHTML = '';
+            const existentes = document.querySelectorAll('building-card');
+            existentes.forEach((e) => {
+                e.remove();
+            })
 
             // Renderizar las nuevas building cards con los datos obtenidos
             buildings.forEach(building => {
@@ -112,7 +277,12 @@
                 buildingCard.title = building.name;
                 buildingCard.subtitle = building.code_name;
                 buildingCard.dataset.id = building.id;
-
+                buildingCard.dataset.name = building.name;
+                buildingCard.dataset.codeName = building.code_name;
+                buildingCard.dataset.latitude = building.latitude;
+                buildingCard.dataset.altitude = building.altitude;
+                buildingCard.dataset.radius = building.radius;
+                buildingCard.imageUrl = building.image_url;
                 mapWrapper.insertBefore(clonedBuildingCard, document.getElementById('basicModal'));
             });
 
@@ -135,8 +305,6 @@
     // Llamar a fetchBuildings para cargar las building cards inicialmente
     fetchBuildings();
 </script>
-
-
 
 <script>
     searchInput = document.getElementById('search-input');
@@ -162,6 +330,7 @@
 
 @section('content')
 <div class="map_wrapper" style="">
+<button type="button" onclick="addNewEdificio()" class="btn btn-primary" style="width: calc((100% / 3) - 10px);">Agregar</button>
     {{-- Modal inicio --}}
     <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -174,32 +343,32 @@
                     <div class="row">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">Nombre Clave</label>
-                            <input type="text" id="nameBasic" class="form-control"
+                            <input type="text" id="nombre_clave" class="form-control"
                                 placeholder="Ingresa el nombre clave">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">Nombre</label>
-                            <input type="text" id="nameBasic" class="form-control" placeholder="Ingresa el nombre">
+                            <input type="text" id="nombre" class="form-control" placeholder="Ingresa el nombre">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">Latitud</label>
-                            <input type="text" id="nameBasic" class="form-control" placeholder="Ingresa la latitud">
+                            <input type="text" id="latitud" class="form-control" placeholder="Ingresa la latitud">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">Altitud</label>
-                            <input type="text" id="nameBasic" class="form-control" placeholder="Ingresa la altitud">
+                            <input type="text" id="altitud" class="form-control" placeholder="Ingresa la altitud">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">Radio</label>
-                            <input type="text" id="nameBasic" class="form-control" placeholder="Ingresa el radio">
+                            <input type="text" id="radio" class="form-control" placeholder="Ingresa el radio">
                         </div>
                     </div>
 
@@ -224,15 +393,19 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                    <button type="button" class="btn btn-primary" id="btnSaveChanges">Guardar Cambios</button>
                 </div>
             </div>
         </div>
     </div>
     {{-- Modal Fin --}}
     <!-- <div class="leaflet-map" id="basicMap"></div> -->
+
+   
+
     <template id="template-building-card">
-        <building-card data-id="">
+        <building-card data-id="" imageUrl="" data-name="" data-codeName="" data-latitude="" data-altitude=""
+            data-radius="">
             <uabcs-card-btn bgColor="red" icon="trash" slot="delete-btn"></uabcs-card-btn>
             <uabcs-card-btn bgColor="#7367f0" icon="pen" slot="modify-btn"></uabcs-card-btn>
         </building-card>

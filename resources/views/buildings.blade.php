@@ -15,7 +15,7 @@
 <script type="module" src="{{ asset('../../assets/js/components/building-card/card-btn.js') }}"></script>
 <script type="module" src="{{ asset('../../assets/js/components/building-card/building-card.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="../../assets/js/ui-modals.js"></script>
+{{-- <script src="../../assets/js/ui-modals.js"></script> --}}
 
 <script>
     let modal = new bootstrap.Modal(document.getElementById('basicModal'));
@@ -27,7 +27,6 @@
             // Realizar una solicitud DELETE a la API para eliminar el edificio
             const apiUrl = `${window.location.origin}/api/buildings/${buildingId}`;
             const token = window.user_info?.api_token ?? "";
-            console.log(apiUrl)
             const response = await fetch(apiUrl, {
                 method: 'DELETE',
                 headers: {
@@ -108,7 +107,6 @@
                 form.append('latitude', latitudInput.value);
                 form.append('altitude', altitudInput.value);
                 form.append('radius', radioInput.value);
-                // console.log(imageInput.dropzone);
 
                 if (imageInput.dropzone.files.length > 0) {
                     // Obtener el archivo del input
@@ -291,7 +289,6 @@
 
             // Se pasa la  funciones para borrar y modificar a los componentes
             let buildingsCards = document.querySelectorAll('building-card');
-            console.log(buildingsCards);
             for (const card of buildingsCards) {
                 let btnDelete = card.querySelector('[slot="delete-btn"]');
                 let btnModify = card.querySelector('[slot="modify-btn"]');

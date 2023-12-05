@@ -67,6 +67,8 @@
         let parent = e.target;
         let tituloModal = document.getElementById('exampleModalLabel1');
         tituloModal.innerHTML = "Editar edificio";
+        let btnTexto = document.getElementById('btnSaveChanges');
+        btnTexto.innerHTML = "Guardar Cambios";
 
         // Obtener los datos del edificio desde el building-card
         const buildingCard = parent.closest('building-card');
@@ -101,8 +103,8 @@
                 const apiUrl = `${window.location.origin}/api/buildings/${buildingId}`;
                 const token = window.user_info?.api_token ?? "";
                 const form = new FormData();
-                form.append('name', nombreInput.value);
-                form.append('code_name', nombreClaveInput.value);
+                form.append('code_name', nombreInput.value);
+                form.append('name', nombreClaveInput.value);
                 form.append('latitude', latitudInput.value);
                 form.append('altitude', altitudInput.value);
                 form.append('radius', radioInput.value);
@@ -162,7 +164,8 @@
         // Configurar el modal para agregar un nuevo usuario
         let tituloModal = document.getElementById('exampleModalLabel1');
         tituloModal.innerHTML = "Agregar Nuevo Edificio";
-
+        let btnTexto = document.getElementById('btnSaveChanges');
+        btnTexto.innerHTML = "Agregar";
         // Restablecer los valores del formulario
         const nombreClaveInput = document.getElementById('nombre_clave');
         const nombreInput = document.getElementById('nombre');
@@ -183,13 +186,12 @@
 
         // Agregar evento clic al botón "Guardar Cambios"
         const btnSaveChanges = document.getElementById('btnSaveChanges');
-        console.log(btnSaveChanges);
-        btnSaveChanges = async () => {
+        btnSaveChanges.onclick = async () => {
             try {
                 // Construir el objeto FormData con los datos del nuevo usuario
                 const form = new FormData();
-                form.append('name', nombreInput.value);
-                form.append('code_name', nombreClaveInput.value);
+                form.append('code_name', nombreInput.value);
+                form.append('name', nombreClaveInput.value);
                 form.append('latitude', latitudInput.value);
                 form.append('altitude', altitudInput.value);
                 form.append('radius', radioInput.value);

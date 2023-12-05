@@ -155,8 +155,8 @@
                             <div data-i18n="Iniciativas">Iniciativas</div>
                         </a>
                     </li>
-                    <li class="menu-item ">
-                        <a href="app-calendar.html" class="menu-link">
+                    <li class="menu-item {{ request()->is('departamentos') ? 'active' : '' }}">
+                        <a href="/departamentos" class="menu-link">
                             <i class="menu-icon tf-icons ti ti-school"></i>
                             <div data-i18n="Departamentos Academicos">Departamentos Academicos</div>
                         </a>

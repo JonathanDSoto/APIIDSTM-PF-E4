@@ -44,3 +44,7 @@ Route::get('/reportes', function () {
 Route::get('/iniciativas', function () {
     return view('initiative');
 });
+
+Route::get('/departamentos', function () {
+    return view('departament');
+});

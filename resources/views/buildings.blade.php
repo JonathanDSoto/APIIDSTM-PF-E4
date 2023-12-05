@@ -94,7 +94,7 @@
 
         // Agregar evento clic al botón "Guardar Cambios"
         const btnSaveChanges = document.getElementById('btnSaveChanges');
-        btnSaveChanges.addEventListener('click', async () => {
+        btnSaveChanges.onclick = async () => {
             try {
 
                 // Realizar una solicitud PUT a la API para actualizar el edificio
@@ -154,7 +154,7 @@
                     icon: "error"
                 });
             }
-        });
+        };
     }
 
 
@@ -183,7 +183,8 @@
 
         // Agregar evento clic al botón "Guardar Cambios"
         const btnSaveChanges = document.getElementById('btnSaveChanges');
-        btnSaveChanges.addEventListener('click', async () => {
+        console.log(btnSaveChanges);
+        btnSaveChanges = async () => {
             try {
                 // Construir el objeto FormData con los datos del nuevo usuario
                 const form = new FormData();
@@ -236,7 +237,7 @@
                     icon: "error"
                 });
             }
-        });
+        };
     }
 
 </script>

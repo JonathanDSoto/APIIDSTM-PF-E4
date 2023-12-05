@@ -25,30 +25,23 @@
     <!-- Row Group CSS -->
   <link rel="stylesheet" href="../../assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css">
 
-  <style>
-    .card {
-        background-color: #f8f9fa; /* Cambia este color al que prefieras */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
-    }
-
-    .badge {
-        border-radius: 4px; /* Bordes redondeados para los distintivos */
-    }
-</style>
+ 
 @endsection
 
-@section('content')            
-<h4 class="py-3 mb-4">
-  <span class="text-muted fw-light">UBACS</span> Reportes
-</h4>
- 
-<!-- Sección de Reportes -->
-<div class="container mt-2">
-    <div class="row">
-      <?php
+@section('content')
+    <h4 class="py-3 mb-4">
+        <span class="text-muted fw-light">UBACS</span> Reportes
+    </h4>
+
+    <!-- Sección de Reportes -->
+    <div class="row" id="reportes-container">
+        <!-- Contenedor de reportes generado dinámicamente con JavaScript -->
+    </div>
+
+    <script>
         // Función para obtener la clase del distintivo según el estado
-        function getBadgeClass($estado) {
-            switch ($estado) {
+        function getBadgeClass(estado) {
+            switch (estado) {
                 case 'Completado':
                     return 'bg-success';
                 case 'Descartado':
@@ -61,26 +54,23 @@
         }
 
         // Array de reportes
-        $reportes = [
+        var reportes = [
             ['Nombre del Reporte 1', 'Descripción del reporte 1', 'En Revisión', 'NombreUsuario1', '2023-01-01', 'Departamento1'],
             ['Nombre del Reporte 2', 'Descripción del reporte 2', 'Completado', 'NombreUsuario2', '2023-02-15', 'Departamento2'],
             ['Nombre del Reporte 3', 'Descripción del reporte 3', 'Descartado', 'NombreUsuario3', '2023-03-20', 'Departamento3'],
         ];
 
-        // Iterar sobre los reportes
-        foreach ($reportes as $id => $reporte) {
-            $nombre = $reporte[0];
-            $descripcion = $reporte[1];
-            $estado = $reporte[2];
-            $nombreUsuario = $reporte[3];
-            $fecha = $reporte[4];
-            $departamento = $reporte[5];
+        // Obtener el contenedor de reportes
+        var reportesContainer = document.getElementById('reportes-container');
 
-            $id_modal_editar = 'editarModal' . $id;
-            $id_modal_eliminar = 'eliminarModal' . $id;
+        // Iterar sobre los reportes
+        reportes.forEach(function (reporte, id) {
+            var [nombre, descripcion, estado, nombreUsuario, fecha, departamento] = reporte;
+            var id_modal_editar = 'editarModal' + id;
+            var id_modal_eliminar = 'eliminarModal' + id;
 
             // Generar código HTML para cada reporte
-            echo "
+            var reporteHtml = `
                 <div class='col-md-4 mb-2'>
                     <div class='card'>
                         <div class='card-header'>
@@ -105,14 +95,14 @@
                             </li>
                             <li class='list-group-item'>
                                 <strong>Estado:</strong>
-                                <span class='badge " . getBadgeClass($estado) . "'>$estado</span>
+                                <span class='badge ${getBadgeClass(estado)}'>$estado</span>
                             </li>
                             <li class='list-group-item'>
                                 <div class='d-grid gap-2'>
-                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#$id_modal_editar'>
+                                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#${id_modal_editar}'>
                                         <i class='fas fa-edit me-2'></i> Editar
                                     </button>
-                                    <button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#$id_modal_eliminar'>
+                                    <button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#${id_modal_eliminar}'>
                                         <i class='fas fa-trash-alt me-2'></i> Eliminar
                                     </button>
                                 </div>
@@ -122,7 +112,7 @@
                 </div>
                 
                 <!-- Modal Editar -->
-                <div class='modal fade' id='$id_modal_editar' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                <div class='modal fade' id='${id_modal_editar}' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                     <div class='modal-dialog'>
                         <div class='modal-content'>
                             <div class='modal-header'>
@@ -134,32 +124,39 @@
                                 <form>
                                     <div class='mb-3'>
                                         <label for='nombre$id' class='form-label'>Nombre del Reporte</label>
-                                        <input type='text' class='form-control' id='nombre$id' value='$nombre' readonly>
+                                        <input type='text' class='form-control' id='nombre$id' value='$nombre' disabled>
                                     </div>
                                     <div class='mb-3'>
                                         <label for='descripcion$id' class='form-label'>Descripción del Reporte</label>
-                                        <textarea class='form-control' id='descripcion$id' rows='3' readonly>$descripcion</textarea>
+                                        <textarea class='form-control' id='descripcion$id' rows='3' disabled>$descripcion</textarea>
                                     </div>
                                     <div class='mb-3'>
                                         <label for='usuario$id' class='form-label'>Usuario</label>
-                                        <input type='text' class='form-control' id='usuario$id' value='$nombreUsuario' readonly>
+                                        <input type='text' class='form-control' id='usuario$id' value='$nombreUsuario' disabled>
                                     </div>
                                     <div class='mb-3'>
                                         <label for='fecha$id' class='form-label'>Fecha</label>
-                                        <input type='text' class='form-control' id='fecha$id' value='$fecha' readonly>
+                                        <input type='text' class='form-control' id='fecha$id' value='$fecha' disabled>
                                     </div>
                                     <div class='mb-3'>
                                         <label for='departamento$id' class='form-label'>Departamento</label>
-                                        <input type='text' class='form-control' id='departamento$id' value='$departamento' readonly>
+                                        <input type='text' class='form-control' id='departamento$id' value='$departamento' disabled>
                                     </div>
                                     <div class='mb-3'>
-                                        <label for='estado$id' class='form-label'>Estado</label>
-                                        <input type='text' class='form-control' id='estado$id' value='$estado'>
+                                        <label for='estado${id}' class='form-label'>Estado</label>
+                                        <select class='form-select' id='estado${id}'>
+                                            <option value='En Revisión' ${estado === 'En Revisión' ? 'selected' : ''}>En Revisión</option>
+                                            <option value='Completado' ${estado === 'Completado' ? 'selected' : ''}>Completado</option>
+                                            <option value='Descartado' ${estado === 'Descartado' ? 'selected' : ''}>Descartado</option>
+                                            <!-- Agrega más opciones según tus necesidades -->
+                                        </select>
                                     </div>
                                 </form>
                             </div>
                             <div class='modal-footer'>
-                                <button type='button' class='btn btn-primary'>Guardar Cambios</button>
+                                <button type='button' class='btn btn-primary'>
+                                    <i class='ti ti-check me'></i>Guardar Cambios
+                                </button>
                                 <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
                             </div>
                         </div>
@@ -167,7 +164,7 @@
                 </div>
                 
                 <!-- Modal Eliminar -->
-                <div class='modal fade' id='$id_modal_eliminar' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                <div class='modal fade' id='${id_modal_eliminar}' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
                     <div class='modal-dialog'>
                         <div class='modal-content'>
                             <div class='modal-header'>
@@ -186,11 +183,30 @@
                         </div>
                     </div>
                 </div>
-            ";
+            `;
+
+            // Agregar el HTML del reporte al contenedor
+            reportesContainer.innerHTML += reporteHtml;
+        });
+
+        // Función para guardar cambios (puedes personalizar según tus necesidades)
+        function guardarCambios(id) {
+            // Obtener el valor del estado seleccionado
+            var nuevoEstado = document.getElementById('estado' + id).value;
+            
+            // Aquí puedes realizar acciones adicionales según tus necesidades, como enviar datos al servidor, etc.
+            
+            // Cerrar el modal
+            $('#editarModal' + id).modal('hide');
         }
-      ?>
-    </div>
-</div>
+        // Función para eliminar un reporte (puedes personalizar según tus necesidades)
+        function eliminarReporte(id) {
+            // Aquí puedes realizar acciones adicionales según tus necesidades, como enviar datos al servidor, etc.
+            
+            // Cerrar el modal
+            $('#eliminarModal' + id).modal('hide');
+        }
+    </script>
 
 
   <!-- Vendors JS -->

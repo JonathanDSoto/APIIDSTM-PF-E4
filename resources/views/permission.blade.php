@@ -39,10 +39,10 @@
         <tr>
           <th></th>
           <th></th>
-          <th>Name</th>
-          <th>Assigned To</th>
-          <th>Created Date</th>
-          <th>Actions</th>
+          <th>Nombre</th>
+          <th>Permiso</th>
+          <th>Fecha de Creación</th>
+          <th>Acciones</th>
         </tr>
       </thead>
     </table>

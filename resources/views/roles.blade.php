@@ -30,7 +30,7 @@ Un rol proporciona acceso a menús y funciones predefinidos, de modo que según 
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between">
-          <h6 class="fw-normal mb-2">4 usuarios en total </h6>
+          <h6 class="fw-normal mb-2">4 Usuarios En Total </h6>
           <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
             <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Vinnie Mostowy" class="avatar avatar-sm pull-up">
               <img class="rounded-circle" src="../../assets/img/avatars/5.png" alt="Avatar">
@@ -63,7 +63,7 @@ Un rol proporciona acceso a menús y funciones predefinidos, de modo que según 
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between">
-          <h6 class="fw-normal mb-2">7 usuarios en total</h6>
+          <h6 class="fw-normal mb-2">7 Usuarios en Total</h6>
           <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
             <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Jimmy Ressula" class="avatar avatar-sm pull-up">
               <img class="rounded-circle" src="../../assets/img/avatars/4.png" alt="Avatar">
@@ -84,8 +84,8 @@ Un rol proporciona acceso a menús y funciones predefinidos, de modo que según 
         </div>
         <div class="d-flex justify-content-between align-items-end mt-1">
           <div class="role-heading">
-            <h4 class="mb-1">Responsable de departamento</h4>
-            <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addRoleModal" class="role-edit-modal"><span>Edit Role</span></a>
+            <h4 class="mb-1">Responsable De Departamento</h4>
+            <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addRoleModal" class="role-edit-modal"><span>Editar Rol</span></a>
           </div>
           <a href="javascript:void(0);" class="text-muted"><i class="ti ti-copy ti-md"></i></a>
         </div>
@@ -96,7 +96,7 @@ Un rol proporciona acceso a menús y funciones predefinidos, de modo que según 
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between">
-          <h6 class="fw-normal mb-2">5 usuarios</h6>
+          <h6 class="fw-normal mb-2">5 Usuarios</h6>
           <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
             <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Andrew Tye" class="avatar avatar-sm pull-up">
               <img class="rounded-circle" src="../../assets/img/avatars/6.png" alt="Avatar">
@@ -118,7 +118,7 @@ Un rol proporciona acceso a menús y funciones predefinidos, de modo que según 
         <div class="d-flex justify-content-between align-items-end mt-1">
           <div class="role-heading">
             <h4 class="mb-1">Usuarios</h4>
-            <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addRoleModal" class="role-edit-modal"><span>Edit Role</span></a>
+            <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addRoleModal" class="role-edit-modal"><span>Editar Rol</span></a>
           </div>
           <a href="javascript:void(0);" class="text-muted"><i class="ti ti-copy ti-md"></i></a>
         </div>
@@ -129,7 +129,7 @@ Un rol proporciona acceso a menús y funciones predefinidos, de modo que según 
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between">
-          <h6 class="fw-normal mb-2">3 usuarios</h6>
+          <h6 class="fw-normal mb-2">3 Usuarios</h6>
           <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
             <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Kim Karlos" class="avatar avatar-sm pull-up">
               <img class="rounded-circle" src="../../assets/img/avatars/3.png" alt="Avatar">
@@ -162,7 +162,7 @@ Un rol proporciona acceso a menús y funciones predefinidos, de modo que según 
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between">
-          <h6 class="fw-normal mb-2">2 usuarios</h6>
+          <h6 class="fw-normal mb-2">2 Usuarios</h6>
           <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
             <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Kim Merchent" class="avatar avatar-sm pull-up">
               <img class="rounded-circle" src="../../assets/img/avatars/10.png" alt="Avatar">
@@ -183,8 +183,8 @@ Un rol proporciona acceso a menús y funciones predefinidos, de modo que según 
         </div>
         <div class="d-flex justify-content-between align-items-end mt-1">
           <div class="role-heading">
-            <h4 class="mb-1">Usuarios restringidos</h4>
-            <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addRoleModal" class="role-edit-modal"><span>Edit Role</span></a>
+            <h4 class="mb-1">Usuarios Restringidos</h4>
+            <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addRoleModal" class="role-edit-modal"><span>Editar Rol</span></a>
           </div>
           <a href="javascript:void(0);" class="text-muted"><i class="ti ti-copy ti-md"></i></a>
         </div>
@@ -201,7 +201,7 @@ Un rol proporciona acceso a menús y funciones predefinidos, de modo que según 
         </div>
         <div class="col-sm-7">
           <div class="card-body text-sm-end text-center ps-sm-0">
-            <button data-bs-target="#addRoleModal" data-bs-toggle="modal" class="btn btn-primary mb-2 text-nowrap add-new-role">Add New Role</button>
+            <button data-bs-target="#addRoleModal" data-bs-toggle="modal" class="btn btn-primary mb-2 text-nowrap add-new-role">Agregar Nuevo Rol</button>
             <p class="mb-0 mt-1">Agregar rol, si no existe</p>
           </div>
         </div>
@@ -234,7 +234,7 @@ Un rol proporciona acceso a menús y funciones predefinidos, de modo que según 
       <button type="button" class="btn-close btn-pinned" data-bs-dismiss="modal" aria-label="Close"></button>
       <div class="modal-body">
         <div class="text-center mb-4">
-          <h3 class="role-title mb-2">Agregar nuevo rol</h3>
+          <h3 class="role-title mb-2">Agregar Nuevo Rol</h3>
           <p class="text-muted">Establecer permisos de rol</p>
         </div>
         <!-- Add role form -->
@@ -280,206 +280,6 @@ Un rol proporciona acceso a menús y funciones predefinidos, de modo que según 
                           <input class="form-check-input" type="checkbox" id="userManagementCreate" />
                           <label class="form-check-label" for="userManagementCreate">
                             Crear
-                          </label>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-nowrap fw-medium">Content Management</td>
-                    <td>
-                      <div class="d-flex">
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="contentManagementRead" />
-                          <label class="form-check-label" for="contentManagementRead">
-                            Read
-                          </label>
-                        </div>
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="contentManagementWrite" />
-                          <label class="form-check-label" for="contentManagementWrite">
-                            Write
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="contentManagementCreate" />
-                          <label class="form-check-label" for="contentManagementCreate">
-                            Create
-                          </label>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-nowrap fw-medium">Disputes Management</td>
-                    <td>
-                      <div class="d-flex">
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="dispManagementRead" />
-                          <label class="form-check-label" for="dispManagementRead">
-                            Read
-                          </label>
-                        </div>
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="dispManagementWrite" />
-                          <label class="form-check-label" for="dispManagementWrite">
-                            Write
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="dispManagementCreate" />
-                          <label class="form-check-label" for="dispManagementCreate">
-                            Create
-                          </label>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-nowrap fw-medium">Database Management</td>
-                    <td>
-                      <div class="d-flex">
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="dbManagementRead" />
-                          <label class="form-check-label" for="dbManagementRead">
-                            Read
-                          </label>
-                        </div>
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="dbManagementWrite" />
-                          <label class="form-check-label" for="dbManagementWrite">
-                            Write
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="dbManagementCreate" />
-                          <label class="form-check-label" for="dbManagementCreate">
-                            Create
-                          </label>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-nowrap fw-medium">Financial Management</td>
-                    <td>
-                      <div class="d-flex">
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="finManagementRead" />
-                          <label class="form-check-label" for="finManagementRead">
-                            Read
-                          </label>
-                        </div>
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="finManagementWrite" />
-                          <label class="form-check-label" for="finManagementWrite">
-                            Write
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="finManagementCreate" />
-                          <label class="form-check-label" for="finManagementCreate">
-                            Create
-                          </label>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-nowrap fw-medium">Reporting</td>
-                    <td>
-                      <div class="d-flex">
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="reportingRead" />
-                          <label class="form-check-label" for="reportingRead">
-                            Read
-                          </label>
-                        </div>
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="reportingWrite" />
-                          <label class="form-check-label" for="reportingWrite">
-                            Write
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="reportingCreate" />
-                          <label class="form-check-label" for="reportingCreate">
-                            Create
-                          </label>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-nowrap fw-medium">API Control</td>
-                    <td>
-                      <div class="d-flex">
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="apiRead" />
-                          <label class="form-check-label" for="apiRead">
-                            Read
-                          </label>
-                        </div>
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="apiWrite" />
-                          <label class="form-check-label" for="apiWrite">
-                            Write
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="apiCreate" />
-                          <label class="form-check-label" for="apiCreate">
-                            Create
-                          </label>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-nowrap fw-medium">Repository Management</td>
-                    <td>
-                      <div class="d-flex">
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="repoRead" />
-                          <label class="form-check-label" for="repoRead">
-                            Read
-                          </label>
-                        </div>
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="repoWrite" />
-                          <label class="form-check-label" for="repoWrite">
-                            Write
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="repoCreate" />
-                          <label class="form-check-label" for="repoCreate">
-                            Create
-                          </label>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-nowrap fw-medium">Payroll</td>
-                    <td>
-                      <div class="d-flex">
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="payrollRead" />
-                          <label class="form-check-label" for="payrollRead">
-                            Read
-                          </label>
-                        </div>
-                        <div class="form-check me-3 me-lg-5">
-                          <input class="form-check-input" type="checkbox" id="payrollWrite" />
-                          <label class="form-check-label" for="payrollWrite">
-                            Write
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="payrollCreate" />
-                          <label class="form-check-label" for="payrollCreate">
-                            Create
                           </label>
                         </div>
                       </div>

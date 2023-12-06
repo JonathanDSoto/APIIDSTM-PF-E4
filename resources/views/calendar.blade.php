@@ -43,13 +43,6 @@
      <!-- Page CSS -->
     <link rel="stylesheet" href="../../assets/vendor/css/pages/app-calendar.css" />
     <link rel="stylesheet" href="../../assets/vendor/css/pages/ui-carousel.css" />
-
-    <style>
-      
-    
-    
-    </style>
-
 @endsection
 
 @section('content')
@@ -194,10 +187,8 @@
   </div>
 </div>
 
-
-
-  <!-- Vendors JS -->
-  <script src="../../assets/vendor/libs/swiper/swiper.js"></script>
-   <!-- Page JS -->
-   <script src="../../assets/js/ui-carousel.js"></script>
+<!-- Vendors JS -->
+<script src="../../assets/vendor/libs/swiper/swiper.js"></script>
+<!-- Page JS -->
+<script src="../../assets/js/ui-carousel.js"></script>
 @endsection

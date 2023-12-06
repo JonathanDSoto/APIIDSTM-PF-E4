@@ -112,7 +112,7 @@ $(function () {
                     },
                     {
                         targets: 6,
-                        title: "Actions",
+                        title: "Acciones",
                         searchable: !1,
                         orderable: !1,
                         render: function (e, t, a, s) {

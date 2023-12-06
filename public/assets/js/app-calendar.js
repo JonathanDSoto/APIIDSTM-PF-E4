@@ -319,8 +319,8 @@ isRtl && (direction = "rtl"),
                     u();
                 }),
                 b.addEventListener("click", (e) => {
-                    h && (h.innerHTML = "Add Event"),
-                        (y.innerHTML = "Add"),
+                    h && (h.innerHTML = "Agregar Evento"),
+                        (y.innerHTML = "Agregar"),
                         y.classList.remove("btn-update-event"),
                         y.classList.add("btn-add-event"),
                         S.classList.add("d-none"),

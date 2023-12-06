@@ -4,14 +4,27 @@ import { LitElement, css, html } from "../../../vendor/js/lit.js";
 class BuildingCard extends LitElement {
     constructor() {
         super();
+
+        this.data = {
+            id: 0,
+            name: "",
+            codeName: "",
+            latitude: 0,
+            latitude: 0,
+            radiud: 0,
+            imageUrl: ""
+        }
     }
 
     static properties = {
-        title: {type: String},
-        subtitle: {type: String},
-        modify_callback: { type: Function },
-        delete_callback: { type: Function },
-        imageUrl: { type: String },
+        data: {type: Object}
+        // data-id="" 
+        // data-name="" 
+        // data-codeName="" 
+        // data-latitude="" 
+        // data-altitude=""
+        // data-radius=""
+        // imageUrl="" 
     };
 
     static styles = [
@@ -104,8 +117,6 @@ class BuildingCard extends LitElement {
             .subtitle_card {
                 color: white;
             }
-            
-
 
             .btn-container {
                 opacity: 0;
@@ -115,20 +126,24 @@ class BuildingCard extends LitElement {
             .wrapper:hover .btn-container {
                 opacity: 1;
             }
-
-            
         `,
     ];
 
     render() {
+        let {name, codeName, imageUrl} = this.data;
+        
         return html`
             <div class="wrapper">
-                <div class="btn-container"
+                <div
+                    class="btn-container"
                     style="position:absolute; z-index: 1; display: flex; gap: 40px; font-size: 2em;"
                 >
                     <slot name="delete-btn"></slot>
                     <slot name="modify-btn"></slot>
-                    <!-- <button @click=${() => this.modify_callback(this)} class="btn-delete modify" id="delete">
+                    <!-- <button @click=${() =>
+                        this.modify_callback(
+                            this
+                        )} class="btn-delete modify" id="delete">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             height=".8em"
@@ -140,7 +155,10 @@ class BuildingCard extends LitElement {
                         </svg>
                     </button>
 
-                    <button @click=${() => this.delete_callback(this)} class="btn-delete delete" id="modify">
+                    <button @click=${() =>
+                        this.delete_callback(
+                            this
+                        )} class="btn-delete delete" id="modify">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             height=".8em"
@@ -154,33 +172,11 @@ class BuildingCard extends LitElement {
                 </div>
 
                 <a href="#" class="container">
-                    <img
-                        src=${this.imageUrl}
-                    />
+                    <img src=${this.imageUrl} />
                     <div class="info_container">
-                        <p class="title_card">${this.title}</p>
-                        <p class="subtitle_card">
-                            ${this.subtitle}
-                        </p>
+                        <p class="title_card">${codeName}</p>
+                        <p class="subtitle_card">${name}</p>
                     </div>
-
-                    <!-- <div class="header">
-                    <img src="https://www.elsudcaliforniano.com.mx/circulos/9wo8lw-edificios-inteligentes-uabcs/ALTERNATES/LANDSCAPE_1140/Edificios%20inteligentes%20UABCS" />
-                    <div class="info_container">
-                        <p class="title_card">CMT-03</p>
-                        <p class="subtitle_card">
-                            Ciencias del Mar y de la Tierra I
-                        </p>
-                    </div>
-                </div> -->
-                    <!-- <div class="btn_container">
-                    <button>
-                        Modificar
-                    </button> -->
-                    <!-- <button>
-                        Eliminar
-                    </button> -->
-                    <!-- </div> -->
                 </a>
             </div>
         `;

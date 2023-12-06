@@ -51,6 +51,9 @@ class UserController extends Controller
                 Session::create($response);
 
                 $user -> api_token = $response['api_token'];
+                $role = Role::find($user -> role_id);
+                $user -> role = $role;  
+
                 return response() -> json([
                     'message' => 'Sesión Iniciada exitosamente',
                     'result' => $user

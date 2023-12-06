@@ -607,7 +607,7 @@
                             <!-- Quick links -->
 
                             <!-- Notification -->
-                            <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
+                            {{-- <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                     <i class="ti ti-bell ti-md"></i>
@@ -856,11 +856,11 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> --}}
                             <!--/ Notification -->
 
                             <!-- User -->
-                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                            <li id="user_data" class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
@@ -877,7 +877,7 @@
                                                             class="h-auto rounded-circle">
                                                     </div>
                                                 </div>
-                                                <div id="user_data" class="flex-grow-1">
+                                                <div class="flex-grow-1">
                                                     <span class="fw-medium d-block"></span>
                                                     <small class="text-muted"></small>
                                                 </div>
@@ -990,6 +990,16 @@
 
     <!-- Main JS -->
     <script src="../../assets/js/main.js"></script>
+    <script>
+        const {name, role, lastname, image_name} = window.user_info;
+        let userTag = document.querySelector('#user_data');
+        userTag.querySelector('span').textContent = name;
+        userTag.querySelector('small').textContent = role.name;
+        
+        userTag.querySelectorAll('img').forEach(element => {
+            element.src = `https://ui-avatars.com/api/?name=${name}+${lastname}`
+        }); 
+    </script>
 
 
     <!-- Page JS -->

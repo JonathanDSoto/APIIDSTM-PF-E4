@@ -10,8 +10,8 @@ class BuildingCard extends LitElement {
             name: "",
             codeName: "",
             latitude: 0,
-            latitude: 0,
-            radiud: 0,
+            longitude: 0,
+            radius: 0,
             imageUrl: ""
         }
     }

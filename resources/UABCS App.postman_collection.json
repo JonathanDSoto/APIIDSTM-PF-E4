@@ -348,6 +348,45 @@
 					"response": []
 				},
 				{
+					"name": "Edit department",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Departamento Academico de Sistemas Computacionales",
+									"type": "text"
+								},
+								{
+									"key": "code_name",
+									"value": "DASSC",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Luis-dev/Downloads/descargar.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/department/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"department",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete department",
 					"request": {
 						"method": "DELETE",

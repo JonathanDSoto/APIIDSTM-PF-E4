@@ -46,10 +46,10 @@ class PlaceController extends Controller
                 'latitude' => 'required|string',
                 'altitude' => 'required|string',
                 'radius' => 'required|integer',
-                'image_name' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+                'image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
             ]);
 
-            $image = $request->file('image_name');
+            $image = $request->file('image');
             $imageName = time() . '_' .  str_replace(" ", "_", $image->getClientOriginalName());
             // $image->storeAs('public/buildings', $imageName);
             Storage::disk(self::$PATH_NAME)->put($imageName, file_get_contents($image));
@@ -61,7 +61,7 @@ class PlaceController extends Controller
                 'latitude' => $validateData['latitude'],
                 'altitude' => $validateData['altitude'],
                 'radius' => $validateData['radius'],
-                'image_name' => $imageName,
+                'image' => $imageName,
             ]);
 
             $place->save();

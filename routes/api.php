@@ -37,6 +37,7 @@ Route::middleware([ApiSpecificMiddleware::class]) -> group(function() {
         // Departamentos
         Route::get('/', [DepartamentController::class, 'index']);
         Route::post('/', [DepartamentController::class, 'store']);
+        Route::post('/{id}', [DepartamentController::class, 'update']);
         Route::get('/{id}', [DepartamentController::class, 'show']);
         Route::delete('/{id}', [DepartamentController::class, 'destroy']);
     });    

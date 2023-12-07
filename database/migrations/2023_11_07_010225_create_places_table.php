@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('altitude');
             $table->string('latitude');
             $table->integer('radius');
-            $table->string('image_name');
+            $table->string('image') -> nullable();
             $table->timestamps();
         });
     }
@@ -27,7 +27,7 @@ return new class extends Migration
      // Obtener la URL completa del avatar
      public function getUrlAttribute()
      {
-         return Storage::disk('buildings') -> url($this->file_name);
+         return Storage::disk('buildings') -> url($this-> file_name);
      }
 
     /**

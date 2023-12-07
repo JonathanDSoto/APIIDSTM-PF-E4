@@ -19,7 +19,7 @@ class PlaceSeeder extends Seeder
             'latitude' => 11,
             'altitude' => 13,
             'radius' => 5,
-            'image_name' => ''
+            'image' => null
         ]);
     }
 }

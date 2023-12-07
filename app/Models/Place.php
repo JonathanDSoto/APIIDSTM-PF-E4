@@ -20,7 +20,7 @@ class Place extends Model
         'latitude',
         'altitude',
         'radius',
-        'image_name'
+        'image'
     ];
 
     /**

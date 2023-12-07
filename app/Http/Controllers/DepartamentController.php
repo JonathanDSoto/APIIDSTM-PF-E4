@@ -39,8 +39,9 @@ class DepartamentController extends Controller
             $validateData = $request->validate([
                 'name' => 'required|string',
                 'code_name' => 'required|string',
-                'image' => 'image|mimes:jpeg,png,jpg|max:2048'
+                'image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
             ]);
+
 
             $department = new Departament([
                 'name' => $validateData['name'],
@@ -54,6 +55,7 @@ class DepartamentController extends Controller
                 $url = Storage::disk(self::$PATH_NAME)->url($imageName);
                 $department->image = $url;
             }
+            var_dump($request -> hasFile('image'));
             $department->save();
 
             return response()->json([
@@ -110,9 +112,9 @@ class DepartamentController extends Controller
         }
 
         try {
-            $validateData = $request->validate([
-                'name' => 'string',
-                'code_name' => 'string',
+            $request->validate([
+                'name' => 'required|string',
+                'code_name' => 'required|string',
                 'image' => 'image|mimes:jpeg,png,jpg|max:2048'
             ]);
 

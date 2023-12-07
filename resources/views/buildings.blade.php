@@ -201,7 +201,7 @@
 
                 if (imageInput.dropzone.files.length > 0) {
                     const file = imageInput.dropzone.files[0];
-                    form.append('image_name', file, file.name);
+                    form.append('image', file, file.name);
                 }
 
                 // Realizar una solicitud POST a la API para agregar un nuevo usuario

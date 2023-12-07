@@ -172,7 +172,7 @@ class BuildingCard extends LitElement {
                 </div>
 
                 <a href="#" class="container">
-                    <img src=${this.imageUrl} />
+                    <img src=${imageUrl} />
                     <div class="info_container">
                         <p class="title_card">${codeName}</p>
                         <p class="subtitle_card">${name}</p>

@@ -12,16 +12,6 @@
 				{
 					"name": "Get all users",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -40,16 +30,6 @@
 				{
 					"name": "Get User",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -69,16 +49,6 @@
 				{
 					"name": "Delete User",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -98,16 +68,6 @@
 				{
 					"name": "Edit User",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -135,25 +95,25 @@
 								},
 								{
 									"key": "role_id",
-									"value": "1",
+									"value": "2",
 									"type": "text"
 								},
 								{
 									"key": "image_name",
 									"type": "file",
-									"src": "/C:/Users/Luis-dev/Downloads/images.jpg"
+									"src": "/C:/Users/Luis-dev/Pictures/Screenshots/Captura de pantalla 2023-12-02 193657.png"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{URL}}/api/user/14ac40a3-52d4-428a-8ba8-aacaeff7f823",
+							"raw": "{{URL}}/api/user/e6d928bc-25ee-4e89-8a38-198d4ea9272e",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"api",
 								"user",
-								"14ac40a3-52d4-428a-8ba8-aacaeff7f823"
+								"e6d928bc-25ee-4e89-8a38-198d4ea9272e"
 							]
 						}
 					},
@@ -162,16 +122,6 @@
 				{
 					"name": "Register User",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -179,17 +129,17 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Emiliano",
+									"value": "Fabian",
 									"type": "text"
 								},
 								{
 									"key": "lastname",
-									"value": "Fernandez",
+									"value": ":)",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "emilianofh99@gmail.com",
+									"value": "emilianofhxxx@gmail.com",
 									"type": "text"
 								},
 								{
@@ -293,16 +243,6 @@
 				{
 					"name": "Register new role",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -310,7 +250,7 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Administrador",
+									"value": "Maestro",
 									"type": "text"
 								},
 								{
@@ -341,16 +281,6 @@
 				{
 					"name": "Get all roles",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -374,16 +304,6 @@
 				{
 					"name": "Get Department",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -401,18 +321,26 @@
 					"response": []
 				},
 				{
+					"name": "Get All Department",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/department",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"department"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create new department",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -446,28 +374,19 @@
 					"response": []
 				},
 				{
-					"name": "Get All Department",
+					"name": "Delete department",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/api/department",
+							"raw": "{{URL}}/api/department/1",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"api",
-								"department"
+								"department",
+								"1"
 							]
 						}
 					},
@@ -481,16 +400,6 @@
 				{
 					"name": "Add new subject",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -529,16 +438,6 @@
 				{
 					"name": "Store new building",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -592,16 +491,6 @@
 				{
 					"name": "Edit building",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -656,16 +545,6 @@
 				{
 					"name": "Delete building",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -674,32 +553,38 @@
 								{
 									"key": "name",
 									"value": "Teibol :)",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "code_name",
 									"value": "TD-8)",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "latitude",
 									"value": "4.9",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "altitude",
 									"value": "11.05",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "radius",
 									"value": "10",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "image_name",
 									"type": "file",
-									"src": "/C:/Users/Luis-dev/Downloads/images.jpg"
+									"src": "/C:/Users/Luis-dev/Downloads/images.jpg",
+									"disabled": true
 								}
 							]
 						},
@@ -723,16 +608,6 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -810,11 +685,6 @@
 		{
 			"key": "URL",
 			"value": "127.0.0.1:8000",
-			"type": "string"
-		},
-		{
-			"key": "Token",
-			"value": "c080e94f-9fcb-48a2-8d6a-8931b71c4c0e",
 			"type": "string"
 		}
 	]

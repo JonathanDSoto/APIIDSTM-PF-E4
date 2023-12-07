@@ -20,9 +20,9 @@ class ApiSpecificMiddleware
         $session = Session::where('api_token', $authorizationHeader) -> first();
 
         if(!$session) {
-            Session::destroy($session -> id);
+            // Session::destroy($session -> id);
             return response() -> json([
-                'message' => 'token invalido'
+                'message' => 'token invalido, inicie sesion para que se genere de nuevo'
             ], 401);
         }
 

@@ -14,6 +14,8 @@ class BuildingCard extends LitElement {
             radius: 0,
             imageUrl: "https://th.bing.com/th?id=OIF.PbMiUQoRmNnNHhqa%2bWyiXQ&rs=1&pid=ImgDetMain"
         }
+
+        this.onerrorimg = "https://th.bing.com/th?id=OIF.PbMiUQoRmNnNHhqa%2bWyiXQ&rs=1&pid=ImgDetMain";
     }
 
     static properties = {
@@ -129,6 +131,10 @@ class BuildingCard extends LitElement {
         `,
     ];
 
+    onErrorImg(e) {
+        e.target.src = this.onerrorimg;
+    }
+
     render() {
         let {name, codeName, imageUrl} = this.data;
         
@@ -172,7 +178,7 @@ class BuildingCard extends LitElement {
                 </div>
 
                 <a href="#" class="container">
-                    <img src=${imageUrl} />
+                    <img src=${imageUrl} @error=${this.onErrorImg}/>
                     <div class="info_container">
                         <p class="title_card">${codeName}</p>
                         <p class="subtitle_card">${name}</p>

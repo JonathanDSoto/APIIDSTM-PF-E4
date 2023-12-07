@@ -16,60 +16,75 @@ class UserController extends Controller
 {
     static $PATH_NAME = 'users';
 
+    public function showLogin(Request $request)
+    {
+        $token = $request->attributes->get('token');
+
+        if ($token) {
+            $session = Session::where('api_token', $token) -> first();
+            
+            if ($session) {
+                return redirect('/buildings');
+            }
+        }
+
+        return view('login');
+    }
+
     public function index()
     {
         $users = User::all();
 
         foreach ($users as $user) {
-            $role = Role::find($user -> role_id);
-            $user -> role = $role;
+            $role = Role::find($user->role_id);
+            $user->role = $role;
         }
         return response()->json($users);
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         try {
             $validateData = $request->validate([
                 'email' => 'required|string',
                 'password' => 'required|string',
             ]);
 
-            $user = User::where('email', $validateData['email']) -> first();
+            $user = User::where('email', $validateData['email'])->first();
 
-            if(!$user) {
-                return response() -> json([
+            if (!$user) {
+                return response()->json([
                     'message' => 'Usuario con ese email no existe'
                 ], 401);
-            } 
+            }
             $passwordValid = Hash::check($validateData['password'], $user->password);
-            
-            if($passwordValid) {
+
+            if ($passwordValid) {
                 $new_token = Str::uuid();
                 $response = [
-                    'id_user' => $user -> id,
+                    'id_user' => $user->id,
                     'api_token' => $new_token
                 ];
 
                 Session::create($response);
-                
-                $user -> api_token = $response['api_token'];
-                $role = Role::find($user -> role_id);
-                $user -> role = $role;  
 
-                return response() -> json([
+                $user->api_token = $response['api_token'];
+                $role = Role::find($user->role_id);
+                $user->role = $role;
+
+                return response()->json([
                     'message' => 'Sesión Iniciada exitosamente',
                     'result' => $user
-                ]) -> withCookie(cookie('token', $new_token, 43800));
+                ])->withCookie(cookie('token', $new_token, 43800));
             }
 
-            return response() -> json([
+            return response()->json([
                 'message' => 'Contraseña incorrecta',
             ], 401);
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->getMessages();
 
-        } catch(ValidationException $e) {
-            $errors = $e -> validator -> errors() -> getMessages();
-
-            return response() -> json([
+            return response()->json([
                 'message' => 'Error de validacion',
                 'errors' => $errors
             ]);
@@ -96,7 +111,7 @@ class UserController extends Controller
     public function register(Request $request)
     {
         try {
-            if(User::where('email', $request->input('email') ) -> first()) {
+            if (User::where('email', $request->input('email'))->first()) {
                 return response([
                     'message' => 'Este correo ya fue registrado',
                 ], 409);
@@ -114,7 +129,7 @@ class UserController extends Controller
             $imageName = null;
             $url = null;
             if ($request->hasFile('image_name')) {
-                $image = $request -> file('image_name');
+                $image = $request->file('image_name');
                 $imageName = time() . '_' .  str_replace(" ", "_", $image->getClientOriginalName());
                 Storage::disk(self::$PATH_NAME)->put($imageName, file_get_contents($image));
             }
@@ -127,14 +142,14 @@ class UserController extends Controller
                 'role_id' => $validateData['role_id'],
                 'image_name' => $imageName
             ]);
-            
+
             $user->save();
 
-            $role = Role::find($user -> role_id);
+            $role = Role::find($user->role_id);
             // $role -> unsetAttribute('role_id');
-            $user -> role = $role;
+            $user->role = $role;
 
-            if(!$url) $user -> image_name = Storage::disk(self::$PATH_NAME)->url($imageName);
+            if (!$url) $user->image_name = Storage::disk(self::$PATH_NAME)->url($imageName);
             $response = [
                 'message' => 'Usuario creado satisfactoriamente',
                 'result' => $user
@@ -151,27 +166,29 @@ class UserController extends Controller
         }
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $user = User::find($id);
 
-        if(!$user) {
-            return response() -> json([
+        if (!$user) {
+            return response()->json([
                 'message' => 'No se encontro al usuario'
             ], 404);
         }
 
-        $user -> delete();
+        $user->delete();
 
-        return response() -> json([
+        return response()->json([
             'message' => 'Usuario eliminado exitosamente'
         ]);
     }
 
-    public function edit(Request $request, $id) {
+    public function edit(Request $request, $id)
+    {
         $user = User::find($id);
 
-        if(!$user) {
-            return response() -> json([
+        if (!$user) {
+            return response()->json([
                 'message' => 'No se encontro al usuario'
             ], 404);
         }
@@ -194,25 +211,25 @@ class UserController extends Controller
             //     'role_id' => $validateData['role_id']
             // ]);
 
-            $imageName = $user -> image_name;
+            $imageName = $user->image_name;
             $url = null;
-            
+
             if ($request->hasFile('image_name')) {
-                if(Storage::disk(self::$PATH_NAME)->exists($user->image_name)) {
+                if (Storage::disk(self::$PATH_NAME)->exists($user->image_name)) {
                     Storage::disk(self::$PATH_NAME)->delete($user->image_name);
                 }
-                
-                $image = $request -> file('image_name');
+
+                $image = $request->file('image_name');
                 $imageName = time() . '_' .  str_replace(" ", "_", $image->getClientOriginalName());
                 Storage::disk(self::$PATH_NAME)->put($imageName, file_get_contents($image));
             }
-            
-            $user -> image_name = $imageName;
-            $user -> update($request->except('image_name', 'password'));
-            
-            $user -> image_url = Storage::disk(self::$PATH_NAME)->url($imageName);
-            if($request -> input('password')) {
-                $user -> password = Hash::make($request-> input('password'));
+
+            $user->image_name = $imageName;
+            $user->update($request->except('image_name', 'password'));
+
+            $user->image_url = Storage::disk(self::$PATH_NAME)->url($imageName);
+            if ($request->input('password')) {
+                $user->password = Hash::make($request->input('password'));
             };
             $response = [
                 'message' => 'Usuario creado satisfactoriamente',
@@ -220,10 +237,10 @@ class UserController extends Controller
             ];
 
             return response()->json($response);
-        } catch(ValidationException $e) {
-            $errors = $e -> validator -> errors() -> getMessages();
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors()->getMessages();
 
-            return response() -> json([
+            return response()->json([
                 'message' => 'Error de validacion',
                 'errors' => $errors
             ]);

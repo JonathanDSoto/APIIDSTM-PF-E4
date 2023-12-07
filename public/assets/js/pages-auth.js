@@ -125,7 +125,7 @@ formAuthentication.addEventListener("click", async (e) => {
             formdata.append("email", document.getElementById("email").value);
             formdata.append("password", document.getElementById("password").value);
         
-            const url = `${window.location.origin}/api/user/login`;
+            const url = `${window.location.origin}/api/login`;
             let response = await fetch(url, {
                 method: "POST",
                 body: formdata,
@@ -135,7 +135,7 @@ formAuthentication.addEventListener("click", async (e) => {
             
             if(response.status == 200) {
                 window.localStorage.setItem('user', JSON.stringify(data.result));
-                // window.location = "/buildings"
+                window.location = "/buildings"
                 return;
             }
 

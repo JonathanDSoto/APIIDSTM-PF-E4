@@ -82,9 +82,10 @@ class DepartamentController extends Controller
             return response()->json(['message' => 'Departamento no encontrado'], 404);
         }
 
+        return response() -> json($departamento);
         // Devuelve los detalles del departamento en formato JSON
         // Además, ahora devuelve la vista Blade 'departamento.show' con la variable $departamento
-        return view('departamento.show', ['departamento' => $departamento]);
+        // return view('departamento.show', ['departamento' => $departamento]);
     }
 
     /**

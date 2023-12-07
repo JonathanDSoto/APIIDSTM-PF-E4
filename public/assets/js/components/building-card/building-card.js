@@ -7,12 +7,12 @@ class BuildingCard extends LitElement {
 
         this.data = {
             id: 0,
-            name: "",
-            codeName: "",
+            name: "Titulo",
+            codeName: "Subtitulo",
             latitude: 0,
             longitude: 0,
             radius: 0,
-            imageUrl: ""
+            imageUrl: "https://th.bing.com/th?id=OIF.PbMiUQoRmNnNHhqa%2bWyiXQ&rs=1&pid=ImgDetMain"
         }
     }
 

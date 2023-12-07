@@ -193,43 +193,13 @@
 							]
 						},
 						"url": {
-							"raw": "{{URL}}/api/user/login",
+							"raw": "{{URL}}/api/login",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"api",
-								"user",
 								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Check Session",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "token",
-									"value": "21900c13-4118-410d-831c-6eb7a315438b",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{URL}}/api/session/",
-							"host": [
-								"{{URL}}"
-							],
-							"path": [
-								"api",
-								"session",
-								""
 							]
 						}
 					},
@@ -352,11 +322,15 @@
 									"type": "text"
 								},
 								{
-									"key": "url_image",
-									"value": "",
+									"key": "code_name",
+									"value": "DASC",
+									"type": "text"
+								},
+								{
+									"key": "image",
 									"description": "opcional",
-									"type": "text",
-									"disabled": true
+									"type": "file",
+									"src": "/C:/Users/Luis-dev/Downloads/descargar.jpg"
 								}
 							]
 						},
@@ -379,14 +353,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/api/department/1",
+							"raw": "{{URL}}/api/department/3",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"api",
 								"department",
-								"1"
+								"3"
 							]
 						}
 					},

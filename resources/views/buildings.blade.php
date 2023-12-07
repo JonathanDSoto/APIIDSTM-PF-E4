@@ -15,16 +15,17 @@
 <script type="module" src="{{ asset('../../assets/js/components/building-card/card-btn.js') }}"></script>
 <script type="module" src="{{ asset('../../assets/js/components/building-card/building-card.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-{{-- <script src="../../assets/js/ui-modals.js"></script> --}}
+{{--
+<script src="../../assets/js/ui-modals.js"></script> --}}
 
 <script>
     let modal = new bootstrap.Modal(document.getElementById('basicModal'));
     async function deleteBuild(e) {
-        const buildingCard = e.currentTarget.parentElement;
-        const buildingId = buildingCard.dataset.id;
+        const buildingCard = e.currentTarget.closest('building-card');
+        const buildingId = buildingCard.data.id;
 
         try {
-            // Realizar una solicitud DELETE a la API para eliminar el edificio
+            // Realizar una solicitud POST a la API para simular la eliminación del edificio
             const apiUrl = `${window.location.origin}/api/buildings/${buildingId}`;
             const token = window.user_info?.api_token ?? "";
             const response = await fetch(apiUrl, {
@@ -36,24 +37,31 @@
                 credentials: 'include',
             });
 
-            if (!response.ok) {
+            if (response.ok) {
+                // Eliminar la building card del front-end
+                buildingCard.remove();
+
+                // Mostrar un mensaje de éxito
+                Swal.fire({
+                    title: "¡Eliminado!",
+                    text: "El edificio fue eliminado.",
+                    icon: "success"
+                });
+            } else if (response.status === 404) {
+                // El edificio no fue encontrado
+                Swal.fire({
+                    title: "Error",
+                    text: "El edificio no se encontró.",
+                    icon: "error"
+                });
+            } else {
+                // Otro error en la solicitud DELETE
                 throw new Error(`Error al eliminar el edificio. Código de estado: ${response.status}`);
             }
-
-            // Eliminar la building card del front-end
-            buildingCard.remove();
-
-            // Mostrar un mensaje de éxito
-            Swal.fire({
-                title: "¡Eliminado!",
-                text: "El edificio fue eliminado.",
-                icon: "success"
-            });
-
         } catch (error) {
             console.error('Error al eliminar el edificio:', error.message);
 
-            // Mostrar un mensaje de error
+            // Mostrar un mensaje de error genérico
             Swal.fire({
                 title: "Error",
                 text: "No se pudo eliminar el edificio.",
@@ -63,15 +71,14 @@
     }
 
     function modifyBuild(e) {
-        let parent = e.target;
+        let buildingCard = e.target.closest('building-card');
         let tituloModal = document.getElementById('exampleModalLabel1');
         tituloModal.innerHTML = "Editar edificio";
         let btnTexto = document.getElementById('btnSaveChanges');
         btnTexto.innerHTML = "Guardar Cambios";
 
         // Obtener los datos del edificio desde el building-card
-        const buildingCard = parent.closest('building-card');
-        const buildingId = buildingCard.dataset.id;
+        const buildingId = buildingCard.data.id;
 
         // Obtener y llenar los datos en el formulario
         const nombreClaveInput = document.getElementById('nombre_clave');
@@ -81,15 +88,18 @@
         const radioInput = document.getElementById('radio');
         const imageInput = document.getElementById('dropzone-basic');
 
+        const codeName = buildingCard.data.codeName;
+        const name = buildingCard.data.name;
+        const latitude = buildingCard.data.latitude;
+        const longitude = buildingCard.data.longitude;
+        const radius = buildingCard.data.radius;
 
         // Llenar los campos con los datos del edificio
-        nombreClaveInput.value = buildingCard.title;
-        nombreInput.value = buildingCard.subtitle;
-        latitudInput.value = buildingCard.dataset.latitude;
-        altitudInput.value = buildingCard.dataset.altitude;
-        radioInput.value = buildingCard.dataset.radius;
-
-
+        nombreClaveInput.value = codeName;
+        nombreInput.value = name;
+        latitudInput.value = latitude;
+        altitudInput.value = longitude;
+        radioInput.value = radius;
         // Mostrar el modal
         modal.show();
 
@@ -97,13 +107,12 @@
         const btnSaveChanges = document.getElementById('btnSaveChanges');
         btnSaveChanges.onclick = async () => {
             try {
-
                 // Realizar una solicitud PUT a la API para actualizar el edificio
                 const apiUrl = `${window.location.origin}/api/buildings/${buildingId}`;
                 const token = window.user_info?.api_token ?? "";
                 const form = new FormData();
-                form.append('code_name', nombreInput.value);
-                form.append('name', nombreClaveInput.value);
+                form.append('code_name', nombreClaveInput.value);
+                form.append('name', nombreInput.value);
                 form.append('latitude', latitudInput.value);
                 form.append('altitude', altitudInput.value);
                 form.append('radius', radioInput.value);
@@ -113,8 +122,6 @@
                     const file = imageInput.dropzone.files[0];
 
                     // Agregar el archivo al FormData
-                    // El primer parámetro es el nombre que se usará en el lado del servidor para acceder al archivo.
-                    // En este ejemplo, se usa 'imagen', pero puedes cambiarlo según tus necesidades.
                     form.append('image_name', file, file.name);
                 }
                 const response = await fetch(apiUrl, {
@@ -125,14 +132,12 @@
                     body: form,
                 });
 
-
                 if (!response.ok) {
                     throw new Error(`Error al actualizar el edificio. Código de estado: ${response.status}`);
                 }
 
                 // Cerrar el modal
                 modal.hide();
-
 
                 // Mostrar mensaje de éxito
                 Swal.fire({
@@ -188,8 +193,8 @@
             try {
                 // Construir el objeto FormData con los datos del nuevo usuario
                 const form = new FormData();
-                form.append('code_name', nombreInput.value);
-                form.append('name', nombreClaveInput.value);
+                form.append('code_name', nombreClaveInput.value);
+                form.append('name', nombreInput.value);
                 form.append('latitude', latitudInput.value);
                 form.append('altitude', altitudInput.value);
                 form.append('radius', radioInput.value);
@@ -240,18 +245,16 @@
         };
     }
 
-</script>
-
-<script>
     async function fetchBuildings() {
-        apiUrl = `${window.location.origin}/api/buildings`;
+        const apiUrl = `${window.location.origin}/api/buildings`;
         const token = window.user_info?.api_token ?? "";
+        console.log(token);
         try {
             const response = await fetch(apiUrl, {
-                method: 'GET', // O el método que corresponda
+                method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json', // Asegúrate de establecer el tipo de contenido adecuado
+                    'Content-Type': 'application/json',
                 }
             });
 
@@ -261,55 +264,61 @@
 
             const buildings = await response.json();
             const mapWrapper = document.querySelector('.map_wrapper');
-            const templateBuildingCard = document.getElementById('template-building-card');
 
             // Limpiar las building cards existentes
             const existentes = document.querySelectorAll('building-card');
             existentes.forEach((e) => {
                 e.remove();
-            })
+            });
 
             // Renderizar las nuevas building cards con los datos obtenidos
             buildings.forEach(building => {
-                const clonedBuildingCard = document.importNode(templateBuildingCard.content, true);
+                const newCard = document.createElement('building-card');
+                newCard.data = {
+                    id: building.id,
+                    name: building.name,
+                    codeName: building.code_name,
+                    latitude: building.latitude,
+                    longitude: building.altitude,
+                    radius: building.radius,
+                    imageUrl: building.image_url
+                };
 
-                // Actualizar los datos en el clon
-                const buildingCard = clonedBuildingCard.querySelector('building-card');
-                buildingCard.title = building.name;
-                buildingCard.subtitle = building.code_name;
-                buildingCard.dataset.id = building.id;
-                buildingCard.dataset.name = building.name;
-                buildingCard.dataset.codeName = building.code_name;
-                buildingCard.dataset.latitude = building.latitude;
-                buildingCard.dataset.altitude = building.altitude;
-                buildingCard.dataset.radius = building.radius;
-                buildingCard.imageUrl = building.image_url;
-                mapWrapper.insertBefore(clonedBuildingCard, document.getElementById('basicModal'));
-            });
 
-            // Se pasa la  funciones para borrar y modificar a los componentes
-            let buildingsCards = document.querySelectorAll('building-card');
-            for (const card of buildingsCards) {
-                let btnDelete = card.querySelector('[slot="delete-btn"]');
-                let btnModify = card.querySelector('[slot="modify-btn"]');
+                // Icono de editar
+                const btnEdit = document.createElement('uabcs-card-btn');
+                btnEdit.setAttribute('slot', 'modify-btn');
+                btnEdit.setAttribute('icon', 'pen');
+                btnEdit.setAttribute('bgColor', '#7367f0');
+                btnEdit.onclick = (e) => modifyBuild(e);
+
+                // Icono de eliminar
+                const btnDelete = document.createElement('uabcs-card-btn');
+                btnDelete.setAttribute('icon', 'trash');
+                btnDelete.setAttribute('slot', 'delete-btn');
+                btnDelete.setAttribute('bgColor', 'red');
                 btnDelete.onclick = (e) => deleteBuild(e);
-                btnModify.onclick = (e) => modifyBuild(e);
 
-            }
-
+                // Agregar botones a la nueva tarjeta
+                newCard.appendChild(btnEdit);
+                newCard.appendChild(btnDelete);
+                // Agregar nueva tarjeta al contenedor
+                mapWrapper.appendChild(newCard);
+            });
         } catch (error) {
-            console.error('Error al obtener la lista de edificios:', error.message);
+            console.error('Error al oa lista de edificios:', error.message);
         }
     }
 
     // Llamar a fetchBuildings para cargar las building cards inicialmente
     fetchBuildings();
+
 </script>
 
 <script>
     searchInput = document.getElementById('search-input');
     searchInput.oninput = (e) => {
-        alert(e.target.value)
+        target.value()
         // Funcion de la barra de busqueda
     }
 </script>
@@ -330,7 +339,8 @@
 
 @section('content')
 <div class="map_wrapper" style="">
-<button type="button" onclick="addNewEdificio()" class="btn btn-primary" style="width: calc((100% / 3) - 10px);">Agregar</button>
+    <button type="button" onclick="addNewEdificio()" class="btn btn-primary"
+        style="width: calc((100% / 3) - 10px);">Agregar</button>
     {{-- Modal inicio --}}
     <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -401,14 +411,5 @@
     {{-- Modal Fin --}}
     <!-- <div class="leaflet-map" id="basicMap"></div> -->
 
-   
-
-    <template id="template-building-card">
-        <building-card data-id="" imageUrl="" data-name="" data-codeName="" data-latitude="" data-altitude=""
-            data-radius="">
-            <uabcs-card-btn bgColor="red" icon="trash" slot="delete-btn"></uabcs-card-btn>
-            <uabcs-card-btn bgColor="#7367f0" icon="pen" slot="modify-btn"></uabcs-card-btn>
-        </building-card>
-    </template>
 </div>
 @endsection

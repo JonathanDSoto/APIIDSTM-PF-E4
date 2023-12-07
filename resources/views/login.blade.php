@@ -67,7 +67,7 @@
 
 </head>
 
-<body hidden>
+<body>
 
 
     <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
@@ -228,7 +228,7 @@
             document.querySelector('body').removeAttribute('hidden');
         }
 
-        checkSession();
+        // checkSession();
     </script>
 
 </body>

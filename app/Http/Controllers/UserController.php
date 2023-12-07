@@ -44,12 +44,14 @@ class UserController extends Controller
             $passwordValid = Hash::check($validateData['password'], $user->password);
             
             if($passwordValid) {
+                $new_token = Str::uuid();
                 $response = [
                     'id_user' => $user -> id,
-                    'api_token' => Str::uuid()
+                    'api_token' => $new_token
                 ];
-                Session::create($response);
 
+                Session::create($response);
+                
                 $user -> api_token = $response['api_token'];
                 $role = Role::find($user -> role_id);
                 $user -> role = $role;  
@@ -57,7 +59,7 @@ class UserController extends Controller
                 return response() -> json([
                     'message' => 'Sesión Iniciada exitosamente',
                     'result' => $user
-                ]);
+                ]) -> withCookie(cookie('token', $new_token, 43800));
             }
 
             return response() -> json([
@@ -84,7 +86,7 @@ class UserController extends Controller
 
         if (!$user) {
             return response()->json([
-                'message' => $user
+                'message' => "Usuario no encontrado"
             ], 404);
         }
 

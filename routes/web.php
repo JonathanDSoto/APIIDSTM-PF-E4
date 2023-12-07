@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\RequireTokenWeb;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,38 +14,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware([RequireTokenWeb::class]) -> group(function() {
+
+    Route::get('/buildings', function () {
+        return view('buildings');
+    });
+    
+    Route::get('/roles', function () {
+        return view('roles');
+    });
+    
+    Route::get('/permisos', function () {
+        return view('permission');
+    });
+    
+    Route::get('/usuarios', function () {
+        return view('users');
+    });
+    
+    Route::get('/calendario/general', function () {
+        return view('calendar');
+    });
+    
+    Route::get('/reportes', function () {
+        return view('report');
+    });
+    
+    Route::get('/iniciativas', function () {
+        return view('initiative');
+    });
+    
+    Route::get('/departamentos', function () {
+        return view('departament');
+    });
+
+});
+
 Route::get('/', function () {
     return view('login');
-});
-
-Route::get('/buildings', function () {
-    return view('buildings');
-});
-
-Route::get('/roles', function () {
-    return view('roles');
-});
-
-Route::get('/permisos', function () {
-    return view('permission');
-});
-
-Route::get('/usuarios', function () {
-    return view('users');
-});
-
-Route::get('/calendario/general', function () {
-    return view('calendar');
-});
-
-Route::get('/reportes', function () {
-    return view('report');
-});
-
-Route::get('/iniciativas', function () {
-    return view('initiative');
-});
-
-Route::get('/departamentos', function () {
-    return view('departament');
-});
+}) -> name('login');

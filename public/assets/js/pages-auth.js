@@ -132,10 +132,10 @@ formAuthentication.addEventListener("click", async (e) => {
             });
             let data = await response.json();
         
-            console.log(response);
+            
             if(response.status == 200) {
                 window.localStorage.setItem('user', JSON.stringify(data.result));
-                window.location = "/buildings"
+                // window.location = "/buildings"
                 return;
             }
 

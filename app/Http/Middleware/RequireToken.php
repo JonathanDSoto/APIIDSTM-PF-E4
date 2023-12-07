@@ -24,15 +24,16 @@ class RequireToken
             return $next($request);
         }
 
-        $authorizationHeader = $request->header('Authorization');
+        $authorizationHeader = $request-> cookie('token');
         if (!$authorizationHeader) {
-            return response()->json(['error' => 'Token de autenticación requerido'], 401);
+            return response()->json(['error' => 'Token de autenticación requerido, inicie sesion para obtenerlo'], 401);
         }
 
         $token = str_replace('Bearer ', '', $authorizationHeader);
         $session = Session::where('api_token', $token) -> first();
 
         if(!$session) {
+            Session::destroy($session -> id);
             return response() -> json([
                 'message' => 'token invalido'
             ], 401);

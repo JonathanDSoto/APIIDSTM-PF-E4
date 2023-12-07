@@ -41,6 +41,12 @@ return [
             'url' => env('APP_URL').'/storage/users',
             'visibility' => 'public'
         ],
+        'department' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/department'),
+            'url' => env('APP_URL').'/storage/department',
+            'visibility' => 'public'
+        ],
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

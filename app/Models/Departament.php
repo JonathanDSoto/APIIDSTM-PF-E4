@@ -16,7 +16,8 @@ class Departament extends Model
      */
     protected $fillable = [
         'name',
-        'url_image'
+        'code_name',
+        'image',
     ];
 
     /**

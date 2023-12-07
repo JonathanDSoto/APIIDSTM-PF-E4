@@ -41,8 +41,9 @@ Route::prefix('roles')->group(function () {
 Route::prefix('department')->group(function () {
     // Departamentos
     Route::get('/', [DepartamentController::class, 'index']);
-    Route::post('/', [DepartamentController::class, 'create']);
+    Route::post('/', [DepartamentController::class, 'store']);
     Route::get('/{id}', [DepartamentController::class, 'show']);
+    Route::delete('/{id}', [DepartamentController::class, 'destroy']);
 });    
     
 Route::prefix('subjects')->group(function () {

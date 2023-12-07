@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('departaments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('url_image') -> nullable();
+            $table->string('code_name');
+            $table->string('image') -> nullable();
             $table->timestamps();
         });
     }

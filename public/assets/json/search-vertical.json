@@ -1,0 +1,44 @@
+{
+    "pages": [
+        {
+            "name": "Dashboard",
+            "icon": "ti-chart-bar",
+            "url": "/dashboard"
+        },
+        {
+            "name": "Reportes",
+            "icon": "ti-file-certificate",
+            "url": "/reportes"
+        },
+        {
+            "name": "Departamentos",
+            "icon": "ti-school",
+            "url": "layouts-collapsed-menu.html"
+        },
+        {
+            "name": "Edificios",
+            "icon": "ti-home",
+            "url": "layouts-content-navbar.html"
+        },
+        {
+            "name": "Materias",
+            "icon": "ti-id",
+            "url": "layouts-content-navbar-with-sidebar.html"
+        },
+        {
+            "name": "Roles",
+            "icon": "ti-shield-checkered",
+            "url": "layouts-without-menu.html"
+        },
+        {
+            "name": "Permisos",
+            "icon": "ti-ban",
+            "url": "layouts-without-navbar.html"
+        },
+        {
+            "name": "Usuarios",
+            "icon": "ti-layout-user",
+            "url": "layouts-fluid.html"
+        }
+    ]
+}

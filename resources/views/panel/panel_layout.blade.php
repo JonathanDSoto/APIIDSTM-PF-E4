@@ -342,7 +342,7 @@
                         </a>
                     </li>
                     <!-- Front Pages -->
-                    <li class="menu-item {{ request()->is('calendario/general') ? 'active open' : '' }}">
+                    {{-- <li class="menu-item {{ request()->is('calendario/general') ? 'active open' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class='menu-icon tf-icons ti ti-calendar'></i>
                             <div data-i18n="Calendarios">Calendarios</div>
@@ -359,7 +359,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
                     <!-- Apartado de administracion -->
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Administración</span>

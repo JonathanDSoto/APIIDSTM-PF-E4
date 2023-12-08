@@ -55,7 +55,6 @@ class DepartamentController extends Controller
                 $url = Storage::disk(self::$PATH_NAME)->url($imageName);
                 $department->image = $url;
             }
-            var_dump($request -> hasFile('image'));
             $department->save();
 
             return response()->json([

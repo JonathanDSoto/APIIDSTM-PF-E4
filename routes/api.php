@@ -57,7 +57,8 @@ Route::middleware([ApiSpecificMiddleware::class]) -> group(function() {
     });  
         
     Route::prefix('subjects')->group(function () {
-        Route::post('/subjects', [SubjectController::class, 'store']);
+        Route::post('/', [SubjectController::class, 'store']);
+        Route::get('/', [SubjectController::class, 'index']);
     });
     
     Route::prefix('buildings')->group(function () {

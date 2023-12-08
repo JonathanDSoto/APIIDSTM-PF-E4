@@ -301,8 +301,8 @@
 
 
                 <ul class="menu-inner py-1">
-                    <li class="menu-item">
-                        <a href="app-calendar.html" class="menu-link">
+                    <li class="menu-item {{ request()->is('dashboard') ? 'active' : '' }} ">
+                        <a href="/dashboard" class="menu-link">
                             <i class="menu-icon tf-icons ti ti-message-report"></i>
                             <div data-i18n="Dashboard">Dashboard</div>
                         </a>
@@ -335,8 +335,8 @@
                             <div data-i18n="Edificios">Edificios</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="app-calendar.html" class="menu-link">
+                    <li class="menu-item {{ request()->is('materias') ? 'active' : '' }} ">
+                        <a href="/materias" class="menu-link">
                             <i class="menu-icon tf-icons ti ti-notebook"></i>
                             <div data-i18n="Materias">Materias</div>
                         </a>

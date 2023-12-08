@@ -54,4 +54,12 @@ Route::middleware([WebSpecificMiddleware::class]) -> group(function() {
         return view('departament');
     });
 
+    Route::get('/materias', function () {
+        return view('subject');
+    });
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
+
 });

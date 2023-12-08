@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->dateTime('date');
+            $table->string('image');
             $table->uuid('id_user');
-            $table->unsignedBigInteger('id_departament');
+            $table->unsignedBigInteger('id_department');
+            $table->boolean('isApproved') -> default(false);
             $table->timestamps();
             $table->foreign('id_user')->references('id')->on('users');
-            $table->foreign('id_departament')->references('id')->on('departaments');
+            $table->foreign('id_department')->references('id')->on('departaments');
         });
     }
 

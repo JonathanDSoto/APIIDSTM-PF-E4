@@ -12,14 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reports', function (Blueprint $table) {
-            $table->id();
+            $table->id('id') -> autoIncrement();
+            $table->string('title');
             $table->string('description');
-            $table->dateTime('date');
             $table->uuid('id_user');
-            $table->unsignedBigInteger('id_place');
+            $table->unsignedBigInteger('id_building');
+            $table->enum('status', ['en revisión', 'completado', "Descartado"]);
             $table->timestamps();
             $table->foreign('id_user')->references('id')->on('users');
-            $table->foreign('id_place')->references('id')->on('places'); 
+            $table->foreign('id_building')->references('id')->on('places'); 
         });
     }
 

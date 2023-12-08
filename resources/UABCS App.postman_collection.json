@@ -736,6 +736,329 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Initiative",
+			"item": [
+				{
+					"name": "Get all Initiative",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/initiative",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"initiative"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Initiative",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Mas sombra",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Pues nomas deberian de poner mas sombra",
+									"type": "text"
+								},
+								{
+									"key": "id_user",
+									"value": "58d9192b-f199-4886-9328-99287a943e11",
+									"type": "text"
+								},
+								{
+									"key": "id_department",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "isApproved",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Luis-dev/Downloads/images.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/initiative",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"initiative"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Initiative",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Mas sombra",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Pues nomas deberian de poner mas sombra",
+									"type": "text"
+								},
+								{
+									"key": "id_user",
+									"value": "ddd84411-8ee9-4d19-b6aa-a9c6c52130dd",
+									"type": "text"
+								},
+								{
+									"key": "id_department",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "isApproved",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Luis-dev/Downloads/images.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/initiative",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"initiative"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Initiative",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Mas sombra",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Pues nomas deberian de poner mas sombra",
+									"type": "text"
+								},
+								{
+									"key": "id_user",
+									"value": "ddd84411-8ee9-4d19-b6aa-a9c6c52130dd",
+									"type": "text"
+								},
+								{
+									"key": "id_department",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "isApproved",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Luis-dev/Downloads/images.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/initiative/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"initiative",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "Create report",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "No hay papel en el departamento",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Por favor pasenme papel, tengo examen",
+									"type": "text"
+								},
+								{
+									"key": "id_user",
+									"value": "58d9192b-f199-4886-9328-99287a943e11",
+									"type": "text"
+								},
+								{
+									"key": "id_building",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "completado",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/reports/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"reports",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit report",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "No hay papel en el departamento",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Por favor pasenme papel, tengo examennnnnn",
+									"type": "text"
+								},
+								{
+									"key": "id_user",
+									"value": "58d9192b-f199-4886-9328-99287a943e11",
+									"type": "text"
+								},
+								{
+									"key": "id_building",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "completado",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/reports/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"reports",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all reports Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/initiative",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"initiative"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete reports",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/reports/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"reports",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [

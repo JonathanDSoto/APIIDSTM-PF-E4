@@ -47,6 +47,12 @@ return [
             'url' => env('APP_URL').'/storage/department',
             'visibility' => 'public'
         ],
+        'initiatives' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/initiatives'),
+            'url' => env('APP_URL').'/storage/initiatives',
+            'visibility' => 'public'
+        ],
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

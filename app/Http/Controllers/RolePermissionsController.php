@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RolePermissions;
+use App\Models\Session;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreRolePermissionsRequest;
-use App\Http\Requests\UpdateRolePermissionsRequest;
+use App\Models\Permissions;
+use App\Models\Role;
+use App\Models\RolePermissions;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class RolePermissionsController extends Controller
 {
@@ -28,9 +31,48 @@ class RolePermissionsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRolePermissionsRequest $request)
+    public function store(Request $request)
     {
-        //
+        try {
+            $validateDate = $request -> validate([
+                'permission_id' => 'required|integer',
+                'role_id' => 'required|integer',
+            ]);
+    
+            $permission = Permissions::find($validateDate['permission_id']);
+            $role = Role::find($validateDate['role_id']);
+
+            if(!$permission)
+                return response() -> json([
+                    'message' => "Permiso no encontrado"
+                ], 404);
+
+            if(!$role)
+                return response() -> json([
+                    'message' => 'Rol no encontrado'
+                ], 404);
+
+            $new_permission_role = new RolePermissions([
+                'permission_id' => $permission,
+                'role_id' => $role
+            ]);
+
+            $new_permission_role -> save();
+
+            return response() -> json([
+                'message' => 'Permiso asignado a rol con exito',
+                'result' => $new_permission_role
+            ]);
+        } catch(ValidationException $e) {
+            $errors = $e -> validator -> errors() -> getMessages();
+
+            return response() -> json([
+                'message' => "Error de validacion",
+                'Errors' => $errors
+            ]);
+        }
+
+
     }
 
     /**
@@ -56,6 +98,7 @@ class RolePermissionsController extends Controller
     {
         //
     }
+    
 
     /**
      * Remove the specified resource from storage.

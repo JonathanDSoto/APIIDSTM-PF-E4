@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('role_permissions', function (Blueprint $table) {
-            $table->id();
+        // Usar palabra correcta "permisson".
+        Schema::create('permissions', function (Blueprint $table) {
+            $table->id('id');
+            $table->boolean('write');
+            $table->boolean('read');
+            $table->boolean('delete');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('role_permissions');
+        Schema::dropIfExists('permissions');
     }
 };

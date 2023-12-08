@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\DepartamentController;
+use App\Http\Controllers\InitiativeController;
 use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SessionController;
 use App\Http\Middleware\ApiSpecificMiddleware;
@@ -43,6 +45,16 @@ Route::middleware([ApiSpecificMiddleware::class]) -> group(function() {
         Route::get('/{id}', [DepartamentController::class, 'show']);
         Route::delete('/{id}', [DepartamentController::class, 'destroy']);
     });    
+
+    Route::prefix('initiative')->group(function () {
+        // Departamentos
+        Route::get('/', [InitiativeController::class, 'index']);
+        Route::post('/', [InitiativeController::class, 'store']);
+
+        Route::post('/{id}', [InitiativeController::class, 'update']);
+        // Route::get('/{id}', [InitiativeController::class, 'show']);
+        Route::delete('/{id}', [InitiativeController::class, 'destroy']);
+    });  
         
     Route::prefix('subjects')->group(function () {
         Route::post('/subjects', [SubjectController::class, 'store']);
@@ -53,6 +65,13 @@ Route::middleware([ApiSpecificMiddleware::class]) -> group(function() {
         Route::post('/', [PlaceController::class, 'store']);
         Route::post('/{id}', [PlaceController::class, 'update']);
         Route::delete('/{id}', [PlaceController::class, 'destroy']);
+    });
+
+    Route::prefix('reports')->group(function () {
+        Route::get('/', [ReportController::class, 'index']);
+        Route::post('/', [ReportController::class, 'store']);
+        Route::post('/{id}', [ReportController::class, 'update']);
+        Route::delete('/{id}', [ReportController::class, 'destroy']);
     });
 });
 

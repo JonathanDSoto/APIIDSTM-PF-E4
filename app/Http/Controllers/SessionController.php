@@ -22,7 +22,6 @@ class SessionController extends Controller
             $session = Session::where('api_token', $request -> input('token')) -> first();
             
             // var_dump($request);
-
             if(!$session) {
                 return response() -> json([
                     'message' => 'Token invalido'

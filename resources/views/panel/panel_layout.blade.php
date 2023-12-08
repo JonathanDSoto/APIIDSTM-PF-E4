@@ -1,7 +1,7 @@
 <!-- resources/views/pane_layout.blade.php -->
 
 <!DOCTYPE html>
-<html lang="es" class="default-style layout-navbar-fixed layout-menu-fixed layout-compact layout-menu-collapsed "
+<html lang="es" class="dark-style layout-navbar-fixed layout-menu-fixed layout-compact layout-menu-collapsed "
     dir="ltr" data-theme="theme-default" data-assets-path="../../assets/" data-template="vertical-menu-template">
 
 <head>

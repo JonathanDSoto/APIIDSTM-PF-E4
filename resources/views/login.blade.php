@@ -220,7 +220,7 @@
                 });
     
                 if(response.status == 200) {
-                    window.location.href = "/buildings";
+                    window.location.href = "/dashboard";
                     return;
                 }
             }

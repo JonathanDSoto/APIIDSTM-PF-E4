@@ -18,10 +18,10 @@ class PlaceController extends Controller
     {
         $buidings = Place::all();
 
-        foreach ($buidings as $building) {
-            $image_url = Storage::disk(self::$PATH_NAME)->url($building->image_name);
-            $building->image_url = $image_url;
-        }
+        // foreach ($buidings as $building) {
+        //     $image_url = Storage::disk(self::$PATH_NAME)->url($building->image_name);
+        //     $building->image = $image_url;
+        // }
 
         return response()->json($buidings);
     }
@@ -60,7 +60,7 @@ class PlaceController extends Controller
                 'latitude' => $validateData['latitude'],
                 'altitude' => $validateData['altitude'],
                 'radius' => $validateData['radius'],
-                'image' => $imageName,
+                'image' => $url,
             ]);
 
             $place->save();
@@ -68,15 +68,7 @@ class PlaceController extends Controller
 
             return response()->json([
                 'message' => 'Edificio creado satisfactoriamente',
-                'result' => [
-                    'id'    => $place->id,
-                    'name'  => $place->name,
-                    'latitude'  => $place->latitude,
-                    'altitude'  => $place->altitude,
-                    'radius'    => $place->radius,
-                    'image_name' => $place->image_name,
-                    'image_url' => $url
-                ],
+                'result' => $place,
             ]);
         } catch (ValidationException $e) {
             $errors = $e->validator->errors()->getMessages();
@@ -123,42 +115,35 @@ class PlaceController extends Controller
                 'latitude' => 'string',
                 'altitude' => 'string',
                 'radius' => 'integer',
-                'image_name' => 'image|mimes:jpeg,png,jpg|max:2048'
+                'image' => 'image|mimes:jpeg,png,jpg|max:2048'
             ]);
 
             // Procesar la imagen solo si se ha enviado una nueva
-            if ($request->hasFile('image_name')) {
+            if ($request->hasFile('image')) {
                 // Eliminar la imagen anterior si existe
-                if (Storage::disk(self::$PATH_NAME)->exists($place->image_name)) {
-                    Storage::disk(self::$PATH_NAME)->delete($place->image_name);
+                if ($place-> image && Storage::disk(self::$PATH_NAME)->exists($place->image)) {
+                    Storage::disk(self::$PATH_NAME)->delete($place->image);
                 }
 
                 // Guardar la nueva imagen
-                $image = $request->file('image_name');
+                $image = $request->file('image');
                 $imageName = time() . '_' .  str_replace(" ", "_", $image->getClientOriginalName());
                 Storage::disk(self::$PATH_NAME)->put($imageName, file_get_contents($image));
-
+                
+                $url = Storage::disk(self::$PATH_NAME)->url($imageName);
+                $place-> image = $url;
                 // Actualizar el nombre de la imagen en el modelo
-                $place->image_name = $imageName;
+                var_dump($url);
             }
 
             // Actualizar los otros campos del modelo
-            $place->update($request->except('image_name'));
+            $place->update($request->except('image'));
 
             // Obtener la URL de la imagen actualizada
-            $url = Storage::disk(self::$PATH_NAME)->url($place->image_name);
 
             return response()->json([
                 'message' => 'Edificio editado satisfactoriamente',
-                'result' => [
-                    'id' => $place->id,
-                    'name' => $place->name,
-                    'latitude' => $place->latitude,
-                    'altitude' => $place->altitude,
-                    'radius' => $place->radius,
-                    'image_name' => $place->image_name,
-                    'image_url' => $url
-                ],
+                'result' => $place,
             ]);
         } catch (ValidationException $e) {
             $errors = $e->validator->errors()->getMessages();

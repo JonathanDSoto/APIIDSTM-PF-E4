@@ -353,32 +353,32 @@
                     <div class="row">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">Nombre Clave</label>
-                            <input type="text" id="nombre_clave" class="form-control"
+                            <input type="text" pattern="[A-Za-z]+" id="nombre_clave" class="form-control"
                                 placeholder="Ingresa el nombre clave">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">Nombre</label>
-                            <input type="text" id="nombre" class="form-control" placeholder="Ingresa el nombre">
+                            <input type="text" pattern="[A-Za-z]+" id="nombre" class="form-control" placeholder="Ingresa el nombre">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">Latitud</label>
-                            <input type="text" id="latitud" class="form-control" placeholder="Ingresa la latitud">
+                            <input type="number" id="latitud" class="form-control" placeholder="Ingresa la latitud">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">Altitud</label>
-                            <input type="text" id="altitud" class="form-control" placeholder="Ingresa la altitud">
+                            <input type="number" id="altitud" class="form-control" placeholder="Ingresa la altitud">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">Radio</label>
-                            <input type="text" id="radio" class="form-control" placeholder="Ingresa el radio">
+                            <input type="number" id="radio" class="form-control" placeholder="Ingresa el radio">
                         </div>
                     </div>
 

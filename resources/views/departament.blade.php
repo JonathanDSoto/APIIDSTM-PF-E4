@@ -138,7 +138,7 @@
                 form.append('code_name', nombreClaveInput.value);
                 form.append('name', nombreInput.value);
 
-                if (imageInput.dropzone.files.length > 0) {
+                if (imageInputEdit && imageInputEdit.dropzone && imageInputEdit.dropzone.files.length > 0) {
                     const file = imageInputEdit.dropzone.files[0];
                     form.append('image', file, file.name);
                 }
@@ -334,13 +334,13 @@
                 <div class="row">
                     <div class="col mb-3">
                         <label for="nombre_clave" class="form-label">Nombre Clave</label>
-                        <input type="text" id="nombre_clave" class="form-control" placeholder="Ingresa el nombre clave">
+                        <input type="text" pattern="[A-Za-z]+" id="nombre_clave" class="form-control" placeholder="Ingresa el nombre clave">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" id="nombre" class="form-control" placeholder="Ingresa el nombre">
+                        <input type="text" pattern="[A-Za-z]+" id="nombre" class="form-control" placeholder="Ingresa el nombre">
                     </div>
                 </div>
                 <div class="row">

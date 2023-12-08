@@ -340,7 +340,7 @@
                 <div class="row">
                     <div class="col mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" pattern="[A-Za-z]+" id="nombre" class="form-control" placeholder="Ingresa el nombre">
+                        <input type="text" onkeypress="return ' áéíóúabcdefghijklmnñopqrstuvwxyz'.includes(event.key)" id="nombre" class="form-control" placeholder="Ingresa el nombre">
                     </div>
                 </div>
                 <div class="row">
@@ -385,7 +385,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="edit_nombre" class="form-label">Nombre</label>
-                        <input type="text" id="edit_nombre" class="form-control" required>
+                        <input type="text" onkeypress="return ' áéíóúabcdefghijklmnñopqrstuvwxyz'.includes(event.key)" id="edit_nombre" class="form-control" required>
                     </div>
                     <div class="col mb-3">
                         <label for="nameBasic" class="form-label">Foto del Departamento</label>

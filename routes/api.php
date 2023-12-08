@@ -31,6 +31,8 @@ Route::middleware([ApiSpecificMiddleware::class]) -> group(function() {
     Route::prefix('roles')->group(function () {
         Route::get('/', [RoleController::class, 'index']);
         Route::post('/', [RoleController::class, 'create']);
+        Route::post('/{id}', [RoleController::class, 'update']);
+        Route::post('/delete/{id}', [RoleController::class, 'destroy']);
     });
     
     Route::prefix('department')->group(function () {

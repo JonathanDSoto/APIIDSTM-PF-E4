@@ -599,9 +599,9 @@
 									"type": "text"
 								},
 								{
-									"key": "image_name",
+									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/Luis-dev/Downloads/descargar.jpg"
+									"src": "/C:/Users/Luis-dev/Pictures/Screenshots/Captura de pantalla 2023-12-07 211116.png"
 								}
 							]
 						},
@@ -942,11 +942,6 @@
 									"type": "text"
 								},
 								{
-									"key": "id_user",
-									"value": "58d9192b-f199-4886-9328-99287a943e11",
-									"type": "text"
-								},
-								{
 									"key": "id_building",
 									"value": "1",
 									"type": "text"
@@ -991,11 +986,6 @@
 									"type": "text"
 								},
 								{
-									"key": "id_user",
-									"value": "58d9192b-f199-4886-9328-99287a943e11",
-									"type": "text"
-								},
-								{
 									"key": "id_building",
 									"value": "1",
 									"type": "text"
@@ -1022,18 +1012,18 @@
 					"response": []
 				},
 				{
-					"name": "Get all reports Copy",
+					"name": "Get all reports",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/api/initiative",
+							"raw": "{{URL}}/api/reports",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"api",
-								"initiative"
+								"reports"
 							]
 						}
 					},

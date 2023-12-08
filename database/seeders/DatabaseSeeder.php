@@ -3,7 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Initiative;
+use App\Models\Place;
 use Illuminate\Database\Seeder;
+use PharIo\Manifest\License;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,7 +26,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
-            PlaceSeeder::class
+            PlaceSeeder::class,
+            DepartamentSeeder::class,
+            Initiative::class,
+            License::class,
+            Place::class,
+            ReportSeeder::class,
+            SubjectSeeder::class
         ]);
     }
 }

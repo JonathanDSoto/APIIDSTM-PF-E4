@@ -117,12 +117,12 @@
                                 placeholder="Ingresa tu correo institucional" autofocus>
                         </div>
                         <div class="mb-3 form-password-toggle">
-                            <div class="d-flex justify-content-between">
+                            <!-- <div class="d-flex justify-content-between">
                                 <label class="form-label" for="password">Contraseña</label>
                                 <a href="auth-forgot-password-cover.html">
                                     <small>¿Olvidaste tu contraseña?</small>
                                 </a>
-                            </div>
+                            </div> -->
                             <div class="input-group input-group-merge">
                                 <input type="password" id="password" class="form-control" name="password"
                                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
@@ -131,24 +131,24 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <div class="form-check">
+                            <!-- <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="remember-me">
                                 <label class="form-check-label" for="remember-me">
                                     Recordar cuenta
                                 </label>
-                            </div>
+                            </div> -->
                         </div>
                         <button id="kt_docs_formvalidation_email_submit" class="btn btn-primary d-grid w-100">
                             Iniciar sesión
                         </button>
                     </form>
 
-                    <p class="text-center">
+                    <!-- <p class="text-center">
                         <span>¿Nuevo por aquí?</span>
                         <a href="auth-register-cover.html">
                             <span>Regístrate ahora</span>
                         </a>
-                    </p>
+                    </p> -->
 
                     <!-- <div class="divider my-4">
                         <div class="divider-text">or</div>

@@ -52,14 +52,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{URL}}/api/user/3bfc15cc-e043-4394-a40f-17432c16dcfb",
+							"raw": "{{URL}}/api/user/18cffd5f-c126-49ef-9d21-11ea7ecd0677",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"api",
 								"user",
-								"3bfc15cc-e043-4394-a40f-17432c16dcfb"
+								"18cffd5f-c126-49ef-9d21-11ea7ecd0677"
 							]
 						}
 					},
@@ -261,6 +261,70 @@
 							"path": [
 								"api",
 								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "role_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/roles/delete/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"roles",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Role",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Un rol cualquiera",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Hola, soy un rol :)",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/roles/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"roles",
+								"1"
 							]
 						}
 					},

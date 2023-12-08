@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Models\SessionPermisson;
 use App\Models\User;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
@@ -132,22 +133,19 @@ class RoleController extends Controller
         // En este punto se revisara si el rol esta relacionado a algun usuario.
         // En caso de que si lo este, se replazara a todos los usuarios por un rol nuevo 
         // que se seleccione
-        $users = User::where('role_id', $role -> id) -> get() -> toArray();
+        $validateData = $request -> validate([
+            'role_id' => 'integer'
+        ]);
 
-        if($users) {
-            $validateData = $request -> validate([
-                'role_id' => 'integer'
-            ]);
-            
-            $new_role = Role::find($validateData['role_id']);
-            if(!$new_role) {
-                return response() -> json([
-                    'message' => 'Rol no encontrado'
-                ], 404);
-            }
+        $new_role = Role::find($validateData['role_id']);
+        if(!$new_role) {
+            return response() -> json([
+                'message' => 'Rol no encontrado'
+            ], 404);
+        }
 
-            User::where('role_id', $role -> id) -> update(['role_id' => $new_role -> id]);
-        } 
+        User::where('role_id', $role -> id) -> update(['role_id' => $new_role -> id]);
+        SessionPermisson::where('role_id', $role -> id) -> delete();
 
         $role -> delete();
         return response() -> json([

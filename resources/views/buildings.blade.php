@@ -122,8 +122,9 @@
                     const file = imageInput.dropzone.files[0];
 
                     // Agregar el archivo al FormData
-                    form.append('image_name', file, file.name);
+                    form.append('image', file, file.name);
                 }
+
                 const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
@@ -132,8 +133,10 @@
                     body: form,
                 });
 
+                // console.log(await response.json());
+
                 if (!response.ok) {
-                    throw new Error(`Error al actualizar el edificio. Código de estado: ${response.status}`);
+                    // throw new Error(`Error al actualizar el edificio. Código de estado: ${response.status}`);
                 }
 
                 // Cerrar el modal
@@ -281,7 +284,7 @@
                     latitude: building.latitude,
                     longitude: building.altitude,
                     radius: building.radius,
-                    imageUrl: building.image_url
+                    imageUrl: building.image
                 };
 
 

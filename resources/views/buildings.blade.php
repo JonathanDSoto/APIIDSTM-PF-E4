@@ -356,14 +356,14 @@
                     <div class="row">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">Nombre Clave</label>
-                            <input type="text" pattern="[A-Za-z]+" id="nombre_clave" class="form-control"
+                            <input type="text" id="nombre_clave" class="form-control"
                                 placeholder="Ingresa el nombre clave">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label for="nameBasic" class="form-label">Nombre</label>
-                            <input type="text" onkeypress="return 'áéíóúabcdefghijklmnñopqrstuvwxyz'.includes(event.key)" id="nombre" class="form-control" placeholder="Ingresa el nombre">
+                            <input type="text" id="nombre" class="form-control" placeholder="Ingresa el nombre">
                         </div>
                     </div>
                     <div class="row">

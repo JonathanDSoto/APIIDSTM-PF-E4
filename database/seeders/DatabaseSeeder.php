@@ -26,13 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
-            PlaceSeeder::class,
-            DepartamentSeeder::class,
-            Initiative::class,
-            License::class,
-            Place::class,
-            ReportSeeder::class,
-            SubjectSeeder::class
+            PlaceSeeder::class
         ]);
     }
 }

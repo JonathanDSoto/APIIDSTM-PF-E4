@@ -16,7 +16,6 @@ class Initiative extends Model
         "id_department",
         "image",
         "status"
-
     ];
 
     protected $cast = [

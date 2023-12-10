@@ -879,18 +879,13 @@
 									"type": "text"
 								},
 								{
-									"key": "id_user",
-									"value": "d2561b43-661d-4c2b-917a-1fbe3b99ea3f",
-									"type": "text"
-								},
-								{
 									"key": "id_department",
 									"value": "1",
 									"type": "text"
 								},
 								{
-									"key": "isApproved",
-									"value": "0",
+									"key": "status",
+									"value": "en revisión",
 									"type": "text"
 								},
 								{
@@ -923,17 +918,12 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Mas sombra",
+									"value": "Mas sombraaaaa",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Pues nomas deberian de poner mas sombra",
-									"type": "text"
-								},
-								{
-									"key": "id_user",
-									"value": "ddd84411-8ee9-4d19-b6aa-a9c6c52130dd",
+									"value": "Pues nomas deberian de poner mas sombraa",
 									"type": "text"
 								},
 								{
@@ -942,25 +932,26 @@
 									"type": "text"
 								},
 								{
-									"key": "isApproved",
-									"value": "1",
-									"type": "text"
-								},
-								{
 									"key": "image",
 									"type": "file",
 									"src": "/C:/Users/Luis-dev/Downloads/images.jpg"
+								},
+								{
+									"key": "status",
+									"value": "descartado",
+									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{URL}}/api/initiative",
+							"raw": "{{URL}}/api/initiative/1",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"api",
-								"initiative"
+								"initiative",
+								"1"
 							]
 						}
 					},

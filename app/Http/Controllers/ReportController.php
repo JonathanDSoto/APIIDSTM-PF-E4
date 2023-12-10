@@ -48,7 +48,7 @@ class ReportController extends Controller
                 "title" => 'required|string',
                 "description" => 'required|string',
                 "id_building" => 'required|integer',
-                "status" => ['required', 'in:en revisión,completado,Descartado']
+                "status" => ['required', 'in:en revisión,completado,descartado']
             ]);
 
             $token = $request->attributes->get('token');
@@ -117,7 +117,7 @@ class ReportController extends Controller
                 "title" => 'required|string',
                 "description" => 'required|string',
                 "id_building" => 'required|integer',
-                "status" => ['required', 'in:en revisión,completado,Descartado']
+                "status" => ['required', 'in:en revisión,completado,descartado']
             ]);
 
             $report = Report::find($id);

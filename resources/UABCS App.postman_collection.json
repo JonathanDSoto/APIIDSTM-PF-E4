@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "82a76d46-050c-447d-a420-a92199891756",
+		"_postman_id": "62102362-8f44-47bf-965c-4529af589c19",
 		"name": "UABCS App",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "16172637"
@@ -394,7 +394,7 @@
 									"key": "image",
 									"description": "opcional",
 									"type": "file",
-									"src": "/C:/Users/Luis-dev/Downloads/descargar.jpg"
+									"src": "/C:/Users/Luis-dev/Downloads/p-egresado.jpeg"
 								}
 							]
 						},
@@ -488,11 +488,113 @@
 									"type": "text"
 								},
 								{
+									"key": "description",
+									"value": "Una materia chida",
+									"type": "text"
+								},
+								{
 									"key": "id_departament",
 									"value": "1",
 									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Luis-dev/Downloads/p-egresado.jpeg"
 								}
 							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/subjects",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"subjects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit subject",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Programacion III",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Una materia chida",
+									"type": "text"
+								},
+								{
+									"key": "id_departament",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Luis-dev/Downloads/R.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/subjects/8",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"subjects",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete subject",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/api/subjects/8",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"subjects",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all subjects",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
 						},
 						"url": {
 							"raw": "{{URL}}/api/subjects",
@@ -778,7 +880,7 @@
 								},
 								{
 									"key": "id_user",
-									"value": "58d9192b-f199-4886-9328-99287a943e11",
+									"value": "d2561b43-661d-4c2b-917a-1fbe3b99ea3f",
 									"type": "text"
 								},
 								{
@@ -794,7 +896,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/Luis-dev/Downloads/images.jpg"
+									"src": "/C:/Users/Luis-dev/Downloads/R.jpg"
 								}
 							]
 						},
@@ -933,12 +1035,12 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "No hay papel en el departamento",
+									"value": "Refrescos gratis",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Por favor pasenme papel, tengo examen",
+									"value": "Salon para medio metro",
 									"type": "text"
 								},
 								{
@@ -948,20 +1050,19 @@
 								},
 								{
 									"key": "status",
-									"value": "completado",
+									"value": "Descartado",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{URL}}/api/reports/",
+							"raw": "{{URL}}/api/reports",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"api",
-								"reports",
-								""
+								"reports"
 							]
 						}
 					},

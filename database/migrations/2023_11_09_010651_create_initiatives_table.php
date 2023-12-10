@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('image');
             $table->uuid('id_user');
             $table->unsignedBigInteger('id_department');
-            $table->boolean('isApproved') -> default(false);
+            $table->enum('status', ['en revisión', 'aprobado', "descartado"]) -> default('en revisión');
             $table->timestamps();
             $table->foreign('id_user')->references('id')->on('users');
             $table->foreign('id_department')->references('id')->on('departaments');

@@ -45,7 +45,8 @@ class SubjectController extends Controller
             $validateData = $request->validate([
                 'name' => 'required|string',
                 'description' => 'required|string',
-                'id_departament' => 'required',
+                'id_departament' => 'required|integer|exists:departaments,id',
+                'status' => ['required', 'in:en revisión,aprobado,descartado'],
                 'image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
             ]);
 
@@ -77,7 +78,7 @@ class SubjectController extends Controller
             return response()->json([
                 'message' => 'Error de validacion',
                 'errors' => $errors
-            ]);
+            ], 400);
         }
     }
 
@@ -100,16 +101,74 @@ class SubjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Subject $subject)
+    public function update(Request $request, $id)
     {
-        //
+        $subject = Subject::find($id);
+
+        if(!$subject) {
+            return response() -> json([
+                'message' => 'Materia no encontrada'
+            ], 404);
+        } 
+
+        try {
+            $validateData = $request -> validate([
+                'name' => 'string',
+                'description' => 'string',
+                'id_departament' => 'integer|exists:departaments,id',
+                'image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            ]);
+    
+            // Procesar la imagen solo si se ha enviado una nueva
+            if ($request->hasFile('image')) {
+                // Eliminar la imagen anterior si existe
+                if (Storage::disk(self::$PATH_NAME)->exists($subject->image)) {
+                    Storage::disk(self::$PATH_NAME)->delete($subject->image);
+                }
+    
+                // Guardar la nueva imagen
+                $image = $request->file('image');
+                $imageName = time() . '_' .  str_replace(" ", "_", $image->getClientOriginalName());
+                Storage::disk(self::$PATH_NAME)->put($imageName, file_get_contents($image));
+                // Obtener la URL de la imagen actualizada
+                $url = Storage::disk(self::$PATH_NAME)->url($imageName);
+                // Actualizar el nombre de la imagen en el modelo
+                $subject->image = $url;
+            }
+            $subject -> update($request -> except('image'));
+    
+            return response() -> json([
+                'message' => 'Informacion de materia actualizada con exito',
+                'result' => $subject
+            ]);
+
+        } catch(ValidationException $e) {
+            $errors = $e -> validator -> errors() -> getMessages();
+
+            return response() -> json([
+                'message' => 'Error de validacion',
+                'errors' => $errors
+            ], 400);   
+        }
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Subject $subject)
+    public function destroy($id)
     {
-        //
+        $subject = Subject::find($id);
+
+        if(!$subject) {
+            return response() -> json([
+                'message' => 'Materia no encontrada'
+            ], 404);
+        }
+
+        $subject -> delete();
+        return response() -> json([
+            'message' => "Materia eliminada con exito"
+        ]);
     }
 }

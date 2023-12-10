@@ -176,6 +176,7 @@ class UserController extends Controller
             ], 404);
         }
 
+        Session::where('id_user', $user -> id) -> delete();
         $user->delete();
 
         return response()->json([

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('description');
             $table->uuid('id_user');
             $table->unsignedBigInteger('id_building');
-            $table->enum('status', ['en revisión', 'completado', "Descartado"]);
+            $table->enum('status', ['en revisión', 'completado', "descartado"]);
             $table->timestamps();
             $table->foreign('id_user')->references('id')->on('users');
             $table->foreign('id_building')->references('id')->on('places'); 

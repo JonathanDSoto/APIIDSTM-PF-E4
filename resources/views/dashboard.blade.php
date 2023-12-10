@@ -71,11 +71,9 @@
 
             miElemento.textContent = `${numeroDeRegistrosRepor}`;
 
-            if (numeroDeRegistrosRepor > 1) {
-                miElemento2.textContent = `${numeroDeRegistrosRepor} reportes`;
-            } else {
-                miElemento2.textContent = `${numeroDeRegistrosRepor} reporte`;
-            }
+            miElemento2.textContent = numeroDeRegistrosRepor > 1 
+                ? `${numeroDeRegistrosRepor} reportes`
+                : `${numeroDeRegistrosRepor} reporte`
 
             return miElemento2;
         } catch (error) {
@@ -126,6 +124,8 @@
         let pendienteCount = 0;
         let descartadoCount = 0;
 
+        
+
         data.forEach(item => {
             const status = item.status;
 
@@ -133,7 +133,7 @@
                 completadoCount++;
             } else if (status === 'en revisión') {
                 pendienteCount++;
-            } else if (status === "Descartado") {
+            } else if (status === "descartado") {
                 descartadoCount++;
             }
         });
@@ -269,7 +269,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <div>
-                        <h5 class="mb-2">Reportes e Iniciativas Aprobadas</h5>
+                        <h5 class="mb-2">Proporción del estado de reportes</h5>
                         <p class="mb-5">Registro total</p>
                     </div>
                     <div class="time-spending-chart">

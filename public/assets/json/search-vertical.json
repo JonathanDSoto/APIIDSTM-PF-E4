@@ -13,32 +13,32 @@
         {
             "name": "Departamentos",
             "icon": "ti-school",
-            "url": "layouts-collapsed-menu.html"
+            "url": "/departamentos"
         },
         {
             "name": "Edificios",
             "icon": "ti-home",
-            "url": "layouts-content-navbar.html"
+            "url": "/buildings"
         },
         {
             "name": "Materias",
             "icon": "ti-id",
-            "url": "layouts-content-navbar-with-sidebar.html"
+            "url": "/meterias"
         },
         {
             "name": "Roles",
             "icon": "ti-shield-checkered",
-            "url": "layouts-without-menu.html"
+            "url": "/roles"
         },
         {
             "name": "Permisos",
             "icon": "ti-ban",
-            "url": "layouts-without-navbar.html"
+            "url": "/permisos"
         },
         {
             "name": "Usuarios",
-            "icon": "ti-layout-user",
-            "url": "layouts-fluid.html"
+            "icon": "ti-user",
+            "url": "/usuarios"
         }
     ]
 }

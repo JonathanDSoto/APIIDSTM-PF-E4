@@ -56,7 +56,7 @@
     <script></script>
     <style>
         div:where(.swal2-container) {
-            z-index: 1080 !important;
+            z-index: 2000 !important;
         }
     </style>
     @yield('aditional_header')
@@ -74,8 +74,6 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/animate-css/animate.css">
     <script>
         let screenMode = document.querySelector('html');
-
-        console.log(screenMode);
     </script>
 
     <!-- Page CSS -->

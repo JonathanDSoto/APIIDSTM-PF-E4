@@ -16,6 +16,7 @@
     <script>
         const card_container = document.getElementById('cards_container');
         const modal = new bootstrap.Modal(document.getElementById('editarModal'));
+        const subjectLength = document.getElementById('subjects_lenght');
         const btnSubmit = document.getElementById('submitBtn');
 
 
@@ -104,6 +105,7 @@
             card_container.innerHTML = "";
             const response = await fetch(`${window.location.origin}/api/subjects`);
             const data = await response.json();
+            subjectLength.textContent = data.length;
 
             if (response.status == 200) {
                 data.forEach(subject => {
@@ -184,7 +186,7 @@
         <div class="card-header d-flex flex-wrap justify-content-between gap-3">
             <div class="card-title mb-0 me-1">
                 <h5 class="mb-1">Materias</h5>
-                <p class="text-muted mb-0">¡Alrededor de 100 materias que estudiantes pueden disfrutar!</p>
+                <p class="text-muted mb-0">¡Alrededor de <span id="subjects_lenght"></span> materias que estudiantes pueden disfrutar!</p>
             </div>
         </div>
         <div class="card-body">

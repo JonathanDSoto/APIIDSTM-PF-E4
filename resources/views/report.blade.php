@@ -34,39 +34,32 @@
                     <!-- Mostrar todos los detalles del reporte, permitir editar el estado -->
                     <form>
                         <div class='mb-3'>
-                            <label for='nombre$id' class='form-label'>Nombre del Reporte</label>
-                            <input type='text' class='form-control' id='nombre$id' value='$nombre' disabled>
+                            <label for='title' class='form-label'>Nombre del Reporte</label>
+                            <input type='text' class='form-control' id='title' value='' disabled>
                         </div>
                         <div class='mb-3'>
-                            <label for='descripcion$id' class='form-label'>Descripción del Reporte</label>
-                            <textarea class='form-control' id='descripcion$id' rows='3' disabled>$descripcion</textarea>
+                            <label for='descripcion' class='form-label'>Descripción del Reporte</label>
+                            <textarea class='form-control' id='descripcion' rows='3' disabled></textarea>
                         </div>
                         <div class='mb-3'>
-                            <label for='usuario$id' class='form-label'>Usuario</label>
-                            <input type='text' class='form-control' id='usuario$id' value='$nombreUsuario' disabled>
+                            <label for='edificio' class='form-label'>Edificio</label>
+                            <select class='form-select' id='edificio' disabled>
+
+                            </select>
+                            {{-- <input type='text' class='form-control' id='edificio' value='edificio' disabled> --}}
                         </div>
                         <div class='mb-3'>
-                            <label for='fecha$id' class='form-label'>Fecha</label>
-                            <input type='text' class='form-control' id='fecha$id' value='$fecha' disabled>
-                        </div>
-                        <div class='mb-3'>
-                            <label for='departamento$id' class='form-label'>Departamento</label>
-                            <input type='text' class='form-control' id='departamento$id' value='$departamento' disabled>
-                        </div>
-                        <div class='mb-3'>
-                            <label for='estado${id}' class='form-label'>Estado</label>
-                            <select class='form-select' id='estado${id}'>
-                                <option value='En Revisión'>En Revisión
-                                </option>
-                                <option value='Completado'>Completado</option>
-                                <option value='Descartado'>Descartado</option>
-                                <!-- Agrega más opciones según tus necesidades -->
+                            <label for='estado' class='form-label'>Estado</label>
+                            <select class='form-select' id='estado'>
+                                <option value="completado">Completado</option>
+                                <option value="descartado">Descartado</option>
+                                <option value="en revisión">En Revisión</option>
                             </select>
                         </div>
                     </form>
                 </div>
                 <div class='modal-footer'>
-                    <button type='button' class='btn btn-primary'>
+                    <button id="saveBtn" type='button' class='btn btn-primary'>
                         <i class='ti ti-check me'></i>Guardar Cambios
                     </button>
                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
@@ -80,10 +73,18 @@
 
 @section('aditional_scripts')
     <script>
+        const titulo = document.getElementById('title');
+        const descripcion = document.getElementById('descripcion');
+        const edificio = document.getElementById('edificio');
+        const estado = document.getElementById('estado');
+        const guardarBtn = document.getElementById('saveBtn');
+
         // Obtener el contenedor de reportes
         const reportesContainer = document.getElementById('reportes-container');
 
         async function mostrarReportes() {
+            reportesContainer.innerHTML = "";
+
             const getDate = (date) => {
                 // Función para agregar ceros a la izquierda
                 const padLeft = (value, length) => {
@@ -143,7 +144,7 @@
                             <h5 class='card-title mb-0'> ${reporte.title} </h5>
                         </div>
                         <ul class='list-group list-group-flush'>
-                            <li class='list-group-item'><strong>Reporte:</strong> ${reporte.description}</li>
+                            <li class='list-group-item'><strong>Descripción:</strong> ${reporte.description}</li>
                             <li class='list-group-item d-flex align-items-center'>
                                 <strong>Usuario:</strong>
                                 <div class='avatar-group ms-2 d-flex align-items-center'>
@@ -157,20 +158,20 @@
                                 <strong>Fecha:</strong> ${getDate(reporte.created_at)}
                             </li>
                             <li class='list-group-item'>
-                                <strong>Departamento:</strong> $departamento
+                                <strong>Id del edificio:</strong> ${reporte.building.name}
                             </li>
                             <li class='list-group-item'>
                                 <strong>Estado:</strong>
                                 <span class='badge ${getBadge(reporte.status.toLowerCase())}'>${reporte.status}</span>
                             </li>
                             <li class='list-group-item'>
-                                <div class='d-grid gap-2'>
-                                    <button  type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editarModal'>
+                                <div class='d-grid gap-2' data-status="${reporte.status.toLowerCase()}" data-bId="${reporte.building.id}" data-bName="${reporte.building.name}" data-title="${reporte.title}" data-description="${reporte.description}">
+                                    <button onclick="abrirModal(this)"  type='button' class='btn btn-primary'>
                                         <i class='fas fa-edit me-2'></i> Editar
                                     </button>
-                                    <button type='button' class='btn btn-danger'>
-                                        <i class='fas fa-trash-alt me-2'></i> Eliminar
-                                    </button>
+                                    <!-- <button type='button' class='btn btn-danger'>
+                                         <i class='fas fa-trash-alt me-2'></i> Eliminar
+                                    </button> -->
                                 </div>
                             </li>
                         </ul>
@@ -181,30 +182,60 @@
                 // Agregar el HTML del reporte al contenedor
                 reportesContainer.innerHTML += reporteHtml;
             });
-
-
-
-
         }
 
-        // Función para guardar cambios (puedes personalizar según tus necesidades)
-        function guardarCambios(id) {
-            // Obtener el valor del estado seleccionado
-            var nuevoEstado = document.getElementById('estado' + id).value;
+        function abrirModal(e) {
+            const {
+                bid,
+                bname,
+                description,
+                title,
+                status
+            } = e.parentElement.dataset;
 
-            // Aquí puedes realizar acciones adicionales según tus necesidades, como enviar datos al servidor, etc.
+            edificio.innerHTML = `<option value="${bid}" selected>${bname}</option>`;
 
-            // Cerrar el modal
-            $('#editarModal' + id).modal('hide');
-        }
+            edificio.value = bid;
+            titulo.value = title;
+            descripcion.value = description;
+            estado.value = status;
 
 
-        // Función para eliminar un reporte (puedes personalizar según tus necesidades)
-        function eliminarReporte(id) {
-            // Aquí puedes realizar acciones adicionales según tus necesidades, como enviar datos al servidor, etc.
+            // Accion para guardar cambios
+            guardarBtn.onclick = async () => {
+                const formdata = new FormData();
+                formdata.append('title', title);
+                formdata.append('description', description);
+                formdata.append('id_building', bid);
+                formdata.append('status', estado.value);
 
-            // Cerrar el modal
-            $('#eliminarModal' + id).modal('hide');
+                const request = await fetch(`${window.location.origin}/api/reports/${bid}`, {
+                    method: 'POST',
+                    body: formdata
+                });
+
+                if (request.status != 200) {
+                    console.log(await request.json())
+                    Swal.fire({
+                        title: "¡Hubo un problema! :(",
+                        text: "No pudo ser posible editar el reporte. Intentelo de nuevo o recargue la pagina",
+                        icon: "error"
+                    });
+                    return;
+                }
+
+                Swal.fire({
+                    title: "¡Reporte editado con exito!",
+                    text: "El reporte ha sido modificado :)",
+                    icon: "success"
+                });
+
+                $('#editarModal').modal('hide');
+
+                mostrarReportes();
+            }
+
+            $('#editarModal').modal('show');
         }
 
         mostrarReportes();

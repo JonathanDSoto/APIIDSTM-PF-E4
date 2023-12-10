@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Initiative;
 use App\Http\Controllers\Controller;
 use App\Models\Departament;
+use App\Models\Session;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -21,14 +22,14 @@ class InitiativeController extends Controller
         $initiatives = Initiative::all();
 
         foreach ($initiatives as $initiative) {
-            $user = User::find($initiative -> id_user);
-            $department = Departament::find($initiative -> id_department);
+            $user = User::find($initiative->id_user);
+            $department = Departament::find($initiative->id_department);
 
-            $initiative -> user = $user;
-            $initiative -> department = $department;
+            $initiative->user = $user;
+            $initiative->department = $department;
         }
 
-        return response() -> json($initiatives);
+        return response()->json($initiatives);
     }
 
     /**
@@ -46,12 +47,11 @@ class InitiativeController extends Controller
     {
 
         try {
-            $validateData = $request -> validate([
+            $validateData = $request->validate([
                 "name" => 'required|string',
                 "description" => 'required|string',
-                "id_user" => 'required|uuid',
                 "id_department" => 'required|string',
-                "isApproved" => 'required|boolean',
+                "status" => ['required', 'in:en revisión,completado,descartado'],
                 "image" => 'required|image|mimes:jpeg,png,jpg|max:2048'
             ]);
 
@@ -60,18 +60,20 @@ class InitiativeController extends Controller
             // $image->storeAs('public/buildings', $imageName);
             Storage::disk(self::$PATH_NAME)->put($imageName, file_get_contents($image));
             $url = Storage::disk(self::$PATH_NAME)->url($imageName);
-            
-            $user = User::find($validateData['id_user']);
+
+            $token = $request->attributes->get('token');
+            $user = User::find(Session::where('api_token', $token)->first()->id_user);
             $department = Departament::find($validateData['id_department']);
 
-            if(!$user) {
-                return response() -> json([
+            if (!$user) {
+                return response()->json([
                     'message' => "Usuario no encontrado"
                 ], 404);
             }
+            
 
-            if(!$department) {
-                return response() -> json([
+            if (!$department) {
+                return response()->json([
                     'message' => "Departamento no encontrado"
                 ], 404);
             }
@@ -79,23 +81,22 @@ class InitiativeController extends Controller
             $new_initiative = new Initiative([
                 "name" => $validateData["name"],
                 "description" => $validateData["description"],
-                "id_user" => $validateData["id_user"],
-                "isApproved" => $validateData["isApproved"],
+                "id_user" => $user -> id,
+                "status" => $validateData["status"],
                 "id_department" => $validateData["id_department"],
                 "image" => $url
             ]);
 
-            $new_initiative -> save();
+            $new_initiative->save();
 
-            return response() -> json([
+            return response()->json([
                 'message' => "Iniciativa guardada con exito",
                 'result' => $new_initiative
             ]);
-
         } catch (ValidationException $e) {
-            $errors = $e -> validator -> errors() -> getmessages();
+            $errors = $e->validator->errors()->getmessages();
 
-            return response() -> json([
+            return response()->json([
                 'message' => 'Error de validacion',
                 'errors' => $errors
             ]);
@@ -132,13 +133,12 @@ class InitiativeController extends Controller
         }
 
         try {
-            $validateData = $request -> validate([
-                "name" => 'required|string',
-                "description" => 'required|string',
-                "id_user" => 'required|uuid',
-                "id_department" => 'required|integer',
-                "isApproved" => 'required|boolean',
-                "image" => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            $validateData = $request->validate([
+                "name" => 'string',
+                "description" => 'string',
+                "id_department" => 'integer',
+                "status" => ['in:en revisión,completado,descartado'],
+                "image" => 'image|mimes:jpeg,png,jpg|max:2048'
             ]);
 
             // Procesar la imagen solo si se ha enviado una nueva
@@ -161,6 +161,7 @@ class InitiativeController extends Controller
 
             // Actualizar los otros campos del modelo
             $initiative->update($request->except('image'));
+            var_dump($validateData['status']);
 
 
             return response()->json([
@@ -184,14 +185,14 @@ class InitiativeController extends Controller
     {
         $initiative = Initiative::find($id);
 
-        if(!$initiative) {
-            return response() -> json([
+        if (!$initiative) {
+            return response()->json([
                 'message' => 'Iniciativa no encontrada'
             ], 404);
         }
 
-        $initiative -> delete();
-        return response() -> json([
+        $initiative->delete();
+        return response()->json([
             'message' => 'Iniciativa borra con exito'
         ], 200);
     }

@@ -12,15 +12,14 @@ class Initiative extends Model
     protected $fillable = [
         "name",
         "description",
-        // "date",
         "id_user",
         "id_department",
         "image",
-        "isApproved"
+        "status"
 
     ];
 
     protected $cast = [
-        "isApproved" => "boolean"
+        
     ];
 }

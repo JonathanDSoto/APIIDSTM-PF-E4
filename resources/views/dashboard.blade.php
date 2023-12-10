@@ -177,13 +177,13 @@
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1
         },
-        {
-            label: 'Departamentos',
-            data: [1, 0, 0, 0, 0, 0],
-            backgroundColor: 'rgba(223, 93, 4, 0.2)',
-            borderColor: 'rgba(223, 93, 4, 1)',
-            borderWidth: 1
-        }
+        // {
+        //     label: 'Departamentos',
+        //     data: [1, 0, 0, 0, 0, 0],
+        //     backgroundColor: 'rgba(223, 93, 4, 0.2)',
+        //     borderColor: 'rgba(223, 93, 4, 1)',
+        //     borderWidth: 1
+        // }
        
         ]
     };

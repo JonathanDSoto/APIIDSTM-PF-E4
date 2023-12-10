@@ -53,8 +53,9 @@
                         <div class="mb-3">
                             <label for="estadoIniciativa" class="form-label">Estado</label>
                             <select class="form-select" id="estadoIniciativa">
-                                <option value="Aprobada">Aprobada</option>
-                                <option value="No Aprobada">No Aprobada</option>
+                                <option value="en revisión">En revisión</option>
+                                <option value="aprobado">Aprobado</option>
+                                <option value="descartado">Descartado</option>
                             </select>
                         </div>
                     </form>
@@ -78,7 +79,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="guardarCambiosBtn">
+                    <button id="saveBtn" type="button" class="btn btn-primary" id="guardarCambiosBtn">
                         <i class="ti ti-check me"></i> Guardar Cambios
                     </button>
                 </div>
@@ -100,9 +101,18 @@
         const estado = document.getElementById('estadoIniciativa');
         const fecha = document.getElementById('fechaIniciativa');
         const departamentoIniciativa = document.getElementById('departamentoIniciativa');
+        const saveBtn = document.getElementById('saveBtn');
 
 
         async function mostrarIniciativas() {
+            iniciativasContainer.innerHTML = "";
+            const badgeClass = {
+                'aprobado': 'bg-success',
+                'descartado': 'bg-danger',
+                'en revisión': 'bg-warning',
+            };
+            const getBadge = (status) => badgeClass[status] ?? 'bg-secondary';
+
             const request = await fetch(`${window.location.origin}/api/initiative`);
             let iniciativas;
 
@@ -159,15 +169,15 @@
                                 <p class='card-text ios-text m-0'><strong>Usuario: </strong></p>
                                 <div class='avatar-group ms-2 d-flex align-items-center'>
                                     <div data-bs-toggle='tooltip' data-popup='tooltip-custom' data-bs-placement='top' class='avatar avatar-xs pull-up' title='${iniciativa.usuario}'>
-                                        <img src='${image}' alt='Avatar' class='rounded-circle' style="object-fit:cover;">
+                                        <img src='https://ui-avatars.com/api/?name=${user.name}+${user.lastname}' alt='Avatar' class='rounded-circle' style="object-fit:cover;">
                                     </div>
                                     <span class='ms-1'>${user.name} ${user.lastname}</span>
                                 </div>
                             </div>
                             <p class='card-text ios-text'>
                                 <strong>Estado: </strong>
-                                <span class='badge ${isApproved === 'Aprobada' ? 'bg-success' : 'bg-danger'}'>
-                                    ${iniciativa.estado}
+                                <span class='badge ${getBadge(status)}'>
+                                    ${status[0].toUpperCase() + status.slice(1)}
                                 </span>
                             </p>
                         </div>
@@ -179,16 +189,16 @@
                 const iniciativaCard = range.createContextualFragment(iniciativaHtml);
 
 
-                const saveBtn = document.createElement('button');
-                saveBtn.onclick = mostrarEditar;
-                saveBtn.initiative = iniciativa;
-                saveBtn.innerHTML = `
+                const showModal = document.createElement('button');
+                showModal.onclick = mostrarEditar;
+                showModal.initiative = iniciativa;
+                showModal.innerHTML = `
                 <i class='ti ti-pencil'></i>
                 Cambiar estado
                 `;
 
-                saveBtn.classList.add('btn', 'btn-outline-primary', 'btn-sm', 'edit-button', 'ms-2');
-                iniciativaCard.querySelector('.btn-container').appendChild(saveBtn);
+                showModal.classList.add('btn', 'btn-outline-primary', 'btn-sm', 'edit-button', 'ms-2');
+                iniciativaCard.querySelector('.btn-container').appendChild(showModal);
 
                 // Agregar el HTML de la iniciativa al contenedor
                 iniciativasContainer.appendChild(iniciativaCard);
@@ -198,6 +208,7 @@
 
         function mostrarEditar(e) {
             const {
+                id,
                 name,
                 image,
                 description,
@@ -211,8 +222,35 @@
             titulo.value = name;
             departamentoIniciativa.innerHTML = `<option value="${department.id}" selected>${department.name}</option>`
             descripcion.value = description;
+            estado.value = status;
             fecha.value = getFormatDate(created_at, true);
-            
+
+            saveBtn.onclick = async () => {
+                const formdata = new FormData();
+                formdata.append('status', estado.value)
+
+                const request = await fetch(`${window.location.origin}/api/initiative/${id}`, {
+                    method: 'POST',
+                    body: formdata
+                });
+
+                if (request.status != 200) {
+                    Swal.fire({
+                        title: "¡Oh no! Ocurrio un error :(",
+                        text: "Intentelo de nuevo.",
+                        icon: "error"
+                    });
+                    return;
+                }
+
+                Swal.fire({
+                    title: "¡Excelente! La informacion fue actualizada correctamente",
+                    text: "Los cambios fueron registrados con exito.",
+                    icon: "success"
+                });
+                mostrarIniciativas();
+            }
+
             // estado.value=
 
             modal.modal('show');
@@ -227,8 +265,8 @@
             const minutos = String(d.getMinutes()).padStart(2, '0');
             const segundos = String(d.getSeconds()).padStart(2, '0');
 
-            return inputFormat ? `${año}-${mes}-${dia}T${horas}:${minutos}:${segundos}`
-            : `${dia}/${mes}/${año} ${horas}:${minutos}:${segundos}`
+            return inputFormat ? `${año}-${mes}-${dia}T${horas}:${minutos}:${segundos}` :
+                `${dia}/${mes}/${año} ${horas}:${minutos}:${segundos}`
         }
 
         mostrarIniciativas();

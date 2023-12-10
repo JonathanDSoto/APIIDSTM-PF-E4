@@ -51,7 +51,7 @@ class InitiativeController extends Controller
                 "name" => 'required|string',
                 "description" => 'required|string',
                 "id_department" => 'required|string',
-                "status" => ['required', 'in:en revisión,completado,descartado'],
+                "status" => ['required', 'in:en revisión,aprobado,descartado'],
                 "image" => 'required|image|mimes:jpeg,png,jpg|max:2048'
             ]);
 
@@ -137,7 +137,7 @@ class InitiativeController extends Controller
                 "name" => 'string',
                 "description" => 'string',
                 "id_department" => 'integer',
-                "status" => ['in:en revisión,completado,descartado'],
+                "status" => ['in:en revisión,aprobado,descartado'],
                 "image" => 'image|mimes:jpeg,png,jpg|max:2048'
             ]);
 

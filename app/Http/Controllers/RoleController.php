@@ -18,6 +18,12 @@ class RoleController extends Controller
     {
         $roles = Role::all();
 
+        foreach ($roles as $role) {
+            $users = User::where('role_id', $role -> id);
+            
+            $role -> users = $users;
+        }
+
         return response() -> json($roles);
         //
     }

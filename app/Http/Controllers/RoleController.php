@@ -19,7 +19,7 @@ class RoleController extends Controller
         $roles = Role::all();
 
         foreach ($roles as $role) {
-            $users = User::where('role_id', $role -> id);
+            $users = User::where('role_id', $role -> id) -> get();
             
             $role -> users = $users;
         }
